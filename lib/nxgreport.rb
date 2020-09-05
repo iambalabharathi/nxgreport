@@ -1,7 +1,8 @@
 
 class NxgReport
-    def setup(location: "./NxgReport.html")
+    def setup(location: "./NxgReport.html", title: "Features Summary")
         @nxg_report_path = location
+        @title = title
         @auto_open = false
         @features = Hash.new()
     end
@@ -295,7 +296,7 @@ class NxgReport
           </div>
         </body>
         <script>
-          var appTitle = \"EBA Quality Dashboard\";
+          var appTitle = \"#{@title}\";
           var theme = \"dark\";
       
           window.onload = function () {
