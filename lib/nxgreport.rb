@@ -10,8 +10,8 @@ class NxgReport
         @auto_open = value
     end
 
-    def log_test(feature_name, status)
-        test_pass = status.downcase.include?('pass')
+    def log_test(feature_name, test_status)
+        test_pass = test_status.downcase.include?('pass')
         if @features.key? feature_name
             @features[feature_name][0]+=1
             @features[feature_name][(test_pass) ? 1 : 2]+=1
