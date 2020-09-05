@@ -2,11 +2,11 @@
 
 A simple light weighted gem to beautify your test reports.
 
-## **Installation 🛠**
+## **🛠 Installation**
 
     gem install nxgreport
 
-## **Usage ⚙️**
+## **⚙️ Usage**
 
     require 'nxgreport'
 
