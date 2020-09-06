@@ -14,6 +14,26 @@ A simple light weighted gem to generate a beautiful emailable test report.
     $NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
     $NxgReport.build()
 
+    Example for cucumber framework ℹ️
+
+    -----------------------------------------------------------------------------
+    In env.rb
+    -----------------------------------------------------------------------------
+    $NxgReport.setup(location: "Absolute file path", title: "My Report")
+
+    -----------------------------------------------------------------------------
+    In hooks.rb
+    -----------------------------------------------------------------------------
+    After do |scenario|
+        feature_name = scenario.feature.name
+        scenario_pass = !scenario.is_failed?() ? "Pass" : "Fail"
+        $NxgReport.log_test(feature_name:feature_name, test_status:scenario_pass)
+    end
+
+    at_exit do
+        $NxgReport.build()
+    end
+
 ## **Report Look**
 
 ![Light Mode](./demo/light.png)
