@@ -1,9 +1,9 @@
 Gem::Specification.new do |spec|
     spec.name        = 'nxgreport'
-    spec.version     = '0.4.0'
-    spec.date        = '2020-09-05'
-    spec.summary     = "Next Gen Reporting"
-    spec.description = "A simple gem to beautify your test report."
+    spec.version     = '0.5.0'
+    spec.date        = '2020-09-06'
+    spec.summary     = "Next Gen Report"
+    spec.description = "A simple light weighted gem to generate a beautiful emailable test report."
     spec.authors     = ["Balabharathi Jayaraman"]
     spec.email       = 'balabharathi.jayaraman@gmail.com'
     spec.files       = ["lib/nxgreport.rb"]
@@ -12,4 +12,4 @@ Gem::Specification.new do |spec|
     spec.metadata["homepage_uri"] = spec.homepage
     spec.metadata["source_code_uri"] = "https://github.com/balabharathijayaraman/nxgreport"
     spec.metadata["changelog_uri"] = "https://github.com/balabharathijayaraman/nxgreport/blob/master/CHANGELOG.md"
-  end
+end
