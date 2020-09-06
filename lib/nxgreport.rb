@@ -334,7 +334,7 @@ class NxgReport
       template.close()
     end
 
-    private :log, :clean, :write, :htmlize
+    private :log, :clean, :write, :htmlize, :report_success
 end
 
 $NxgReport = NxgReport.new()
