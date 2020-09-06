@@ -14,10 +14,8 @@ A simple light weighted gem to generate a beautiful emailable test report.
     $NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
     $NxgReport.build()
 
-## **Light Mode**
+## **Report Look**
 
-<img src="./demo/light.png" alt="Light Mode" width="600"/>
+<div style="text-align:center;"><img src="./demo/light.png" alt="Light Mode" width="600"/></div>
 
-## **Dark Mode**
-
-![Dark Mode](./demo/dark.png)
+<div style="text-align:center;"><img src="./demo/dark.png" alt="Dark Mode" width="600"/></div>
