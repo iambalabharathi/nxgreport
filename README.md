@@ -16,7 +16,7 @@ A simple light weighted gem to generate a beautiful emailable test report.
 
 ## **Light Mode**
 
-![Light Mode](./demo/light.png)
+<img src="./demo/light.png" alt="Light Mode" width="600"/>
 
 ## **Dark Mode**
 
