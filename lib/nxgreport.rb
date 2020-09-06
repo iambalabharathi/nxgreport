@@ -30,6 +30,10 @@ class NxgReport
         end
     end
 
+    def report_location()
+      return @nxg_report_path
+    end
+
     # Private methods
     def log(message)
         puts("🤖- #{message}")
