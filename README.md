@@ -2,6 +2,14 @@
 
 A simple light weighted gem to generate a beautiful emailable test report.
 
+## **Light Mode**
+
+![Light Mode](./demo/light.png)
+
+## **Dark Mode**
+
+![Dark Mode](./demo/dark.png)
+
 ## **Installation**
 
     gem install nxgreport

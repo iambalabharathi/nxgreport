@@ -22,5 +22,5 @@ class TestNxgReport < Test::Unit::TestCase
         @nxg_report.setup()
         assert_equal("Features Summary", @nxg_report.title)
     end
-
+    
 end
