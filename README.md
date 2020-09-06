@@ -61,3 +61,7 @@ $NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
 
 - **feature_name:** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
 - **test_status:** _This is the status of the test, allowed values are Pass or Fail_
+
+## **License**
+
+Copyright © 2020 [MIT License](LICENSE)
