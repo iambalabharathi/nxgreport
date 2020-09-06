@@ -25,7 +25,7 @@ class NxgReport
 
     def build()
         write()
-        if @auto_open
+        if @auto_open && report_success()
             system("open #{@nxg_report_path}")
         end
     end
@@ -37,6 +37,10 @@ class NxgReport
     # Private methods
     def log(message)
         puts("🤖- #{message}")
+    end
+
+    def report_success()
+      return File.file?(@nxg_report_path)
     end
 
     def clean()
@@ -70,7 +74,7 @@ class NxgReport
     def write()
         if @features.length == 0
             log("No tests logged, cannot build empty report.")
-            exit()
+            return
         end
         clean()
         template = File.new(@nxg_report_path, 'w')
