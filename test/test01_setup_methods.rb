@@ -18,6 +18,20 @@ class TestNxgReport < Test::Unit::TestCase
         assert_equal(@expected_default_report_location, @nxg_report.nxg_report_path())
     end
 
+    def test_title_color_is_not_set_if_invalid_color_is_passed()
+        @nxg_report.setup()
+        @nxg_report.set_title_color(hex_color:"85C1E9")
+
+        assert(@nxg_report.title_color.empty?())
+    end
+
+    def test_title_color_is_set_if_valid_color_is_passed()
+        @nxg_report.setup()
+        @nxg_report.set_title_color(hex_color:"#85C1E9")
+
+        assert_equal("#85C1E9", @nxg_report.title_color)
+    end
+
     def test_report_folder_is_created_if_not_exists()
         @nxg_report.setup(location: "./new/test/index.html")
         folder = File.dirname(@nxg_report.nxg_report_path)

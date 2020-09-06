@@ -1,3 +1,7 @@
+## **[v0.6.2](https://rubygems.org/gems/nxgreport/versions/0.6.1)**
+
+- Option to customize the title color
+
 ## **[v0.6.1](https://rubygems.org/gems/nxgreport/versions/0.6.1)**
 
 - Automatic sub folder creation if not exists

@@ -2,18 +2,27 @@ require 'fileutils'
 
 class NxgReport
 
-    attr_reader :nxg_report_path, :auto_open, :title, :features
+    attr_reader :nxg_report_path, :auto_open, :title, :features, :title_color
 
     def setup(location: "./NxgReport.html", title: "Features Summary")
         @nxg_report_path = location.empty? ? "./NxgReport.html" : location
         folder_check()
         @title = title
+        @title_color = ''
         @auto_open = false
         @features = Hash.new()
     end
 
     def open_upon_execution(value:true)
         @auto_open = value
+    end
+
+    def set_title_color(hex_color: "")
+        if !hex_color[0].eql?("#")
+          log("Invalid hex color passed for report title #{hex_color}")
+          return
+        end
+        @title_color = hex_color
     end
 
     def log_test(feature_name, test_status)
@@ -139,7 +148,7 @@ class NxgReport
               display: grid;
               grid-template-columns: 6fr 1fr;
               text-align: center;
-              background: linear-gradient(to bottom right, #ff644e, #cb3018);
+              #{@title_color.empty?() ? "background: linear-gradient(to bottom right, #ff644e, #cb3018);" : "background-color: #{@title_color}"}
             }
       
             .mc {
