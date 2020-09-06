@@ -1,5 +1,8 @@
 
 class NxgReport
+
+    attr_reader :nxg_report_path, :auto_open, :title
+
     def setup(location: "./NxgReport.html", title: "Features Summary")
         @nxg_report_path = location
         @title = title
@@ -28,10 +31,6 @@ class NxgReport
         if @auto_open && report_success()
             system("open #{@nxg_report_path}")
         end
-    end
-
-    def report_location()
-      return @nxg_report_path
     end
 
     # Private methods
