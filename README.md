@@ -1,6 +1,8 @@
 # **Next Gen Report 💎** [![Gem Version](https://badge.fury.io/rb/nxgreport.svg)](https://badge.fury.io/rb/nxgreport)
 
-A simple light weighted gem to generate a beautiful emailable test report. It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.
+A simple light weighted gem to generate a beautiful emailable test report.
+
+It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.
 
 ## **Installation**
 
