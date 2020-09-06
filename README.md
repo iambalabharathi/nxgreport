@@ -52,14 +52,12 @@ end
 $NxgReport.setup(location, title)
 ```
 
-**location (optional):** _This is an absolute path where the report should be generated (ex: "C:\Report\index.hmtl). If not passed, the report will be generated in the **root folder** as **NxgReport.html**_
-
-**title (optional):** _This is title of report displayed. If not passed, the report will be generated with a title **Features Summary**_
+- **location (optional):** _This is an absolute path where the report should be generated (ex: "C:\Report\index.hmtl). If not passed, the report will be generated in the **root folder** as **NxgReport.html**_
+- **title (optional):** _This is title of report displayed. If not passed, the report will be generated with a title **Features Summary**_
 
 ```
 $NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
 ```
 
-**feature_name:** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
-
-**test_status:** _This is the status of the test, allowed values are Pass or Fail_
+- **feature_name:** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
+- **test_status:** _This is the status of the test, allowed values are Pass or Fail_
