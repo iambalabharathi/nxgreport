@@ -1,12 +1,15 @@
-Gem::Specification.new do |s|
-    s.name        = 'nxgreport'
-    s.version     = '0.3.0'
-    s.date        = '2020-09-05'
-    s.summary     = "Next Gen Reporting"
-    s.description = "A simple gem to beautify your test report."
-    s.authors     = ["Balabharathi Jayaraman"]
-    s.email       = 'balabharathi.jayaraman@gmail.com'
-    s.files       = ["lib/nxgreport.rb"]
-    s.homepage    = 'https://rubygems.org/gems/nxgreport'
-    s.license     = 'MIT'
+Gem::Specification.new do |spec|
+    spec.name        = 'nxgreport'
+    spec.version     = '0.3.0'
+    spec.date        = '2020-09-05'
+    spec.summary     = "Next Gen Reporting"
+    spec.description = "A simple gem to beautify your test report."
+    spec.authors     = ["Balabharathi Jayaraman"]
+    spec.email       = 'balabharathi.jayaraman@gmail.com'
+    spec.files       = ["lib/nxgreport.rb"]
+    spec.homepage    = 'https://rubygemspec.org/gems/nxgreport'
+    spec.license     = 'MIT'
+    spec.metadata["homepage_uri"] = spec.homepage
+    spec.metadata["source_code_uri"] = "https://github.com/balabharathijayaraman/nxgreport"
+    spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
   end

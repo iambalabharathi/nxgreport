@@ -2,14 +2,14 @@
 
 A simple light weighted gem to beautify your test reports.
 
-## **🛠 Installation**
+## **Installation**
 
     gem install nxgreport
 
-## **⚙️ Usage**
+## **Usage**
 
     require 'nxgreport'
 
-    $NxgReport.setup(location: "Absolute file path")
+    $NxgReport.setup(location: "Absolute file path", title: "My Report")
     $NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
     $NxgReport.build()
