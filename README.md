@@ -14,16 +14,14 @@ A simple light weighted gem to generate a beautiful emailable test report.
     $NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
     $NxgReport.build()
 
-    Example for cucumber framework ℹ️
+## **Cucumber Ruby Usage**
 
-    -----------------------------------------------------------------------------
-    In env.rb
-    -----------------------------------------------------------------------------
+In **env.rb** add the below line
+
     $NxgReport.setup(location: "Absolute file path", title: "My Report")
 
-    -----------------------------------------------------------------------------
-    In hooks.rb
-    -----------------------------------------------------------------------------
+In **hooks.rb** add the below block of code.
+
     After do |scenario|
         feature_name = scenario.feature.name
         scenario_pass = !scenario.is_failed?() ? "Pass" : "Fail"
