@@ -18,6 +18,29 @@ class TestNxgReportGeneration < Test::Unit::TestCase
         assert(!File.file?(report_location))
     end
 
+    def test_feature_count()
+        @nxg_report.setup()
+        @nxg_report.log_test("Login", "Pass")
+        @nxg_report.log_test("Login", "Pass")
+        @nxg_report.log_test("New Login", "Pass")
+
+        assert_equal(2, @nxg_report.features.length)
+    end
+
+    def test_totalpassfail_per_feature()
+        @nxg_report.setup()
+        @nxg_report.log_test("Login", "Pass")
+        @nxg_report.log_test("Login", "Pass")
+        @nxg_report.log_test("SignUp", "Pass")
+        @nxg_report.log_test("Login", "Fail")
+        @nxg_report.log_test("SignUp", "Pass")
+        @nxg_report.log_test("Login", "Pass")
+
+        assert_equal(4, @nxg_report.features["Login"][0])
+        assert_equal(3, @nxg_report.features["Login"][1])
+        assert_equal(1, @nxg_report.features["Login"][2])
+    end
+
     def test_report_is_created_when_one_test_is_logged()
         @nxg_report.setup()
         report_location = @nxg_report.nxg_report_path()        

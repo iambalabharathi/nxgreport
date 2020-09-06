@@ -22,5 +22,10 @@ class TestNxgReport < Test::Unit::TestCase
         @nxg_report.setup()
         assert_equal("Features Summary", @nxg_report.title)
     end
+
+    def test_default_auto_open_state_is_false() 
+        @nxg_report.setup()
+        assert(!@nxg_report.auto_open) 
+    end
     
 end
