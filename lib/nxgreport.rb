@@ -139,8 +139,16 @@ class NxgReport
             }
       
             .footer {
-              margin-bottom: 1em;
-              padding: 3em;
+            margin-bottom: 1em;
+            padding: 3em;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            }
+
+            a {
+              cursor: pointer;
+              font-weight: 600;
             }
       
             .module {
@@ -222,6 +230,10 @@ class NxgReport
             body.dark > .wrapper > .header {
               color: var(--dark-primary);
             }
+
+            body.dark > .wrapper > .footer > p > span > a {
+              color: var(--dark-font);
+            }
       
             body.dark > .wrapper > .header > div > button > #theme-switch-icon {
               color: var(--dark-primary);
@@ -259,6 +271,10 @@ class NxgReport
       
             body > .wrapper > .header {
               color: var(--light-primary);
+            }
+
+            body > .wrapper > .footer > p > span > a {
+              color: var(--light-font);
             }
       
             body > .wrapper > .header > div > button > #theme-switch-icon {
@@ -298,7 +314,17 @@ class NxgReport
               #{htmlize(@features)}
             </div>
             <div class=\"footer\">
-              <h6>Developed by Balabharathi Jayaraman</h6>
+              <p>
+                Developed by
+                <span
+                  ><a
+                    href=\"https://www.linkedin.com/in/balabharathijayaraman\"
+                    rel=\"nofollow\"
+                    target=\"_blank\"
+                    >Balabharathi Jayaraman</a
+                  ></span
+                >
+              </p>
             </div>
           </div>
         </body>
