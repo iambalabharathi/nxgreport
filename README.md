@@ -1,6 +1,6 @@
-# **Next Gen Report**
+# **Next Gen Report** [![Gem Version](https://badge.fury.io/rb/nxgreport.svg)](https://badge.fury.io/rb/nxgreport)
 
-A simple light weighted gem to beautify your test reports.
+A simple light weighted gem to generate a beautiful emailable test report.
 
 ## **Installation**
 
