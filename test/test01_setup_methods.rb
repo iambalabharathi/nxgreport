@@ -18,6 +18,12 @@ class TestNxgReport < Test::Unit::TestCase
         assert_equal(@expected_default_report_location, @nxg_report.nxg_report_path())
     end
 
+    def test_report_folder_is_created_if_not_exists()
+        @nxg_report.setup(location: "./new/test/index.html")
+        folder = File.dirname(@nxg_report.nxg_report_path)
+        assert(File.directory?(folder))
+    end
+
     def test_default_report_title()
         @nxg_report.setup()
         assert_equal("Features Summary", @nxg_report.title)

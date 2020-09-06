@@ -18,6 +18,13 @@ class TestNxgReportGeneration < Test::Unit::TestCase
         assert(!File.file?(report_location))
     end
 
+    def test_feature_not_added_if_name_is_empty() 
+        @nxg_report.setup()
+        @nxg_report.log_test("", "Pass")
+
+        assert_equal(0, @nxg_report.features.length)
+    end
+
     def test_feature_count()
         @nxg_report.setup()
         @nxg_report.log_test("Login", "Pass")

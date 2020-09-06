@@ -1,10 +1,12 @@
+require 'fileutils'
 
 class NxgReport
 
     attr_reader :nxg_report_path, :auto_open, :title, :features
 
     def setup(location: "./NxgReport.html", title: "Features Summary")
-        @nxg_report_path = location
+        @nxg_report_path = location.empty? ? "./NxgReport.html" : location
+        folder_check()
         @title = title
         @auto_open = false
         @features = Hash.new()
@@ -15,14 +17,20 @@ class NxgReport
     end
 
     def log_test(feature_name, test_status)
+        if feature_name.nil?() || feature_name.strip.empty?()
+          log("Feature name cannot be empty.")
+          return
+        end
         test_pass = test_status.downcase.include?('pass')
-        if @features.key? feature_name
-            @features[feature_name][0]+=1
-            @features[feature_name][(test_pass) ? 1 : 2]+=1
+        name = feature_name.strip()
+
+        if @features.key? name
+            @features[name][0]+=1
+            @features[name][(test_pass) ? 1 : 2]+=1
         else
-            @features[feature_name]=[0,0,0]
-            @features[feature_name][0]+=1
-            @features[feature_name][(test_pass) ? 1 : 2]+=1
+            @features[name]=[0,0,0]
+            @features[name][0]+=1
+            @features[name][(test_pass) ? 1 : 2]+=1
         end
     end
 
@@ -36,6 +44,11 @@ class NxgReport
     # Private methods
     def log(message)
         puts("🤖- #{message}")
+    end
+
+    def folder_check()
+      folder = File.dirname(@nxg_report_path)
+      FileUtils.mkdir_p(folder) unless File.directory?(folder)
     end
 
     def report_success()
