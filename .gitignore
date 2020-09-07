@@ -1,3 +1,4 @@
 *.gem
 *.html
 test/play.rb
+.DS_Store
