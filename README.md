@@ -1,14 +1,18 @@
 <h1 align="center">
     <img src="./demo/Nxg.gif" alt="Markdownify" width="200">
-  <br>
-  Next Gen Report 💎
-  <br>
+    <br> Next Gen Report 💎 <br>
 </h1>
-<p align="center"><a href="https://badge.fury.io/rb/nxgreport"><img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18"></a></p>
 
-<h4 align="center">A simple light weighted gem to generate a beautiful emailable test report. 
-</h4>
-<p align="center">It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.</p>
+<p align="center">
+    <a href="https://badge.fury.io/rb/nxgreport">
+        <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
+    </a>
+</p>
+
+<h4 align="center">A simple light weighted gem to generate a beautiful emailable test report.</h4>
+<p align="center">
+It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.
+</p>
 
 <p align="center">
   <a href="#installation">Installation</a> •
