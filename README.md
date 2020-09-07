@@ -63,9 +63,9 @@ end
 
 ## **Demo**
 
-![Light Mode](./demo/light.png)
-
 ![Dark Mode](./demo/dark.png)
+
+![Light Mode](./demo/light.png)
 
 ## **Parameters Explaination**
 
