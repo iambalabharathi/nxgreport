@@ -25,11 +25,17 @@ class NxgReport
         @title_color = hex_color
     end
 
-    def log_test(feature_name, test_status)
+    def log_test(feature_name: "", test_status: "")
         if feature_name.nil?() || feature_name.strip.empty?()
           log("Feature name cannot be empty.")
           return
         end
+
+        if test_status.nil?() || test_status.strip.empty?()
+          log("Test status cannot be empty.")
+          return
+        end
+        
         test_pass = test_status.downcase.include?('pass')
         name = feature_name.strip()
 
