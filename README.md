@@ -14,7 +14,7 @@ It displays a single view where tests (total, pass, fail) are grouped by functio
 require 'nxgreport'
 
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
-$NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
+$NxgReport.log_test("Feature Name", "Pass/Fail")
 $NxgReport.build()
 ```
 
@@ -56,11 +56,11 @@ $NxgReport.setup(location, title)
 - **title (optional):** _This is title of report displayed. If not passed, the report will be generated with a title "Features Summary"_
 
 ```
-$NxgReport.log_test(feature_name:"Feature Name", test_status:"Pass/Fail")
+$NxgReport.log_test("Feature Name", "Pass/Fail")
 ```
 
-- **feature_name:** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
-- **test_status:** _This is the status of the test, allowed values are Pass or Fail_
+- **arg 1** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
+- **arg 2** _This is the status of the test, allowed values are Pass or Fail_
 
 ## **License**
 
