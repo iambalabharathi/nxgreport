@@ -1,5 +1,7 @@
 <h1 align="center">
-    <img src="./demo/Nxg.gif" alt="Markdownify" width="200">
+    <a href="https://github.com/balabharathijayaraman/nxgreport">
+        <img src="./demo/Nxg.gif" alt="Markdownify" width="200">
+    </a>
     <br> Next Gen Report 💎 <br>
 </h1>
 
