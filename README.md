@@ -63,7 +63,6 @@ end
 
 ## **Demo**
 
-<br>
 <h1 align="center">
 <img src="./demo/dark.png" alt="Markdownify" width="600"> 
 <img src="./demo/mdark.png" alt="Markdownify" height="300">
@@ -72,6 +71,7 @@ end
 <img src="./demo/light.png" alt="Markdownify" width="600"> 
 <img src="./demo/mlight.png" alt="Markdownify" height="300">
 </h1>
+
 ## **Parameters Explaination**
 
 ```
