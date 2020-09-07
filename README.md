@@ -11,10 +11,10 @@
 <p align="center">It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.</p>
 
 <p align="center">
-  <a href="#installation" style="color: #FF644E">Installation</a> •
-  <a href="#usage" style="color: #FF644E">Usage</a> •
-  <a href="#demo" style="color: #FF644E">Demo</a> •
-  <a href="#license" style="color: #FF644E">License</a>
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#demo">Demo</a> •
+  <a href="#license">License</a>
 </p>
 
 ## **Installation**
