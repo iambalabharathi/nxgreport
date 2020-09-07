@@ -42,6 +42,8 @@ $NxgReport.build()
 In **env.rb** add the below line
 
 ```
+require 'nxgreport'
+
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
 ```
 
