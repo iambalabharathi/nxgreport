@@ -63,14 +63,14 @@ end
 
 ## **Demo**
 
-<h1 align="center">
-<img src="./demo/dark.png" alt="Markdownify" width="600"> 
-<img src="./demo/mdark.png" alt="Markdownify" height="300">
-<br>
-<br>
-<img src="./demo/light.png" alt="Markdownify" width="600"> 
-<img src="./demo/mlight.png" alt="Markdownify" height="300">
-</h1>
+<div align="center">
+    <img src="./demo/dark.png" alt="Markdownify" width="600"> 
+    <img src="./demo/mdark.png" alt="Markdownify" height="300">
+    <br>
+    <br>
+    <img src="./demo/light.png" alt="Markdownify" width="600"> 
+    <img src="./demo/mlight.png" alt="Markdownify" height="300">
+</div>
 
 ## **Parameters Explaination**
 
