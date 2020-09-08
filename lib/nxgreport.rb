@@ -2,13 +2,12 @@ require 'fileutils'
 
 class NxgReport
 
-    attr_reader :nxg_report_path, :auto_open, :title, :features, :title_color
-
     def setup(location: "./NxgReport.html", title: "Features Summary")
         @nxg_report_path = location.empty? ? "./NxgReport.html" : location
         folder_check()
         @title = title
         @title_color = ''
+        @execution_configuration = Hash.new()
         @auto_open = false
         @features = Hash.new()
     end
@@ -17,12 +16,47 @@ class NxgReport
         @auto_open = value
     end
 
-    def set_title_color(hex_color: "")
-        if !hex_color[0].eql?("#")
-          log("Invalid hex color passed for report title #{hex_color}")
-          return
-        end
-        @title_color = hex_color
+    def set_envrionment(name: "")
+      if name.empty?() 
+        return
+      end
+      @execution_configuration[:environment] = name
+    end
+
+    def set_app_version(no: "")
+      if no.empty?()
+        return
+      end
+      version_no = no.downcase.gsub("app", "").gsub("version", "").strip
+      @execution_configuration[:app_version] = "App Version #{version_no}"
+    end
+
+    def set_release(name: "")
+      if name.empty?() 
+        return
+      end
+      @execution_configuration[:release_name] = name
+    end
+
+    def set_os(name: "")
+      if name.empty?() 
+        return
+      end
+      @execution_configuration[:os] = name
+    end
+
+    def set_device(name: "")
+      if name.empty?() 
+        return
+      end
+      @execution_configuration[:device] = name
+    end
+
+    def set_execution(date: "")
+      if date.empty?() 
+        return
+      end
+      @execution_configuration[:execution_date] = date
     end
 
     def log_test(feature_name: "", test_status: "")
@@ -145,7 +179,7 @@ class NxgReport
       
             .wrapper {
               display: grid;
-              grid-template-rows: auto 1fr;
+              grid-template-rows: auto auto 1fr;
               height: 100vh;
               width: 100vw;
             }
@@ -155,6 +189,24 @@ class NxgReport
               grid-template-columns: 6fr 1fr;
               text-align: center;
               #{@title_color.empty?() ? "background: linear-gradient(to bottom right, #ff644e, #cb3018);" : "background-color: #{@title_color}"}
+            }
+
+            .test-config-area {
+              padding-top: 2em;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-around;
+              text-align: center;
+            }
+
+            .config-item {
+              display: flex;
+              
+            }
+
+            .config-item-icon {
+              font-size: 2em;
+              padding-right: 0.5em;
             }
       
             .mc {
@@ -259,6 +311,10 @@ class NxgReport
               color: var(--dark-primary);
             }
 
+            body.dark > .wrapper > .test-config-area > .config-item {
+              color: var(--dark-font);
+            }
+
             body.dark > .wrapper > .footer > p > span > a {
               color: var(--dark-font);
             }
@@ -301,6 +357,10 @@ class NxgReport
               color: var(--light-primary);
             }
 
+            body > .wrapper > .test-config-area > .config-item {
+              color: var(--light-font);
+            }
+
             body > .wrapper > .footer > p > span > a {
               color: var(--light-font);
             }
@@ -338,6 +398,7 @@ class NxgReport
                 </button>
               </div>
             </div>
+            #{config_htmlize()}
             <div class=\"mc\">
               #{htmlize(@features)}
             </div>
@@ -387,7 +448,102 @@ class NxgReport
       template.close()
     end
 
-    private :log, :clean, :write, :htmlize, :report_success
+    def config_htmlize()
+
+      if @execution_configuration.length == 0
+        return
+      end
+
+      return "
+      <div class=\"test-config-area\">
+        #{execution_date_htmllize()}
+        #{device_htmllize()}
+        #{os_htmllize()}
+        #{release_name_htmllize()}
+        #{app_version_htmllize()}
+        #{environment_htmllize()}
+      </div>"
+    end
+
+    def environment_htmllize()
+      if !@execution_configuration.key?(:environment)
+        return
+      end
+
+      return "<div class=\"config-item\">
+                <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
+                  >layers</i
+                >
+                <h5>#{@execution_configuration[:environment]}</h5>
+              </div>"
+    end
+
+    def app_version_htmllize()
+      if !@execution_configuration.key?(:app_version)
+        return
+      end
+
+      return "<div class=\"config-item\">
+                <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
+                  >info</i
+                >
+                <h5>#{@execution_configuration[:app_version]}</h5>
+              </div>"
+    end
+
+    def release_name_htmllize()
+      if !@execution_configuration.key?(:release_name)
+        return
+      end
+
+      return "<div class=\"config-item\">
+                <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
+                  >bookmark</i
+                >
+                <h5>#{@execution_configuration[:release_name]}</h5>
+              </div>"
+    end
+
+    def os_htmllize()
+      if !@execution_configuration.key?(:os)
+        return
+      end
+
+      return "<div class=\"config-item\">
+                <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
+                  >settings</i
+                >
+                <h5>#{@execution_configuration[:os]}</h5>
+              </div>"
+    end
+
+    def device_htmllize()
+      if !@execution_configuration.key?(:device)
+        return
+      end
+
+      return "<div class=\"config-item\">
+                <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
+                  >devices_other</i
+                >
+                <h5>#{@execution_configuration[:device]}</h5>
+              </div>"
+    end
+
+    def execution_date_htmllize()
+      if !@execution_configuration.key?(:execution_date)
+        return
+      end
+
+      return "<div class=\"config-item\">
+                <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
+                  >date_range</i
+                >
+                <h5>#{@execution_configuration[:execution_date]}</h5>
+              </div>"
+    end
+
+    private :log, :clean, :write, :htmlize, :report_success, :config_htmlize
 end
 
 $NxgReport = NxgReport.new()

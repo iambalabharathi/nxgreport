@@ -32,8 +32,18 @@ It displays a single view where tests (total, pass, fail) are grouped by functio
 ```
 require 'nxgreport'
 
+# Report Setup Methods.
+
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
-$NxgReport.log_test("Feature Name", "Pass/Fail")
+$NxgReport.set_execution(date: "10-10-2020")
+$NxgReport.set_device(name: "iPhone X")
+$NxgReport.set_os(name: "iOS 12.1")
+$NxgReport.set_release(name: "M09 2020")
+$NxgReport.set_app_version(no: "app0.9.1")
+$NxgReport.set_envrionment(name: "QA")
+
+$NxgReport.log_test(feature_name: "Feature Name", test_status: "Pass/Fail")
+
 $NxgReport.build()
 ```
 
@@ -45,6 +55,13 @@ In **env.rb** add the below line
 require 'nxgreport'
 
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
+
+$NxgReport.set_execution(date: "10-10-2020")
+$NxgReport.set_device(name: "iPhone X")
+$NxgReport.set_os(name: "iOS 12.1")
+$NxgReport.set_release(name: "M09 2020")
+$NxgReport.set_app_version(no: "app0.9.1")
+$NxgReport.set_envrionment(name: "QA")
 ```
 
 In **hooks.rb** add the below block of code.
@@ -53,7 +70,7 @@ In **hooks.rb** add the below block of code.
 After do |scenario|
     feature_name = scenario.feature.name
     scenario_pass = !scenario.is_failed?() ? "Pass" : "Fail"
-    $NxgReport.log_test(feature_name, scenario_pass)
+    $NxgReport.log_test(feature_name: "Feature Name", test_status: "Pass/Fail")
 end
 
 at_exit do
@@ -85,8 +102,8 @@ $NxgReport.setup(location, title)
 $NxgReport.log_test("Feature Name", "Pass/Fail")
 ```
 
-- **arg 1** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
-- **arg 2** _This is the status of the test, allowed values are Pass or Fail_
+- **feature_name** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
+- **test_status** _This is the status of the test, allowed values are Pass or Fail_
 
 ## **Contributing**
 

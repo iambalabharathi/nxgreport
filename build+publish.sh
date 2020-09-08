@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GEM_VERSION='0.6.1'
+GEM_VERSION='0.7.0'
 
 gem build nxgreport.gemspec
 sudo gem install nxgreport-$GEM_VERSION.gem

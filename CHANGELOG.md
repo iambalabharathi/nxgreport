@@ -2,6 +2,7 @@
 
 - Option to customize the title color
 - Bug fixes & Improvements
+- Display execution parameters like Execution date, App Version, Device Version, OS vesion, Test Environment, Release Name
 
 ## **[v0.6.1](https://rubygems.org/gems/nxgreport/versions/0.6.1)**
 
