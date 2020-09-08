@@ -150,4 +150,25 @@ class TestNxgReportGeneration < Test::Unit::TestCase
         assert(@stub_data_provider.key?(:release_name))
         assert_equal("M09 2020", @stub_data_provider[:release_name])
     end
+
+    def test_os_is_not_set_by_default()
+        @nxg_report.setup()
+
+        assert(!@stub_data_provider.key?(:os))
+    end
+
+    def test_os_is_not_set_if_no_argument_is_passed()
+        @nxg_report.setup()
+        @nxg_report.set_envrionment()
+
+        assert(!@stub_data_provider.key?(:os))
+    end
+
+    def test_os_setting_change()
+        @nxg_report.setup()
+
+        @nxg_report.set_os(name: "iOS 13.5")
+        assert(@stub_data_provider.key?(:os))
+        assert_equal("iOS 13.5", @stub_data_provider[:os])
+    end
 end
