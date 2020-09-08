@@ -2,3 +2,4 @@
 *.html
 test/play.rb
 .DS_Store
+/test/cucumber-test
