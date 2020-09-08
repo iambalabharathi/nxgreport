@@ -35,6 +35,7 @@ require 'nxgreport'
 # Report Setup Methods.
 
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
+
 $NxgReport.set_execution(date: "10-10-2020")
 $NxgReport.set_device(name: "iPhone X")
 $NxgReport.set_os(name: "iOS 12.1")
