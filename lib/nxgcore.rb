@@ -12,7 +12,7 @@ class NxgCore
             @data_provider[:title] = title
             @data_provider[:title_color] = "background: linear-gradient(to bottom right, #ff644e, #cb3018);"
             @data_provider[:open_on_completion] = false
-            @features = Hash.new()
+            @data_provider[:features] = Hash.new()
         end
 
         def set_title_color(hex_color: "")
@@ -87,20 +87,22 @@ class NxgCore
             test_pass = test_status.downcase.include?('pass')
             name = feature_name.strip()
     
-            if @features.key? name
-                @features[name][0]+=1
-                @features[name][(test_pass) ? 1 : 2]+=1
+            if @data_provider[:features].key? name
+                @data_provider[:features][name][0]+=1
+                @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
             else
-                @features[name]=[0,0,0]
-                @features[name][0]+=1
-                @features[name][(test_pass) ? 1 : 2]+=1
+                @data_provider[:features][name]=[0,0,0]
+                @data_provider[:features][name][0]+=1
+                @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
             end
         end
     
         def build()
             write()
             if @data_provider[:open_on_completion]
-                system("open #{@data_provider[:report_path]}")
+                if File.file?(@data_provider[:report_path])
+                  system("open #{@data_provider[:report_path]}")
+                end
             end
         end
     
@@ -144,7 +146,7 @@ class NxgCore
     
         def write()
             clean()
-            if @features.length == 0
+            if @data_provider[:features].length == 0
                 log("No tests logged, cannot build empty report.")
                 return
             end
@@ -410,7 +412,7 @@ class NxgCore
                 </div>
                 #{config_htmlize()}
                 <div class=\"mc\">
-                  #{htmlize(@features)}
+                  #{htmlize(@data_provider[:features])}
                 </div>
                 <div class=\"footer\">
                   <p>

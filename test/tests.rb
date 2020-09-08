@@ -213,4 +213,51 @@ class TestNxgReportGeneration < Test::Unit::TestCase
         assert(@stub_data_provider.key?(:execution_date))
         assert_equal("iPhone XS", @stub_data_provider[:execution_date])
     end
+
+    def test_report_is_not_generated_if_no_tests_are_logged()
+        @nxg_report.setup()
+        @nxg_report.build()
+
+        assert(!File.file?(@stub_data_provider[:report_path]))
+    end
+
+    def test_report_is_generated_if_atleast_1_test_is_logged()
+        @nxg_report.setup()
+        @nxg_report.log_test(feature_name:"Login", test_status:"Pass")
+        @nxg_report.build()
+
+        assert(File.file?(@stub_data_provider[:report_path]))
+    end
+
+    def test_feature_is_not_added_if_feature_name_is_not_sent()
+        @nxg_report.setup()
+        @nxg_report.log_test(test_status:"Pass")
+        @nxg_report.build()
+
+        assert_equal(0, @stub_data_provider[:features].length())
+    end
+
+    def test_feature_is_not_added_if_feature_name_is_sent_empty()
+        @nxg_report.setup()
+        @nxg_report.log_test(feature_name:"", test_status:"Pass")
+        @nxg_report.build()
+
+        assert_equal(0, @stub_data_provider[:features].length())
+    end
+
+    def test_feature_is_not_added_if_test_status_is_not_sent()
+        @nxg_report.setup()
+        @nxg_report.log_test(feature_name:"Login")
+        @nxg_report.build()
+
+        assert_equal(0, @stub_data_provider[:features].length())
+    end
+
+    def test_feature_is_not_added_if_test_status_is_sent_empty()
+        @nxg_report.setup()
+        @nxg_report.log_test(feature_name:"Login", test_status:"")
+        @nxg_report.build()
+
+        assert_equal(0, @stub_data_provider[:features].length())
+    end
 end
