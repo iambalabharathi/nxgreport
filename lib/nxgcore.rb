@@ -526,9 +526,7 @@ class NxgCore
 
         def build_config_item(name, icon)
           return "<div class=\"config-item\">
-                    <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
-                      >#{icon}</i
-                    >
+                    <i class=\"config-item-icon material-icons\">#{icon}</i>
                     <h5>#{name}</h5>
                   </div>"
         end
