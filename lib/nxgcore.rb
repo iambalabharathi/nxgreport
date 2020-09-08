@@ -466,96 +466,76 @@ class NxgCore
             return
           end
     
-          return "
-          <div class=\"test-config-area\">
-            #{execution_date_htmllize()}
-            #{device_htmllize()}
-            #{os_htmllize()}
-            #{release_name_htmllize()}
-            #{app_version_htmllize()}
-            #{environment_htmllize()}
-          </div>"
+          return "<div class=\"test-config-area\">
+                  #{execution_date_htmlize()}
+                  #{device_htmlize()}
+                  #{os_htmlize()}
+                  #{release_name_htmlize()}
+                  #{app_version_htmlize()}
+                  #{environment_htmlize()}
+                </div>"
         end
     
-        def environment_htmllize()
+        def environment_htmlize()
           if !@data_provider.key?(:environment)
             return
           end
-    
-          return "<div class=\"config-item\">
-                    <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
-                      >layers</i
-                    >
-                    <h5>#{@data_provider[:environment]}</h5>
-                  </div>"
+
+          return build_config_item(@data_provider[:environment], "layers")
         end
     
-        def app_version_htmllize()
+        def app_version_htmlize()
           if !@data_provider.key?(:app_version)
             return
           end
-    
-          return "<div class=\"config-item\">
-                    <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
-                      >info</i
-                    >
-                    <h5>#{@data_provider[:app_version]}</h5>
-                  </div>"
+
+          return build_config_item(@data_provider[:app_version], "info")
         end
     
-        def release_name_htmllize()
+        def release_name_htmlize()
           if !@data_provider.key?(:release_name)
             return
           end
-    
-          return "<div class=\"config-item\">
-                    <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
-                      >bookmark</i
-                    >
-                    <h5>#{@data_provider[:release_name]}</h5>
-                  </div>"
+
+          return build_config_item(@data_provider[:release_name], "bookmark")
         end
     
-        def os_htmllize()
+        def os_htmlize()
           if !@data_provider.key?(:os)
             return
           end
-    
-          return "<div class=\"config-item\">
-                    <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
-                      >settings</i
-                    >
-                    <h5>#{@data_provider[:os]}</h5>
-                  </div>"
+
+          return build_config_item(@data_provider[:os], "settings")
         end
     
-        def device_htmllize()
+        def device_htmlize()
           if !@data_provider.key?(:device)
             return
           end
-    
-          return "<div class=\"config-item\">
-                    <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
-                      >devices_other</i
-                    >
-                    <h5>#{@data_provider[:device]}</h5>
-                  </div>"
+
+          return build_config_item(@data_provider[:device], "devices_other")
         end
     
-        def execution_date_htmllize()
+        def execution_date_htmlize()
           if !@data_provider.key?(:execution_date)
             return
           end
-    
+
+          return build_config_item(@data_provider[:execution_date], "date_range")
+        end
+
+        def build_config_item(name, icon)
           return "<div class=\"config-item\">
                     <i class=\"config-item-icon material-icons\" id=\"theme-switch-icon\"
-                      >date_range</i
+                      >#{icon}</i
                     >
-                    <h5>#{@data_provider[:execution_date]}</h5>
+                    <h5>#{name}</h5>
                   </div>"
         end
     
-        private :log, :clean, :write, :htmlize, :config_htmlize
+        private :log, :clean, :write
+        private :execution_date_htmlize, :device_htmlize, :os_htmlize, :release_name_htmlize, :app_version_htmlize, :environment_htmlize
+        private :htmlize, :config_htmlize, :build_config_item
     end
 
     private_constant :NxgReport
