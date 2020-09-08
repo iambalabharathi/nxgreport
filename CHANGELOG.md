@@ -1,4 +1,4 @@
-## **[v0.6.2](https://rubygems.org/gems/nxgreport/versions/0.6.1)**
+## **[v0.7.0](https://rubygems.org/gems/nxgreport/versions/0.6.1)**
 
 - Bug fixes & Improvements
 - Display execution parameters like Execution date, App Version, Device Version, OS vesion, Test Environment, Release Name
