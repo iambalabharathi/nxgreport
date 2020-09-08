@@ -133,11 +133,11 @@ class NxgReport
     end
 
     def write()
+        clean()
         if @features.length == 0
             log("No tests logged, cannot build empty report.")
             return
         end
-        clean()
         template = File.new(@nxg_report_path, 'w')
         template.puts("<html lang=\"en\">
         <head>
