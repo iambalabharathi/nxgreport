@@ -192,4 +192,25 @@ class TestNxgReportGeneration < Test::Unit::TestCase
         assert(@stub_data_provider.key?(:device))
         assert_equal("iPhone XS", @stub_data_provider[:device])
     end
+
+    def test_execution_date_is_not_set_by_default()
+        @nxg_report.setup()
+
+        assert(!@stub_data_provider.key?(:os))
+    end
+
+    def test_execution_date_is_not_set_if_no_argument_is_passed()
+        @nxg_report.setup()
+        @nxg_report.set_execution()
+
+        assert(!@stub_data_provider.key?(:execution_date))
+    end
+
+    def test_execution_date_setting_change()
+        @nxg_report.setup()
+
+        @nxg_report.set_execution(date: "iPhone XS")
+        assert(@stub_data_provider.key?(:execution_date))
+        assert_equal("iPhone XS", @stub_data_provider[:execution_date])
+    end
 end
