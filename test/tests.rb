@@ -159,7 +159,7 @@ class TestNxgReportGeneration < Test::Unit::TestCase
 
     def test_os_is_not_set_if_no_argument_is_passed()
         @nxg_report.setup()
-        @nxg_report.set_envrionment()
+        @nxg_report.set_os()
 
         assert(!@stub_data_provider.key?(:os))
     end
@@ -170,5 +170,26 @@ class TestNxgReportGeneration < Test::Unit::TestCase
         @nxg_report.set_os(name: "iOS 13.5")
         assert(@stub_data_provider.key?(:os))
         assert_equal("iOS 13.5", @stub_data_provider[:os])
+    end
+
+    def test_device_is_not_set_by_default()
+        @nxg_report.setup()
+
+        assert(!@stub_data_provider.key?(:os))
+    end
+
+    def test_device_is_not_set_if_no_argument_is_passed()
+        @nxg_report.setup()
+        @nxg_report.set_device()
+
+        assert(!@stub_data_provider.key?(:device))
+    end
+
+    def test_device_setting_change()
+        @nxg_report.setup()
+
+        @nxg_report.set_device(name: "iPhone XS")
+        assert(@stub_data_provider.key?(:device))
+        assert_equal("iPhone XS", @stub_data_provider[:device])
     end
 end
