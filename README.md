@@ -32,8 +32,6 @@ It displays a single view where tests (total, pass, fail) are grouped by functio
 ```
 require 'nxgreport'
 
-# Report Setup Methods.
-
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
 
 $NxgReport.set_execution(date: "10-10-2020")
