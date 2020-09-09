@@ -21,7 +21,7 @@
         <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport" height="18">
     </a>
     &nbsp;&nbsp;
-    <a href="https://badge.fury.io/rb/nxgreport">
+    <a href="https://twitter.com/balabharathijay">
         <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/balabharathijay" height="18">
     </a>
 </p>
