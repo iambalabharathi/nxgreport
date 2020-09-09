@@ -125,4 +125,4 @@ Copyright © 2020 [MIT License](LICENSE)
 
 ## **Like it ?**
 
-Hit that star icon -> ✭ at the top right corner of this page to show you appreciation, it will be huge boost for me to improve & add new features on this project.
+Hit that star icon -> ✭ at the top right corner of this page to show you appreciation.
