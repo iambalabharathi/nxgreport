@@ -14,7 +14,7 @@
     </a> -->
 </p>
 
-<h4 align="center">A simple light weighted gem to generate a beautiful emailable test report.</h4>
+<h4 align="center">A simple light weighted gem to generate a beautiful e-mailable test report.</h4>
 <p align="center">
 It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.
 </p>
