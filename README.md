@@ -12,11 +12,11 @@
     <!-- <a href="#">
         <img src="https://ruby-gem-downloads-badge.herokuapp.com/nxgreport?extension=png" alt="Gem Downloads" height="18">
     </a> -->
-    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;
     <a href="https://badge.fury.io/rb/nxgreport">
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
     </a>
-    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;
     <a href="https://badge.fury.io/rb/nxgreport">
         <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport" height="18">
     </a>
