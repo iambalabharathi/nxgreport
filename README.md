@@ -6,9 +6,12 @@
 </h1>
 
 <p align="center">
-    <a href="https://badge.fury.io/rb/nxgreport" target="_blank">
+    <a href="https://badge.fury.io/rb/nxgreport">
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
     </a>
+    <!-- <a href="#">
+        <img src="https://ruby-gem-downloads-badge.herokuapp.com/nxgreport?extension=png" alt="Gem Downloads" height="18">
+    </a> -->
 </p>
 
 <h4 align="center">A simple light weighted gem to generate a beautiful emailable test report.</h4>
