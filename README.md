@@ -7,7 +7,11 @@
 
 <p align="center">
     <a href="https://badge.fury.io/rb/nxgreport">
-        <img alt="Ruby Version" src="https://img.shields.io/badge/ruby--version-2.3.0-pink" height="18">
+        <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport?color=blue" height="18">
+    </a>
+    &nbsp;&nbsp;
+    <a href="https://badge.fury.io/rb/nxgreport">
+        <img alt="Ruby Version" src="https://img.shields.io/badge/ruby version-2.3.0-red" height="18">
     </a>
     <!-- <a href="#">
         <img src="https://ruby-gem-downloads-badge.herokuapp.com/nxgreport?extension=png" alt="Gem Downloads" height="18">
@@ -15,14 +19,6 @@
     &nbsp;&nbsp;
     <a href="https://badge.fury.io/rb/nxgreport">
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
-    </a>
-    &nbsp;&nbsp;
-    <a href="https://badge.fury.io/rb/nxgreport">
-        <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport" height="18">
-    </a>
-    &nbsp;&nbsp;
-    <a href="https://twitter.com/balabharathijay">
-        <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/balabharathijay" height="18">
     </a>
 </p>
 
