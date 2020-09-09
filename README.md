@@ -20,6 +20,10 @@
     <a href="https://badge.fury.io/rb/nxgreport">
         <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport" height="18">
     </a>
+    &nbsp;&nbsp;
+    <a href="https://badge.fury.io/rb/nxgreport">
+        <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/balabharathijay" height="18">
+    </a>
 </p>
 
 <h4 align="center">A simple light weighted gem to generate a beautiful e-mailable test report.</h4>
