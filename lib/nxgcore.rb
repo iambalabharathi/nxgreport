@@ -35,7 +35,7 @@ class NxgCore
           @data_provider[:open_on_completion] = value
         end
     
-        def set_envrionment(name: "")
+        def set_environment(name: "")
           if name.empty?() 
             return
           end

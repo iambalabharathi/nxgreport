@@ -74,7 +74,7 @@ class TestNxgReportGeneration < Test::Unit::TestCase
 
     def test_environment_is_not_set_if_no_argument_is_passed()
         @nxg_report.setup()
-        @nxg_report.set_envrionment()
+        @nxg_report.set_environment()
 
         assert(!@stub_data_provider.key?(:environment))
     end
@@ -82,7 +82,7 @@ class TestNxgReportGeneration < Test::Unit::TestCase
     def test_environment_setting_change()
         @nxg_report.setup()
 
-        @nxg_report.set_envrionment(name: "QA")
+        @nxg_report.set_environment(name: "QA")
 
         assert(@stub_data_provider.key?(:environment))
         assert_equal("QA", @stub_data_provider[:environment])
@@ -137,7 +137,7 @@ class TestNxgReportGeneration < Test::Unit::TestCase
 
     def test_release_is_not_set_if_no_argument_is_passed()
         @nxg_report.setup()
-        @nxg_report.set_envrionment()
+        @nxg_report.set_environment()
 
         assert(!@stub_data_provider.key?(:release_name))
     end
