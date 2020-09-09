@@ -6,7 +6,7 @@
 </h1>
 
 <p align="center">
-    <a href="https://badge.fury.io/rb/nxgreport">
+    <a href="https://badge.fury.io/rb/nxgreport" target="_blank">
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
     </a>
 </p>
