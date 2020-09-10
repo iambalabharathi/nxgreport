@@ -6,11 +6,11 @@
 </h1>
 
 <p align="center">
-    <a href="https://badge.fury.io/rb/nxgreport">
+    <a href="#">
         <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport?color=blue" height="18">
     </a>
     &nbsp;&nbsp;
-    <a href="https://badge.fury.io/rb/nxgreport">
+    <a href="#">
         <img alt="Ruby Version" src="https://img.shields.io/badge/ruby version-2.3.0-red" height="18">
     </a>
     <!-- <a href="#">
