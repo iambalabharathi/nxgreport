@@ -90,7 +90,7 @@ In **hooks.rb** add the below block of code.
 ```
 After do |scenario|
     feature_name = scenario.feature.name
-    scenario_pass = !scenario.is_failed?() ? "Pass" : "Fail"
+    scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
     $NxgReport.log_test(feature_name: "Feature Name", test_status: scenario_pass)
 end
 
