@@ -224,21 +224,21 @@ module NxgCss
                     }
             
                     @media only screen and (max-width: 600px) {
-                    h1 {
-                        font-size: 24px;
-                    }
+                        h1 {
+                            font-size: 24px;
+                        }
             
-                    .mc {
-                        grid-template-columns: 1fr;
-                        padding: 0.5em 0.5em;
-                        padding-top: 1em;
-                    }
+                        .mc {
+                            grid-template-columns: 1fr;
+                            padding: 0.5em 0.5em;
+                            padding-top: 1em;
+                        }
                     }
             
                     @media (min-width: 600px) and (max-width: 992px) {
-                    .mc {
-                        grid-template-columns: 1fr 1fr;
-                    }
+                        .mc {
+                            grid-template-columns: 1fr 1fr;
+                        }
                     }
                 </style>"
     end
