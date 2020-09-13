@@ -1,4 +1,10 @@
-## **[v0.7.0](https://rubygems.org/gems/nxgreport/versions/0.6.1)**
+## **[v0.8.0](https://rubygems.org/gems/nxgreport/versions/0.8.0)**
+
+- UI tweaks like drop shadows, borders, transition animations
+- Option to filter only failed features/functionalities
+- Bug fixes & Improvements
+
+## **[v0.7.0](https://rubygems.org/gems/nxgreport/versions/0.7.0)**
 
 - Bug fixes & Improvements
 - Display execution parameters like Execution date, App Version, Device Version, OS vesion, Test Environment, Release Name

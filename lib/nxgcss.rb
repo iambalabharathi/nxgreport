@@ -10,27 +10,31 @@ module NxgCss
             :root {
                 --dark-bg: rgb(41, 40, 40);
                 --dark-primary: #050505;
+                --dark-secondary: #050505a9;
                 --dark-font: rgb(201, 201, 201);
                 --dark-blue: rgb(0, 225, 255);
                 --dark-green: rgba(115, 255, 0, 0.89);
                 --dark-red: rgb(255, 0, 0);
-                --dark-shadow: rgba(0, 0, 0, 0.75);
+                --dark-shadow: rgba(0, 0, 0, 0.5);
         
                 --light-bg: rgb(226, 226, 226);
                 --light-primary: #fff;
+                --light-secondary: rgba(255, 255, 255, 0.445);
                 --light-font: rgb(44, 44, 44);
                 --light-blue: rgb(1, 67, 165);
                 --light-green: rgb(14, 138, 2);
                 --light-red: rgb(255, 0, 0);
-                --light-shadow: rgba(245, 245, 245, 0.75);
+                --light-shadow: rgba(245, 245, 245, 0.5);
         
                 --font: \"Open Sans\", sans-serif;
                 --danger-bg: rgba(255, 0, 0, 0.185);
+                --color-switch-animation: all 500ms ease;
             }
 
             body {
                 font-family: var(--font);
                 margin: auto;
+                transition: var(--color-switch-animation);
             }
 
             .body-wrapper {
@@ -74,7 +78,7 @@ module NxgCss
                 border-radius: 1em;
                 width: 5em;
                 padding: 0.2em 0.8em;
-                background-color: var(--light-primary);
+                background-color: var(--light-secondary);
                 -webkit-box-shadow: -1px 0px 5px 0px var(--light-shadow);
                 -moz-box-shadow: -1px 0px 5px 0px var(--light-shadow);
                 box-shadow: -1px 0px 5px 0px var(--light-shadow);
@@ -107,6 +111,9 @@ module NxgCss
                 grid-template-columns: 3fr 1fr 1fr 1fr;
                 border-radius: 0.7rem;
                 padding: 10px 10px;
+                -webkit-box-shadow: -1px 0px 5px 0px var(--light-shadow);
+                -moz-box-shadow: -1px 0px 5px 0px var(--light-shadow);
+                box-shadow: -1px 0px 5px 0px var(--light-shadow);
             }
 
             .button-body-wrapper {
@@ -160,6 +167,9 @@ module NxgCss
             body.dark > .body-wrapper > .mc > .module {
                 background-color: var(--dark-primary);
                 color: var(--dark-font);
+                -webkit-box-shadow: -1px 0px 5px 0px var(--dark-shadow);
+                -moz-box-shadow: -1px 0px 5px 0px var(--dark-shadow);
+                box-shadow: -1px 0px 5px 0px var(--dark-shadow);
             }
 
             body.dark > .body-wrapper > .mc > .module > .total {
@@ -187,7 +197,7 @@ module NxgCss
             }
 
             body.dark > .body-wrapper > .configuration-container > #filter {
-                background-color: var(--dark-primary);
+                background-color: var(--dark-secondary);
                 -webkit-box-shadow: -1px 0px 5px 0px var(--dark-shadow);
                 -moz-box-shadow: -1px 0px 5px 0px var(--dark-shadow);
                 box-shadow: -1px 0px 5px 0px var(--dark-shadow);
