@@ -73,7 +73,7 @@ module NxgCss
                     }
             
                     .footer {
-                    margin-bottom: 1em;
+                    margin-bottom: 0.5em;
                     padding: 3em;
                     text-align: center;
                     font-size: 0.7rem;
