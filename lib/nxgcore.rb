@@ -79,39 +79,39 @@ class NxgCore
         end
     
         def log_test(feature_name: "", test_status: "")
-            if feature_name.nil?() || feature_name.strip.empty?()
-              log("Feature name cannot be empty.")
-              return
-            end
-    
-            if test_status.nil?() || test_status.strip.empty?()
-              log("Test status cannot be empty.")
-              return
-            end
-            
-            test_pass = test_status.downcase.include?('pass')
-            name = feature_name.strip()
-    
-            if !@data_provider[:features].key?(name)
-              @data_provider[:features][name]=[0,0,0]
-            end
+          if feature_name.nil?() || feature_name.strip.empty?()
+            log("Feature name cannot be empty.")
+            return
+          end
+  
+          if test_status.nil?() || test_status.strip.empty?()
+            log("Test status cannot be empty.")
+            return
+          end
+          
+          test_pass = test_status.downcase.include?('pass')
+          name = feature_name.strip()
+  
+          if !@data_provider[:features].key?(name)
+            @data_provider[:features][name]=[0,0,0]
+          end
 
-            @data_provider[:features][name][0]+=1
-            @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
+          @data_provider[:features][name][0]+=1
+          @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
         end
     
         def build()
-            write()
-            if @data_provider[:open_on_completion]
-                if File.file?(@data_provider[:report_path])
-                  system("open #{@data_provider[:report_path]}")
-                end
-            end
+          write()
+          if @data_provider[:open_on_completion]
+              if File.file?(@data_provider[:report_path])
+                system("open #{@data_provider[:report_path]}")
+              end
+          end
         end
     
         # Private methods
         def log(message)
-            puts("🤖- #{message}")
+          puts("🤖- #{message}")
         end
     
         def folder_check()
@@ -124,66 +124,66 @@ class NxgCore
         end
     
         def write()
-            clean()
-            if @data_provider[:features].length == 0
-                log("No tests logged, cannot build empty report.")
-                return
-            end
-            template = File.new(@data_provider[:report_path], 'w')
-            template.puts("<html lang=\"en\">
-                            #{head()}
-                            #{body()}
-                            #{javascript()}
-                          </html>")
+          clean()
+          if @data_provider[:features].length == 0
+              log("No tests logged, cannot build empty report.")
+              return
+          end
+          template = File.new(@data_provider[:report_path], 'w')
+          template.puts("<html lang=\"en\">
+                          #{head()}
+                          #{body()}
+                          #{javascript()}
+                        </html>")
           template.close()
         end
 
         def head()
-          return "<head>
-                    <meta charset=\"UTF-8\" />
-                    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
-                    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
-                    <title>Home | #{@data_provider[:title]}</title>
-                    #{google_fonts_link()}
-                    #{icons_link()}
-                    #{css(@data_provider)}
-                  </head>"
+          "<head>
+            <meta charset=\"UTF-8\" />
+            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
+            <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
+            <title>Home | #{@data_provider[:title]}</title>
+            #{google_fonts_link()}
+            #{icons_link()}
+            #{css(@data_provider)}
+          </head>"
         end
 
         def google_fonts_link()
           "<link
-              href=\"https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap\"
-              rel=\"stylesheet\"
-            />"
+            href=\"https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap\"
+            rel=\"stylesheet\"
+          />"
         end
 
         def icons_link()
           "<link
-              href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"
-              rel=\"stylesheet\"
-            />"
+            href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"
+            rel=\"stylesheet\"
+          />"
         end
 
         def body()
-          return "<body class=\"dark\" id=\"app\">
-                    <div class=\"body-wrapper\">
-                      #{header()}
-                      #{config()}
-                      #{features()}
-                      #{footer()}
-                    </div>
-                  </body>"
+          "<body class=\"dark\" id=\"app\">
+            <div class=\"body-wrapper\">
+              #{header()}
+              #{config()}
+              #{features()}
+              #{footer()}
+            </div>
+          </body>"
         end
 
         def header()
-          return "<div class=\"header\">
-                    <h1>#{@data_provider[:title]}</h1>
-                    <div class=\"button-wrapper\">
-                      <button id=\"theme-switch\" onclick=\"handleThemeSwitch()\">
-                        <i class=\"material-icons\" id=\"theme-switch-icon\">brightness_2</i>
-                      </button>
-                    </div>
-                  </div>"
+          "<div class=\"header\">
+            <h1>#{@data_provider[:title]}</h1>
+            <div class=\"button-wrapper\">
+              <button id=\"theme-switch\" onclick=\"handleThemeSwitch()\">
+                <i class=\"material-icons\" id=\"theme-switch-icon\">brightness_2</i>
+              </button>
+            </div>
+          </div>"
         end
 
         def features()
@@ -199,92 +199,92 @@ class NxgCore
       end
 
         def footer()
-          return "<div class=\"footer\">
-                    <p>
-                      Developed by
-                      <span
-                        ><a
-                          href=\"https://www.linkedin.com/in/balabharathijayaraman\"
-                          rel=\"nofollow\"
-                          target=\"_blank\"
-                          >Balabharathi Jayaraman</a
-                        ></span
-                      >
-                    </p>
-                  </div>"
+          "<div class=\"footer\">
+            <p>
+              Developed by
+              <span
+                ><a
+                  href=\"https://www.linkedin.com/in/balabharathijayaraman\"
+                  rel=\"nofollow\"
+                  target=\"_blank\"
+                  >Balabharathi Jayaraman</a
+                ></span
+              >
+            </p>
+          </div>"
         end
 
         def javascript()
-          return "<script>
-                    var theme = \"dark\";
-                    var displayAllTests = true;
-                    
-                    var features = [
-                        #{features_js_array()}
-                    ]
-                
-                    window.onload = (e) => {
-                      displayAll()
-                    };
-                
-                    function handleThemeSwitch() {
-                      if (theme === \"dark\") {
-                        theme = \"light\";
-                        document.getElementById(\"app\").classList.remove(\"dark\");
-                        document.getElementById(\"theme-switch-icon\").innerHTML = \"wb_sunny\";
-                        document.getElementById(\"theme-switch-icon\");
-                        return;
-                      }
-                      if (theme === \"light\") {
-                        theme = \"dark\";
-                        document.getElementById(\"app\").classList.add(\"dark\");
-                        document.getElementById(\"theme-switch-icon\").innerHTML = \"brightness_2\";
-                      }
-                    }
-                
-                    function handleFilter() {
-                      displayAllTests = !displayAllTests;
-                      if (displayAllTests) {
-                        displayAll();
-                      } else {
-                        displayFailuresOnly();
-                      }
-                    }
-                
-                    function displayAll() {
-                      $(\"#filter h5\").text(\"All\");
-                      mcNode = document.getElementsByClassName(\"mc\");
-                      $(\".mc\").empty();
-                      features.forEach((item) => {
-                        $(\".mc\").append(
-                          `<div class=\"module dark ${
-                            item.fail > 0 ? \"danger\" : \"\"
-                          }\"><div class=\"funcname\"><h4>${
-                            item.name
-                          }</h4></div><div class=\"total\"><h6>Total</h6><h4>${
-                            item.total
-                          }</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${
-                            item.pass
-                          }</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${
-                            item.fail
-                          }</h4></div></div>`
-                        );
-                      });
-                    }
+          "<script>
+              var theme = \"dark\";
+              var displayAllTests = true;
+              
+              var features = [
+                  #{features_js_array()}
+              ]
+          
+              window.onload = (e) => {
+                displayAll()
+              };
+          
+              function handleThemeSwitch() {
+                if (theme === \"dark\") {
+                  theme = \"light\";
+                  document.getElementById(\"app\").classList.remove(\"dark\");
+                  document.getElementById(\"theme-switch-icon\").innerHTML = \"wb_sunny\";
+                  document.getElementById(\"theme-switch-icon\");
+                  return;
+                }
+                if (theme === \"light\") {
+                  theme = \"dark\";
+                  document.getElementById(\"app\").classList.add(\"dark\");
+                  document.getElementById(\"theme-switch-icon\").innerHTML = \"brightness_2\";
+                }
+              }
+          
+              function handleFilter() {
+                displayAllTests = !displayAllTests;
+                if (displayAllTests) {
+                  displayAll();
+                } else {
+                  displayFailuresOnly();
+                }
+              }
+          
+              function displayAll() {
+                $(\"#filter h5\").text(\"All\");
+                mcNode = document.getElementsByClassName(\"mc\");
+                $(\".mc\").empty();
+                features.forEach((item) => {
+                  $(\".mc\").append(
+                    `<div class=\"module dark ${
+                      item.fail > 0 ? \"danger\" : \"\"
+                    }\"><div class=\"funcname\"><h4>${
+                      item.name
+                    }</h4></div><div class=\"total\"><h6>Total</h6><h4>${
+                      item.total
+                    }</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${
+                      item.pass
+                    }</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${
+                      item.fail
+                    }</h4></div></div>`
+                  );
+                });
+              }
 
-                    function displayFailuresOnly() {
-                      $(\"#filter h5\").text(\"Failures\");
-                      mcNode = document.getElementsByClassName(\"mc\");
-                      $(\".mc\").empty();
-                      features.forEach((item) => {
-                        if (item.fail > 0) {
-                          $(\".mc\").append(
-                            `<div class=\"module dark danger\"><div class=\"funcname\"><h4>${item.name}</h4></div><div class=\"total\"><h6>Total</h6><h4>${item.total}</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${item.pass}</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${item.fail}</h4></div></div>`
-                          );
-                        }
-                      });
-                    }
-                  </script>"
+              function displayFailuresOnly() {
+                $(\"#filter h5\").text(\"Failures\");
+                mcNode = document.getElementsByClassName(\"mc\");
+                $(\".mc\").empty();
+                features.forEach((item) => {
+                  if (item.fail > 0) {
+                    $(\".mc\").append(
+                      `<div class=\"module dark danger\"><div class=\"funcname\"><h4>${item.name}</h4></div><div class=\"total\"><h6>Total</h6><h4>${item.total}</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${item.pass}</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${item.fail}</h4></div></div>`
+                    );
+                  }
+                });
+              }
+            </script>"
         end
     
         def config()
@@ -355,10 +355,10 @@ class NxgCore
         end
 
         def config_item(name, icon)
-          return "<div class=\"configuration-wrapper\">
-                    <i class=\"configuration-icon material-icons\">#{icon}</i>
-                    <h5 id=\"configuration-text\">#{name}</h5>
-                  </div>"
+          "<div class=\"configuration-wrapper\">
+            <i class=\"configuration-icon material-icons\">#{icon}</i>
+            <h5 id=\"configuration-text\">#{name}</h5>
+          </div>"
         end
     
         private :log, :clean, :write
