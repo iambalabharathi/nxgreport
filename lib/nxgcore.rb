@@ -187,28 +187,7 @@ class NxgCore
         end
 
         def features()
-          html_content = ''
-          @data_provider[:features].each do |name, metrics|
-              html_content += "\n<div class=\"module dark #{metrics[2] != 0 ? 'danger' : ''} \">
-                                <div class=\"funcname\">
-                                  <h4>#{name}</h4>
-                                </div>
-                                <div class=\"total\">
-                                  <h6>Total</h6>
-                                  <h4>#{metrics[0]}</h4>
-                                </div>
-                                <div class=\"pass\">
-                                  <h6>Passed</h6>
-                                  <h4>#{metrics[1]}</h4>
-                                </div>
-                                <div class=\"fail\">
-                                  <h6>Failed</h6>
-                                  <h4>#{metrics[2]}</h4>
-                                </div>
-                              </div>"
-          end
-
-          return "<div class=\"mc\">#{html_content}</div>"
+          "<div class=\"mc\"></div>"
       end
 
       def features_js_array()
@@ -245,7 +224,7 @@ class NxgCore
                     ]
                 
                     window.onload = (e) => {
-                      $(\"#filter h5\").text(\"All\");
+                      displayAll()
                     };
                 
                     function handleThemeSwitch() {
@@ -266,15 +245,14 @@ class NxgCore
                     function handleFilter() {
                       displayAllTests = !displayAllTests;
                       if (displayAllTests) {
-                        $(\"#filter h5\").text(\"All\");
                         displayAll();
                       } else {
-                        $(\"#filter h5\").text(\"Failures\");
                         displayFailuresOnly();
                       }
                     }
                 
                     function displayAll() {
+                      $(\"#filter h5\").text(\"All\");
                       mcNode = document.getElementsByClassName(\"mc\");
                       $(\".mc\").empty();
                       features.forEach((item) => {
@@ -295,6 +273,7 @@ class NxgCore
                     }
 
                     function displayFailuresOnly() {
+                      $(\"#filter h5\").text(\"Failures\");
                       mcNode = document.getElementsByClassName(\"mc\");
                       $(\".mc\").empty();
                       features.forEach((item) => {

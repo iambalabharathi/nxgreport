@@ -14,6 +14,7 @@ module NxgCss
                         --dark-blue: rgb(0, 225, 255);
                         --dark-green: rgba(115, 255, 0, 0.89);
                         --dark-red: rgb(255, 0, 0);
+                        --dark-shadow: rgba(0, 0, 0, 0.75);
                 
                         --light-bg: rgb(226, 226, 226);
                         --light-primary: #fff;
@@ -21,6 +22,7 @@ module NxgCss
                         --light-blue: rgb(1, 67, 165);
                         --light-green: rgb(14, 138, 2);
                         --light-red: rgb(255, 0, 0);
+                        --light-shadow: rgba(245, 245, 245, 0.75);
                 
                         --font: \"Open Sans\", sans-serif;
                         --danger-bg: rgba(255, 0, 0, 0.185);
@@ -73,9 +75,9 @@ module NxgCss
                         width: 5em;
                         padding: 0.2em 0.8em;
                         background-color: var(--light-primary);
-                        -webkit-box-shadow: -1px 0px 5px 0px rgba(245, 245, 245, 0.75);
-                        -moz-box-shadow: -1px 0px 5px 0px rgba(245, 245, 245, 0.75);
-                        box-shadow: -1px 0px 5px 0px rgba(245, 245, 245, 0.75);
+                        -webkit-box-shadow: -1px 0px 5px 0px var(--light-shadow);
+                        -moz-box-shadow: -1px 0px 5px 0px var(--light-shadow);
+                        box-shadow: -1px 0px 5px 0px var(--light-shadow);
                     }
 
                     .mc {
@@ -186,9 +188,9 @@ module NxgCss
 
                     body.dark > .body-wrapper > .configuration-container > #filter {
                         background-color: var(--dark-primary);
-                        -webkit-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
-                        -moz-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
-                        box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
+                        -webkit-box-shadow: -1px 0px 5px 0px var(--dark-shadow);
+                        -moz-box-shadow: -1px 0px 5px 0px var(--dark-shadow);
+                        box-shadow: -1px 0px 5px 0px var(--dark-shadow);
                     }
 
                     body.dark > .body-wrapper > .footer > p > span > a {
