@@ -363,7 +363,7 @@ class NxgCore
     
         private :log, :clean, :write
         private :execution_date, :device, :os, :release_name, :app_version, :environment
-        private :features, :config, :config_item
+        private :features, :config, :config_item, :features_js_array
         private :head, :body, :header, :footer, :javascript
     end
 
