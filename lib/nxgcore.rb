@@ -92,14 +92,12 @@ class NxgCore
             test_pass = test_status.downcase.include?('pass')
             name = feature_name.strip()
     
-            if @data_provider[:features].key? name
-                @data_provider[:features][name][0]+=1
-                @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
-            else
-                @data_provider[:features][name]=[0,0,0]
-                @data_provider[:features][name][0]+=1
-                @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
+            if !@data_provider[:features].key?(name)
+              @data_provider[:features][name]=[0,0,0]
             end
+
+            @data_provider[:features][name][0]+=1
+            @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
         end
     
         def build()
@@ -177,7 +175,7 @@ class NxgCore
                       href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"
                       rel=\"stylesheet\"
                     />
-                    #{css(@data_provider[:title_color])}
+                    #{css(@data_provider)}
                   </head>"
         end
 

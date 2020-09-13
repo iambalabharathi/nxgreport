@@ -1,7 +1,11 @@
 
-module NxgCss 
+module NxgCss
 
-    def css(title_color)
+    def has_environment_settings(data_provider)
+        data_provider.key?(:environment) || data_provider.key?(:app_version) || data_provider.key?(:release_name) || data_provider.key?(:os) || data_provider.key?(:device) || data_provider.key?(:execution_date)
+    end
+
+    def css(data_provider)
         return "<style>
                     :root {
                     --dark-bg: rgb(41, 40, 40);
@@ -29,7 +33,7 @@ module NxgCss
             
                     .wrapper {
                     display: grid;
-                    grid-template-rows: auto auto 1fr;
+                    grid-template-rows: #{has_environment_settings(data_provider) ? "auto auto 1fr" : "auto 1fr"};
                     height: 100vh;
                     width: 100vw;
                     }
@@ -38,7 +42,7 @@ module NxgCss
                     display: grid;
                     grid-template-columns: 6fr 1fr;
                     text-align: center;
-                    #{title_color}
+                    #{data_provider[:title_color]}
                     }
 
                     .test-config-area {
