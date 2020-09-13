@@ -202,14 +202,14 @@ class NxgCore
           "<div class=\"footer\">
             <p>
               Developed by
-              <span
-                ><a
+              <span>
+                <a
                   href=\"https://www.linkedin.com/in/balabharathijayaraman\"
                   rel=\"nofollow\"
                   target=\"_blank\"
                   >Balabharathi Jayaraman</a
-                ></span
-              >
+                >
+              </span>
             </p>
           </div>"
         end
