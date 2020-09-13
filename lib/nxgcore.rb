@@ -211,6 +211,14 @@ class NxgCore
           return "<div class=\"mc\">#{html_content}</div>"
       end
 
+      def features_js_array()
+        js_array = ''
+        @data_provider[:features].each do |name, metrics|
+          js_array += "{ name: \"#{name}\", total: #{metrics[0]}, pass: #{metrics[1]}, fail: #{metrics[2]} },"
+        end
+        return js_array
+      end
+
         def footer()
           return "<div class=\"footer\">
                     <p>
@@ -231,6 +239,10 @@ class NxgCore
           return "<script>
                     var theme = \"dark\";
                     var displayAllTests = true;
+                    
+                    var features = [
+                        #{features_js_array()}
+                    ]
                 
                     window.onload = (e) => {
                       $(\"#filter h5\").text(\"All\");
@@ -262,9 +274,37 @@ class NxgCore
                       }
                     }
                 
-                    function displayAll() {}
-                
-                    function displayFailuresOnly() {}
+                    function displayAll() {
+                      mcNode = document.getElementsByClassName(\"mc\");
+                      $(\".mc\").empty();
+                      features.forEach((item) => {
+                        $(\".mc\").append(
+                          `<div class=\"module dark ${
+                            item.fail > 0 ? \"danger\" : \"\"
+                          }\"><div class=\"funcname\"><h4>${
+                            item.name
+                          }</h4></div><div class=\"total\"><h6>Total</h6><h4>${
+                            item.total
+                          }</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${
+                            item.pass
+                          }</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${
+                            item.fail
+                          }</h4></div></div>`
+                        );
+                      });
+                    }
+
+                    function displayFailuresOnly() {
+                      mcNode = document.getElementsByClassName(\"mc\");
+                      $(\".mc\").empty();
+                      features.forEach((item) => {
+                        if (item.fail > 0) {
+                          $(\".mc\").append(
+                            `<div class=\"module dark danger\"><div class=\"funcname\"><h4>${item.name}</h4></div><div class=\"total\"><h6>Total</h6><h4>${item.total}</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${item.pass}</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${item.fail}</h4></div></div>`
+                          );
+                        }
+                      });
+                    }
                   </script>"
         end
     
