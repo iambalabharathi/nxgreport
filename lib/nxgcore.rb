@@ -166,7 +166,7 @@ class NxgCore
 
         def body()
           return "<body class=\"dark\" id=\"app\">
-                    <div class=\"wrapper\">
+                    <div class=\"body-wrapper\">
                       #{header()}
                       #{config()}
                       #{features()}
@@ -273,16 +273,16 @@ class NxgCore
             return
           end
     
-          return "<div class=\"test-config-area\">
+          return "<div class=\"configuration-container\">
                   #{release_name()}
                   #{execution_date()}
                   #{device()}
                   #{os()}
                   #{app_version()}
                   #{environment()}
-                  <div class=\"config-item\" onclick=\"handleFilter()\" id=\"filter\">
-                    <i class=\"config-item-icon material-icons\">filter_list</i>
-                    <h5 id=\"config-item-text\">Failed</h5>
+                  <div class=\"configuration-wrapper\" onclick=\"handleFilter()\" id=\"filter\">
+                    <i class=\"configuration-icon material-icons\">filter_list</i>
+                    <h5 id=\"configuration-text\">Failed</h5>
                   </div>
                 </div>"
         end
@@ -336,9 +336,9 @@ class NxgCore
         end
 
         def config_item(name, icon)
-          return "<div class=\"config-item\">
-                    <i class=\"config-item-icon material-icons\">#{icon}</i>
-                    <h5 id=\"config-item-text\">#{name}</h5>
+          return "<div class=\"configuration-wrapper\">
+                    <i class=\"configuration-icon material-icons\">#{icon}</i>
+                    <h5 id=\"configuration-text\">#{name}</h5>
                   </div>"
         end
     

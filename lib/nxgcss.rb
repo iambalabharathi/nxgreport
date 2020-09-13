@@ -31,7 +31,7 @@ module NxgCss
                         margin: auto;
                     }
             
-                    .wrapper {
+                    .body-wrapper {
                         display: grid;
                         grid-template-rows: auto auto 1fr;
                         height: 100vh;
@@ -45,7 +45,7 @@ module NxgCss
                         #{data_provider[:title_color]}
                     }
 
-                    .test-config-area {
+                    .configuration-container {
                         padding-top: 1.5em;
                         display: flex;
                         flex-wrap: wrap;
@@ -53,17 +53,17 @@ module NxgCss
                         text-align: center;
                     }
 
-                    .config-item {
+                    .configuration-wrapper {
                         display: flex;
                         padding: 0.2em 0.8em;
                     }
 
-                    .config-item-icon {
+                    .configuration-icon {
                         font-size: 1.5em;
                         padding-right: 0.5em;
                     }
 
-                    #config-item-text {
+                    #configuration-text {
                         font-size: 0.7em;
                     }
 
@@ -107,7 +107,7 @@ module NxgCss
                         padding: 10px 10px;
                     }
             
-                    .button-wrapper {
+                    .button-body-wrapper {
                         place-items: center;
                     }
             
@@ -151,51 +151,51 @@ module NxgCss
                         color: var(--dark-font);
                     }
             
-                    body.dark > .wrapper > .footer {
+                    body.dark > .body-wrapper > .footer {
                         color: var(--dark-font);
                     }
             
-                    body.dark > .wrapper > .mc > .module {
+                    body.dark > .body-wrapper > .mc > .module {
                         background-color: var(--dark-primary);
                         color: var(--dark-font);
                     }
             
-                    body.dark > .wrapper > .mc > .module > .total {
+                    body.dark > .body-wrapper > .mc > .module > .total {
                         color: var(--dark-blue);
                     }
             
-                    body.dark > .wrapper > .mc > .module > .pass {
+                    body.dark > .body-wrapper > .mc > .module > .pass {
                         color: var(--dark-green);
                     }
             
-                    body.dark > .wrapper > .mc > .module > .fail {
+                    body.dark > .body-wrapper > .mc > .module > .fail {
                         color: var(--dark-red);
                     }
             
-                    body.dark > .wrapper > .mc > .module.danger {
+                    body.dark > .body-wrapper > .mc > .module.danger {
                         background-color: rgba(255, 0, 0, 0.185);
                     }
             
-                    body.dark > .wrapper > .header {
+                    body.dark > .body-wrapper > .header {
                         color: var(--dark-primary);
                     }
 
-                    body.dark > .wrapper > .test-config-area > .config-item {
+                    body.dark > .body-wrapper > .configuration-container > .configuration-wrapper {
                         color: var(--dark-font);
                     }
 
-                    body.dark > .wrapper > .test-config-area > #filter {
+                    body.dark > .body-wrapper > .configuration-container > #filter {
                         background-color: var(--dark-primary);
                         -webkit-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
                         -moz-box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
                         box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.75);
                     }
 
-                    body.dark > .wrapper > .footer > p > span > a {
+                    body.dark > .body-wrapper > .footer > p > span > a {
                         color: var(--dark-font);
                     }
             
-                    body.dark > .wrapper > .header > div > button > #theme-switch-icon {
+                    body.dark > .body-wrapper > .header > div > button > #theme-switch-icon {
                         color: var(--dark-primary);
                     }
             
@@ -204,44 +204,44 @@ module NxgCss
                         color: var(--dark-font);
                     }
             
-                    body > .wrapper > .footer {
+                    body > .body-wrapper > .footer {
                         color: var(--light-font);
                     }
             
-                    body > .wrapper > .mc > .module {
+                    body > .body-wrapper > .mc > .module {
                         background-color: var(--light-primary);
                         color: var(--light-font);
                     }
             
-                    body > .wrapper > .mc > .module > .total {
+                    body > .body-wrapper > .mc > .module > .total {
                         color: var(--light-blue);
                     }
             
-                    body > .wrapper > .mc > .module > .pass {
+                    body > .body-wrapper > .mc > .module > .pass {
                         color: var(--light-green);
                     }
             
-                    body > .wrapper > .mc > .module > .fail {
+                    body > .body-wrapper > .mc > .module > .fail {
                         color: var(--light-red);
                     }
             
-                    body > .wrapper > .mc > .module.danger {
+                    body > .body-wrapper > .mc > .module.danger {
                         background-color: var(--danger-bg);
                     }
             
-                    body > .wrapper > .header {
+                    body > .body-wrapper > .header {
                         color: var(--light-primary);
                     }
 
-                    body > .wrapper > .test-config-area > .config-item {
+                    body > .body-wrapper > .configuration-container > .configuration-wrapper {
                         color: var(--light-font);
                     }
 
-                    body > .wrapper > .footer > p > span > a {
+                    body > .body-wrapper > .footer > p > span > a {
                         color: var(--light-font);
                     }
             
-                    body > .wrapper > .header > div > button > #theme-switch-icon {
+                    body > .body-wrapper > .header > div > button > #theme-switch-icon {
                         color: var(--light-primary);
                     }
             
@@ -256,19 +256,19 @@ module NxgCss
                             padding-top: 1em;
                         }
 
-                        .test-config-area {
+                        .configuration-container {
                             padding-top: 1em;
                         }
 
-                        .config-item {
+                        .configuration-wrapper {
                         padding: 0.5em 1em;
                         }
 
-                        .config-item-icon {
+                        .configuration-icon {
                         font-size: 1em;
                         }
 
-                        #config-item-text {
+                        #configuration-text {
                         font-size: 0.6em;
                         }
 
