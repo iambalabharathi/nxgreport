@@ -142,7 +142,7 @@ class NxgCore
           return "<head>
                     <meta charset=\"UTF-8\" />
                     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
-                    <title id=\"meta-app-title\"></title>
+                    <title>Home | #{@data_provider[:title]}</title>
                     <link
                       href=\"https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap\"
                       rel=\"stylesheet\"
@@ -168,7 +168,7 @@ class NxgCore
 
         def header()
           return "<div class=\"header\">
-                    <h1 id=\"app-title\"></h1>
+                    <h1>#{@data_provider[:title]}</h1>
                     <div class=\"button-wrapper\">
                       <button id=\"theme-switch\" onclick=\"handleThemeSwitch()\">
                         <i class=\"material-icons\" id=\"theme-switch-icon\">brightness_2</i>
@@ -220,16 +220,8 @@ class NxgCore
 
         def javascript()
           return "<script>
-                    var appTitle = \"#{@data_provider[:title]}\";
                     var theme = \"dark\";
-                
-                    window.onload = function () {
-                      document.getElementById(
-                        \"meta-app-title\"
-                      ).innerHTML = `Home | ${appTitle}`;
-                      document.getElementById(\"app-title\").innerHTML = appTitle;
-                    };
-                
+                    
                     function handleThemeSwitch() {
                       if (theme === \"dark\") {
                         theme = \"light\";
