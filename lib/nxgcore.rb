@@ -123,30 +123,6 @@ class NxgCore
             File.delete(@data_provider[:report_path]) if File.file?(@data_provider[:report_path])
         end
     
-        def htmlize(features)
-            html_content = ''
-            features.each do |name, metrics|
-                html_content += "\n<div class=\"module dark #{metrics[2] != 0 ? 'danger' : ''} \">
-                                  <div class=\"funcname\">
-                                    <h4>#{name}</h4>
-                                  </div>
-                                  <div class=\"total\">
-                                    <h6>Total</h6>
-                                    <h4>#{metrics[0]}</h4>
-                                  </div>
-                                  <div class=\"pass\">
-                                    <h6>Passed</h6>
-                                    <h4>#{metrics[1]}</h4>
-                                  </div>
-                                  <div class=\"fail\">
-                                    <h6>Failed</h6>
-                                    <h4>#{metrics[2]}</h4>
-                                  </div>
-                                </div>"
-            end
-            return html_content
-        end
-    
         def write()
             clean()
             if @data_provider[:features].length == 0
@@ -183,8 +159,8 @@ class NxgCore
           return "<body class=\"dark\" id=\"app\">
                     <div class=\"wrapper\">
                       #{header()}
-                      #{config_htmlize()}
-                      #{feature_metrics()}
+                      #{config()}
+                      #{features()}
                       #{footer()}
                     </div>
                   </body>"
@@ -201,11 +177,30 @@ class NxgCore
                   </div>"
         end
 
-        def feature_metrics()
-          return "<div class=\"mc\">
-                    #{htmlize(@data_provider[:features])}
-                  </div>"
-        end
+        def features()
+          html_content = ''
+          @data_provider[:features].each do |name, metrics|
+              html_content += "\n<div class=\"module dark #{metrics[2] != 0 ? 'danger' : ''} \">
+                                <div class=\"funcname\">
+                                  <h4>#{name}</h4>
+                                </div>
+                                <div class=\"total\">
+                                  <h6>Total</h6>
+                                  <h4>#{metrics[0]}</h4>
+                                </div>
+                                <div class=\"pass\">
+                                  <h6>Passed</h6>
+                                  <h4>#{metrics[1]}</h4>
+                                </div>
+                                <div class=\"fail\">
+                                  <h6>Failed</h6>
+                                  <h4>#{metrics[2]}</h4>
+                                </div>
+                              </div>"
+          end
+
+          return "<div class=\"mc\">#{html_content}</div>"
+      end
 
         def footer()
           return "<div class=\"footer\">
@@ -252,70 +247,70 @@ class NxgCore
                   </script>"
         end
     
-        def config_htmlize()
+        def config()
           if @data_provider.length == 0
             return
           end
     
           return "<div class=\"test-config-area\">
-                  #{execution_date_htmlize()}
-                  #{device_htmlize()}
-                  #{os_htmlize()}
-                  #{release_name_htmlize()}
-                  #{app_version_htmlize()}
-                  #{environment_htmlize()}
+                  #{execution_date()}
+                  #{device()}
+                  #{os()}
+                  #{release_name()}
+                  #{app_version()}
+                  #{environment()}
                 </div>"
         end
     
-        def environment_htmlize()
+        def environment()
           if !@data_provider.key?(:environment)
             return
           end
 
-          return build_config_item(@data_provider[:environment], "layers")
+          return config_item(@data_provider[:environment], "layers")
         end
     
-        def app_version_htmlize()
+        def app_version()
           if !@data_provider.key?(:app_version)
             return
           end
 
-          return build_config_item(@data_provider[:app_version], "info")
+          return config_item(@data_provider[:app_version], "info")
         end
     
-        def release_name_htmlize()
+        def release_name()
           if !@data_provider.key?(:release_name)
             return
           end
 
-          return build_config_item(@data_provider[:release_name], "bookmark")
+          return config_item(@data_provider[:release_name], "bookmark")
         end
     
-        def os_htmlize()
+        def os()
           if !@data_provider.key?(:os)
             return
           end
 
-          return build_config_item(@data_provider[:os], "settings")
+          return config_item(@data_provider[:os], "settings")
         end
     
-        def device_htmlize()
+        def device()
           if !@data_provider.key?(:device)
             return
           end
 
-          return build_config_item(@data_provider[:device], "devices_other")
+          return config_item(@data_provider[:device], "devices_other")
         end
     
-        def execution_date_htmlize()
+        def execution_date()
           if !@data_provider.key?(:execution_date)
             return
           end
 
-          return build_config_item(@data_provider[:execution_date], "date_range")
+          return config_item(@data_provider[:execution_date], "date_range")
         end
 
-        def build_config_item(name, icon)
+        def config_item(name, icon)
           return "<div class=\"config-item\">
                     <i class=\"config-item-icon material-icons\">#{icon}</i>
                     <h5>#{name}</h5>
@@ -323,9 +318,9 @@ class NxgCore
         end
     
         private :log, :clean, :write
-        private :execution_date_htmlize, :device_htmlize, :os_htmlize, :release_name_htmlize, :app_version_htmlize, :environment_htmlize
-        private :htmlize, :config_htmlize, :build_config_item
-        private :head, :body, :header, :footer, :javascript, :feature_metrics
+        private :execution_date, :device, :os, :release_name, :app_version, :environment
+        private :features, :config, :config_item
+        private :head, :body, :header, :footer, :javascript
     end
 
     private_constant :NxgReport
