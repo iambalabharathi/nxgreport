@@ -142,6 +142,7 @@ class NxgCore
           return "<head>
                     <meta charset=\"UTF-8\" />
                     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
+                    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
                     <title>Home | #{@data_provider[:title]}</title>
                     #{google_fonts_link()}
                     #{icons_link()}
@@ -229,7 +230,12 @@ class NxgCore
         def javascript()
           return "<script>
                     var theme = \"dark\";
-                    
+                    var displayAllTests = true;
+                
+                    window.onload = (e) => {
+                      $(\"#filter h5\").text(\"Failures\");
+                    };
+                
                     function handleThemeSwitch() {
                       if (theme === \"dark\") {
                         theme = \"light\";
@@ -244,6 +250,21 @@ class NxgCore
                         document.getElementById(\"theme-switch-icon\").innerHTML = \"brightness_2\";
                       }
                     }
+                
+                    function handleFilter() {
+                      displayAllTests = !displayAllTests;
+                      if (displayAllTests) {
+                        $(\"#filter h5\").text(\"Failures\");
+                        displayAll();
+                      } else {
+                        $(\"#filter h5\").text(\"All\");
+                        displayFailuresOnly();
+                      }
+                    }
+                
+                    function displayAll() {}
+                
+                    function displayFailuresOnly() {}
                   </script>"
         end
     
@@ -253,12 +274,16 @@ class NxgCore
           end
     
           return "<div class=\"test-config-area\">
+                  #{release_name()}
                   #{execution_date()}
                   #{device()}
                   #{os()}
-                  #{release_name()}
                   #{app_version()}
                   #{environment()}
+                  <div class=\"config-item\" onclick=\"handleFilter()\" id=\"filter\">
+                    <i class=\"config-item-icon material-icons\">filter_list</i>
+                    <h5 id=\"config-item-text\">Failed</h5>
+                  </div>
                 </div>"
         end
     
@@ -313,7 +338,7 @@ class NxgCore
         def config_item(name, icon)
           return "<div class=\"config-item\">
                     <i class=\"config-item-icon material-icons\">#{icon}</i>
-                    <h5>#{name}</h5>
+                    <h5 id=\"config-item-text\">#{name}</h5>
                   </div>"
         end
     
