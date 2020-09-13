@@ -46,16 +46,16 @@ module NxgCss
                     }
 
                     .configuration-container {
-                        padding-top: 1.5em;
                         display: flex;
                         flex-wrap: wrap;
-                        justify-content: space-around;
+                        justify-content: space-between;
                         text-align: center;
+                        padding: 1.5em 2em 1em 2em;
                     }
 
                     .configuration-wrapper {
                         display: flex;
-                        padding: 0.2em 0.8em;
+                        place-items: center;
                     }
 
                     .configuration-icon {
@@ -71,19 +71,19 @@ module NxgCss
                         cursor: pointer;
                         border-radius: 1em;
                         width: 5em;
+                        padding: 0.2em 0.8em;
                         background-color: var(--light-primary);
                         -webkit-box-shadow: -1px 0px 5px 0px rgba(245, 245, 245, 0.75);
                         -moz-box-shadow: -1px 0px 5px 0px rgba(245, 245, 245, 0.75);
                         box-shadow: -1px 0px 5px 0px rgba(245, 245, 245, 0.75);
                     }
-            
+
                     .mc {
                         display: grid;
                         grid-template-columns: 1fr 1fr 1fr;
                         grid-auto-rows: 70px;
                         grid-gap: 0.5em;
                         padding: 0.5em 2em;
-                        padding-top: 1.5em;
                     }
             
                     .footer {
@@ -257,23 +257,25 @@ module NxgCss
                         }
 
                         .configuration-container {
-                            padding-top: 1em;
+                            padding: 0.5em 0em;
                         }
 
                         .configuration-wrapper {
-                        padding: 0.5em 1em;
+                            padding: 0.5em 1em;
                         }
 
                         .configuration-icon {
-                        font-size: 1em;
+                            font-size: 1em;
                         }
 
                         #configuration-text {
-                        font-size: 0.6em;
+                            font-size: 0.6em;
                         }
 
                         #filter {
                             width: 4em;
+                            padding: 0.4em 0.4em;
+                            margin: 0.3em 0.7em 0.3em 0.7em;
                         }
                     }
             
