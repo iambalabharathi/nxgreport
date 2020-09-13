@@ -40,7 +40,7 @@ module NxgCss
             
                     .header {
                     display: grid;
-                    grid-template-columns: 6fr 1fr;
+                    grid-template-columns: 8fr 1fr;
                     text-align: center;
                     #{data_provider[:title_color]}
                     }
@@ -55,7 +55,7 @@ module NxgCss
 
                     .config-item {
                     display: flex;
-                    
+                    padding: 0 0.5em;
                     }
 
                     .config-item-icon {
@@ -107,6 +107,7 @@ module NxgCss
                     overflow: hidden;
                     outline: none;
                     margin: 0;
+                    margin-right: 1em;
                     position: relative;
                     top: 50%;
                     -ms-transform: translateY(-50%);
