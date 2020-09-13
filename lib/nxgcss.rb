@@ -33,7 +33,7 @@ module NxgCss
             
                     .wrapper {
                         display: grid;
-                        grid-template-rows: #{has_environment_settings(data_provider) ? "auto auto 1fr" : "auto 1fr"};
+                        grid-template-rows: auto auto 1fr;
                         height: 100vh;
                         width: 100vw;
                     }
