@@ -29,52 +29,45 @@ class NxgCore
         end
     
         def open_upon_execution(value: true)
-          if !value
-            return
-          end
+          return if !value
+
           @data_provider[:open_on_completion] = value
         end
     
         def set_environment(name: "")
-          if name.empty?() 
-            return
-          end
+          return if name.empty?() 
+          
           @data_provider[:environment] = name
         end
     
         def set_app_version(no: "")
-          if no.empty?()
-            return
-          end
+          return if no.empty?()
+            
           version_no = no.downcase.gsub("app", "").gsub("version", "").strip
           @data_provider[:app_version] = "App Version #{version_no}"
         end
     
         def set_release(name: "")
-          if name.empty?() 
-            return
-          end
+          return if name.empty?() 
+            
           @data_provider[:release_name] = name
         end
     
         def set_os(name: "")
-          if name.empty?() 
-            return
-          end
+          return if name.empty?() 
+            
           @data_provider[:os] = name
         end
     
         def set_device(name: "")
-          if name.empty?() 
-            return
-          end
+          return if name.empty?() 
+            
           @data_provider[:device] = name
         end
     
         def set_execution(date: "")
-          if date.empty?() 
-            return
-          end
+          return if date.empty?() 
+            
           @data_provider[:execution_date] = date
         end
     
@@ -103,9 +96,7 @@ class NxgCore
         def build()
           write()
           if @data_provider[:open_on_completion]
-              if File.file?(@data_provider[:report_path])
-                system("open #{@data_provider[:report_path]}")
-              end
+            system("open #{@data_provider[:report_path]}") if File.file?(@data_provider[:report_path])
           end
         end
     
@@ -126,8 +117,8 @@ class NxgCore
         def write()
           clean()
           if @data_provider[:features].length == 0
-              log("No tests logged, cannot build empty report.")
-              return
+            log("No tests logged, cannot build empty report.")
+            return
           end
           template = File.new(@data_provider[:report_path], 'w')
           template.puts("<html lang=\"en\">
@@ -216,82 +207,80 @@ class NxgCore
 
         def javascript()
           "<script>
-              var theme = \"dark\";
-              var displayAllTests = true;
-              
-              var features = [
-                  #{features_js_array()}
-              ]
-          
-              window.onload = (e) => {
-                displayAll()
-              };
-          
-              function handleThemeSwitch() {
-                if (theme === \"dark\") {
-                  theme = \"light\";
-                  document.getElementById(\"app\").classList.remove(\"dark\");
-                  document.getElementById(\"theme-switch-icon\").innerHTML = \"wb_sunny\";
-                  document.getElementById(\"theme-switch-icon\");
-                  return;
-                }
-                if (theme === \"light\") {
-                  theme = \"dark\";
-                  document.getElementById(\"app\").classList.add(\"dark\");
-                  document.getElementById(\"theme-switch-icon\").innerHTML = \"brightness_2\";
-                }
+            var theme = \"dark\";
+            var displayAllTests = true;
+            
+            var features = [
+                #{features_js_array()}
+            ]
+        
+            window.onload = (e) => {
+              displayAll()
+            };
+        
+            function handleThemeSwitch() {
+              if (theme === \"dark\") {
+                theme = \"light\";
+                document.getElementById(\"app\").classList.remove(\"dark\");
+                document.getElementById(\"theme-switch-icon\").innerHTML = \"wb_sunny\";
+                document.getElementById(\"theme-switch-icon\");
+                return;
               }
-          
-              function handleFilter() {
-                displayAllTests = !displayAllTests;
-                if (displayAllTests) {
-                  displayAll();
-                } else {
-                  displayFailuresOnly();
-                }
+              if (theme === \"light\") {
+                theme = \"dark\";
+                document.getElementById(\"app\").classList.add(\"dark\");
+                document.getElementById(\"theme-switch-icon\").innerHTML = \"brightness_2\";
               }
-          
-              function displayAll() {
-                $(\"#filter h5\").text(\"All\");
-                mcNode = document.getElementsByClassName(\"mc\");
-                $(\".mc\").empty();
-                features.forEach((item) => {
-                  $(\".mc\").append(
-                    `<div class=\"module dark ${
-                      item.fail > 0 ? \"danger\" : \"\"
-                    }\"><div class=\"funcname\"><h4>${
-                      item.name
-                    }</h4></div><div class=\"total\"><h6>Total</h6><h4>${
-                      item.total
-                    }</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${
-                      item.pass
-                    }</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${
-                      item.fail
-                    }</h4></div></div>`
-                  );
-                });
+            }
+        
+            function handleFilter() {
+              displayAllTests = !displayAllTests;
+              if (displayAllTests) {
+                displayAll();
+              } else {
+                displayFailuresOnly();
               }
+            }
+        
+            function displayAll() {
+              $(\"#filter h5\").text(\"All\");
+              mcNode = document.getElementsByClassName(\"mc\");
+              $(\".mc\").empty();
+              features.forEach((item) => {
+                $(\".mc\").append(
+                  `<div class=\"module dark ${
+                    item.fail > 0 ? \"danger\" : \"\"
+                  }\"><div class=\"funcname\"><h4>${
+                    item.name
+                  }</h4></div><div class=\"total\"><h6>Total</h6><h4>${
+                    item.total
+                  }</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${
+                    item.pass
+                  }</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${
+                    item.fail
+                  }</h4></div></div>`
+                );
+              });
+            }
 
-              function displayFailuresOnly() {
-                $(\"#filter h5\").text(\"Failures\");
-                mcNode = document.getElementsByClassName(\"mc\");
-                $(\".mc\").empty();
-                features.forEach((item) => {
-                  if (item.fail > 0) {
-                    $(\".mc\").append(
-                      `<div class=\"module dark danger\"><div class=\"funcname\"><h4>${item.name}</h4></div><div class=\"total\"><h6>Total</h6><h4>${item.total}</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${item.pass}</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${item.fail}</h4></div></div>`
-                    );
-                  }
-                });
-              }
-            </script>"
+            function displayFailuresOnly() {
+              $(\"#filter h5\").text(\"Failures\");
+              mcNode = document.getElementsByClassName(\"mc\");
+              $(\".mc\").empty();
+              features.forEach((item) => {
+                if (item.fail > 0) {
+                  $(\".mc\").append(
+                    `<div class=\"module dark danger\"><div class=\"funcname\"><h4>${item.name}</h4></div><div class=\"total\"><h6>Total</h6><h4>${item.total}</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${item.pass}</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${item.fail}</h4></div></div>`
+                  );
+                }
+              });
+            }
+          </script>"
         end
     
         def config()
-          if @data_provider.length == 0
-            return
-          end
-    
+          return if @data_provider.length == 0
+
           return "<div class=\"configuration-container\">
                   #{release_name()}
                   #{execution_date()}
@@ -307,50 +296,38 @@ class NxgCore
         end
     
         def environment()
-          if !@data_provider.key?(:environment)
-            return
-          end
+          return if !@data_provider.key?(:environment)
 
           return config_item(@data_provider[:environment], "layers")
         end
     
         def app_version()
-          if !@data_provider.key?(:app_version)
-            return
-          end
+          return if !@data_provider.key?(:app_version)
 
           return config_item(@data_provider[:app_version], "info")
         end
     
         def release_name()
-          if !@data_provider.key?(:release_name)
-            return
-          end
+          return if !@data_provider.key?(:release_name)
 
           return config_item(@data_provider[:release_name], "bookmark")
         end
     
         def os()
-          if !@data_provider.key?(:os)
-            return
-          end
+          return if !@data_provider.key?(:os)
 
           return config_item(@data_provider[:os], "settings")
         end
     
         def device()
-          if !@data_provider.key?(:device)
-            return
-          end
-
+          return if !@data_provider.key?(:device)
+            
           return config_item(@data_provider[:device], "devices_other")
         end
     
         def execution_date()
-          if !@data_provider.key?(:execution_date)
-            return
-          end
-
+          return if !@data_provider.key?(:execution_date)
+            
           return config_item(@data_provider[:execution_date], "date_range")
         end
 
@@ -370,6 +347,6 @@ class NxgCore
     private_constant :NxgReport
 
     def instance(data_provider: Hash.new())
-        return NxgReport.new(data_provider)
+        NxgReport.new(data_provider)
     end
 end
