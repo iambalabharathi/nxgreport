@@ -233,7 +233,7 @@ class NxgCore
                     var displayAllTests = true;
                 
                     window.onload = (e) => {
-                      $(\"#filter h5\").text(\"Failures\");
+                      $(\"#filter h5\").text(\"All\");
                     };
                 
                     function handleThemeSwitch() {
@@ -254,10 +254,10 @@ class NxgCore
                     function handleFilter() {
                       displayAllTests = !displayAllTests;
                       if (displayAllTests) {
-                        $(\"#filter h5\").text(\"Failures\");
+                        $(\"#filter h5\").text(\"All\");
                         displayAll();
                       } else {
-                        $(\"#filter h5\").text(\"All\");
+                        $(\"#filter h5\").text(\"Failures\");
                         displayFailuresOnly();
                       }
                     }
