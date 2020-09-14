@@ -37,7 +37,12 @@ It displays a single view where tests (total, pass, fail) are grouped by functio
 ## **Demo**
 
 <div align="center">
-    <img src="./demo/NxgReport.gif" alt="Markdownify"> 
+    <img src="./demo/dark.png" alt="Markdownify" width="600"> 
+    <img src="./demo/mdark.png" alt="Markdownify" height="300">
+    <br>
+    <br>
+    <img src="./demo/light.png" alt="Markdownify" width="600"> 
+    <img src="./demo/mlight.png" alt="Markdownify" height="300">
 </div>
 
 ## **Installation**
