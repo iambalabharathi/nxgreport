@@ -3,6 +3,7 @@
 - UI tweaks like drop shadows, borders, transition animations
 - Option to filter only failed features/functionalities
 - Bug fixes & Improvements
+- Added banner to displayed no failures if all tests are pass.
 
 ## **[v0.7.0](https://rubygems.org/gems/nxgreport/versions/0.7.0)**
 
