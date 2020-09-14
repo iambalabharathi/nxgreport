@@ -244,7 +244,6 @@ class NxgCore
         
             function displayAll() {
               $(\"#filter h5\").text(\"All\");
-              mcNode = document.getElementsByClassName(\"mc\");
               $(\".banner-in-the-middle\").removeClass(\"banner-in-the-middle\").addClass(\"mc\");
               $(\".mc\").empty();
               features.forEach((item) => {
@@ -266,11 +265,12 @@ class NxgCore
 
             function displayFailuresOnly() {
               $(\"#filter h5\").text(\"Failures\");
-              mcNode = document.getElementsByClassName(\"mc\");
+              $(\".banner-in-the-middle\").removeClass(\"banner-in-the-middle\").addClass(\"mc\");
               $(\".mc\").empty();
               failureCount = 0;
               features.forEach((item) => {
                 if (item.fail > 0) {
+                  failureCount++;
                   $(\".mc\").append(
                     `<div class=\"module dark danger\"><div class=\"funcname\"><h4>${item.name}</h4></div><div class=\"total\"><h6>Total</h6><h4>${item.total}</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${item.pass}</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${item.fail}</h4></div></div>`
                   );
