@@ -92,6 +92,20 @@ module NxgCss
                 padding: 0.5em 2em;
             }
 
+            .banner-in-the-middle {
+                text-align: center;
+                margin: auto;
+            }
+
+            .banner-text {
+                color: green;
+                font-size: 5em;
+            }
+
+            .banner-in-the-middle > h1 {
+                color: var(--light-font);
+            }
+
             .footer {
                 margin-bottom: 0.5em;
                 padding: 3em;
@@ -186,6 +200,10 @@ module NxgCss
 
             body.dark > .body-wrapper > .mc > .module.danger {
                 background-color: rgba(255, 0, 0, 0.185);
+            }
+
+            body.dark > .body-wrapper > .banner-in-the-middle > h1 {
+                color: var(--dark-font);
             }
 
             body.dark > .body-wrapper > .header {

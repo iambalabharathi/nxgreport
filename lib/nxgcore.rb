@@ -245,6 +245,7 @@ class NxgCore
             function displayAll() {
               $(\"#filter h5\").text(\"All\");
               mcNode = document.getElementsByClassName(\"mc\");
+              $(\".banner-in-the-middle\").removeClass(\"banner-in-the-middle\").addClass(\"mc\");
               $(\".mc\").empty();
               features.forEach((item) => {
                 $(\".mc\").append(
@@ -267,6 +268,7 @@ class NxgCore
               $(\"#filter h5\").text(\"Failures\");
               mcNode = document.getElementsByClassName(\"mc\");
               $(\".mc\").empty();
+              failureCount = 0;
               features.forEach((item) => {
                 if (item.fail > 0) {
                   $(\".mc\").append(
@@ -274,6 +276,14 @@ class NxgCore
                   );
                 }
               });
+              if (failureCount === 0) {
+              $(\".mc\")
+                .removeClass(\"mc\")
+                .addClass(\"banner-in-the-middle\")
+                .append(
+                  `<i class=\"banner-text material-icons\">done_all</i><h1>No Failures</>`
+                );
+              }
             }
           </script>"
         end
