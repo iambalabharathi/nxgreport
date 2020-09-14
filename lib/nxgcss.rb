@@ -70,13 +70,13 @@ module NxgCss
             }
 
             #configuration-text {
-                font-size: 0.7em;
+                font-size: 0.75em;
             }
 
             #filter {
                 cursor: pointer;
                 border-radius: 1em;
-                width: 5em;
+                width: 6em;
                 padding: 0.2em 0.8em;
                 background-color: var(--light-secondary);
                 -webkit-box-shadow: -1px 0px 5px 0px var(--light-shadow);
