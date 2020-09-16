@@ -4,6 +4,7 @@
 - Option to filter only failed features/functionalities
 - Bug fixes & Improvements
 - Added banner to displayed no failures if all tests are pass.
+- Display total pass, total fail & pass percentage at the top
 
 ## **[v0.7.0](https://rubygems.org/gems/nxgreport/versions/0.7.0)**
 
