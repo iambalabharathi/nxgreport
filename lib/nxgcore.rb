@@ -298,11 +298,50 @@ class NxgCore
                   #{os()}
                   #{app_version()}
                   #{environment()}
+                  #{passed_tests()}
+                  #{failed_tests()}
+                  #{percentage_pass()}
                   <div class=\"configuration-wrapper\" onclick=\"handleFilter()\" id=\"filter\">
                     <i class=\"configuration-icon material-icons\">filter_list</i>
                     <h5 id=\"configuration-text\">Failed</h5>
                   </div>
                 </div>"
+        end
+
+        def passed_tests()
+          passed = 0
+          @data_provider[:features].each do |name, metrics|
+            passed+=metrics[1]
+          end
+          "<div class=\"configuration-wrapper\">
+            <i class=\"configuration-icon material-icons\">check_circle</i>
+            <h5 id=\"configuration-text\">#{passed}</h5>
+          </div>"
+        end
+
+        def failed_tests()
+          failed = 0
+          @data_provider[:features].each do |name, metrics|
+            failed+=metrics[2]
+          end
+          "<div class=\"configuration-wrapper\">
+            <i class=\"configuration-icon material-icons\">cancel</i>
+            <h5 id=\"configuration-text\">#{failed}</h5>
+          </div>"
+        end
+
+        def percentage_pass()
+          total = 0
+          passed = 0
+          @data_provider[:features].each do |name, metrics|
+            total+=metrics[0]
+            passed+=metrics[1]
+          end
+          pass_percentage = ((passed/total.to_f) * 100).round(2)
+          "<div class=\"configuration-wrapper\">
+            <i class=\"configuration-icon material-icons\">equalizer</i>
+            <h5 id=\"configuration-text\">#{pass_percentage}%</h5>
+          </div>"
         end
     
         def environment()
