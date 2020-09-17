@@ -370,7 +370,7 @@ class NxgCore
         end
     
         def execution_date()
-          return if !@data_provider.key?(:execution_date)
+          @data_provider[:execution_date] = Time.now().strftime("%b %d, %Y") if !@data_provider.key?(:execution_date)
             
           return config_item(@data_provider[:execution_date], "event")
         end
