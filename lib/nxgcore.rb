@@ -99,8 +99,8 @@ class NxgCore
           @data_provider[(test_pass) ? :pass : :fail]+=1
         end
     
-        def build()
-          @end_time = Time.now.to_f
+        def build(execution_time: 0)
+          set_execution_time(execution_time)
           write()
           if @data_provider[:open_on_completion]
             system("open #{@data_provider[:report_path]}") if File.file?(@data_provider[:report_path])
@@ -314,19 +314,12 @@ class NxgCore
         end
 
         def execution_time()
-          total_time = ''
-          time_diff_in_mins = ((@end_time - @start_time)  / 60).to_i
-          if time_diff_in_mins >= 60
-            time_diff_in_hrs = time_diff_in_mins / 60
-            total_time = "#{time_diff_in_hrs} #{time_diff_in_hrs = 1 ? "hour" : "hours"}"
-          else
-            total_time = "#{time_diff_in_mins} mins"
-          end
+          return if !@data_provider.key?(:environment)
           
-          "<div class=\"configuration-wrapper\">
-            <i class=\"configuration-icon material-icons\">access_time</i>
-            <h5 id=\"configuration-text\">#{total_time}</h5>
-          </div>"
+          return "<div class=\"configuration-wrapper\">
+                  <i class=\"configuration-icon material-icons\">access_time</i>
+                  <h5 id=\"configuration-text\">#{@data_provider[:execution_time]}</h5>
+                </div>"
         end
 
         def filter()
@@ -399,6 +392,23 @@ class NxgCore
             <i class=\"configuration-icon material-icons\">#{icon}</i>
             <h5 id=\"configuration-text\">#{name}</h5>
           </div>"
+        end
+
+        def set_execution_time(time)
+          time_diff_in_mins = 0
+          if time == 0
+            @end_time = Time.now.to_f
+            time_diff_in_mins = ((@end_time - @start_time)  / 60).to_i
+          else
+            time_diff_in_mins = (time / 60).to_i
+          end
+
+          if time_diff_in_mins >= 60
+            time_diff_in_hrs = (time_diff_in_mins / 60.to_f).round(2)
+            @data_provider[:execution_time] = "#{time_diff_in_hrs} #{time_diff_in_hrs == 1 ? "hour" : "hours"}"
+          else
+            @data_provider[:execution_time] = "#{time_diff_in_mins} mins"
+          end
         end
     
         private :log, :clean, :write
