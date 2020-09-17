@@ -21,6 +21,7 @@ class NxgCore
             @data_provider[:title_color] = "background: linear-gradient(to bottom right, #ff644e, #cb3018);"
             @data_provider[:open_on_completion] = false
             @data_provider[:features] = Hash.new()
+            @start_time = Time.now.to_f
         end
 
         def set_title_color(hex_color: "")
@@ -99,6 +100,7 @@ class NxgCore
         end
     
         def build()
+          @end_time = Time.now.to_f
           write()
           if @data_provider[:open_on_completion]
             system("open #{@data_provider[:report_path]}") if File.file?(@data_provider[:report_path])
@@ -161,7 +163,7 @@ class NxgCore
         end
 
         def body()
-          "<body class=\"dark\" id=\"app\">
+          "<body class=\"dark\" id=\"app\" onload=\"onStart()\">
             <div class=\"body-wrapper\">
               #{header()}
               #{config()}
@@ -219,9 +221,9 @@ class NxgCore
                 #{features_js_array()}
             ]
         
-            window.onload = (e) => {
-              displayAll()
-            };
+            function onStart() {
+              displayAll();
+            }
         
             function handleThemeSwitch() {
               if (theme === \"dark\") {
@@ -306,8 +308,25 @@ class NxgCore
                   #{passed_tests()}
                   #{failed_tests()}
                   #{percentage_pass()}
+                  #{execution_time()}
                   #{filter()}
                 </div>"
+        end
+
+        def execution_time()
+          total_time = ''
+          time_diff_in_mins = ((@end_time - @start_time)  / 60).to_i
+          if time_diff_in_mins >= 60
+            time_diff_in_hrs = time_diff_in_mins / 60
+            total_time = "#{time_diff_in_hrs} #{time_diff_in_hrs = 1 ? "hour" : "hours"}"
+          else
+            total_time = "#{time_diff_in_mins} mins"
+          end
+          
+          "<div class=\"configuration-wrapper\">
+            <i class=\"configuration-icon material-icons\">access_time</i>
+            <h5 id=\"configuration-text\">#{total_time}</h5>
+          </div>"
         end
 
         def filter()
