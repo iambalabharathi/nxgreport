@@ -198,6 +198,14 @@ module NxgCss
                 color: var(--dark-red);
             }
 
+            body.dark > .body-wrapper > .configuration-container > .configuration-wrapper > .pass-total {
+                color: var(--dark-green);
+            }
+
+            body.dark > .body-wrapper > .configuration-container > .configuration-wrapper > .fail-total {
+                color: var(--dark-red);
+            }
+
             body.dark > .body-wrapper > .mc > .module.danger {
                 background-color: rgba(255, 0, 0, 0.185);
             }
@@ -252,6 +260,14 @@ module NxgCss
             }
 
             body > .body-wrapper > .mc > .module > .fail {
+                color: var(--light-red);
+            }
+
+            body > .body-wrapper > .configuration-container > .configuration-wrapper > .pass-total {
+                color: var(--light-green);
+            }
+
+            body > .body-wrapper > .configuration-container > .configuration-wrapper > .fail-total {
                 color: var(--light-red);
             }
 

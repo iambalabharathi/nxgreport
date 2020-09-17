@@ -9,6 +9,9 @@ class NxgCore
 
         def initialize(data_provider)
           @data_provider = data_provider
+          @data_provider[:pass] = 0
+          @data_provider[:fail] = 0
+          @data_provider[:total] = 0
         end
 
         def setup(location: "./NxgReport.html", title: "Features Summary")
@@ -90,7 +93,9 @@ class NxgCore
           end
 
           @data_provider[:features][name][0]+=1
+          @data_provider[:total]+=1
           @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
+          @data_provider[(test_pass) ? :pass : :fail]+=1
         end
     
         def build()
@@ -301,43 +306,33 @@ class NxgCore
                   #{passed_tests()}
                   #{failed_tests()}
                   #{percentage_pass()}
-                  <div class=\"configuration-wrapper\" onclick=\"handleFilter()\" id=\"filter\">
-                    <i class=\"configuration-icon material-icons\">filter_list</i>
-                    <h5 id=\"configuration-text\">Failed</h5>
-                  </div>
+                  #{filter()}
                 </div>"
         end
 
+        def filter()
+          "<div class=\"configuration-wrapper\" onclick=\"handleFilter()\" id=\"filter\">
+            <i class=\"configuration-icon material-icons\">filter_list</i>
+            <h5 id=\"configuration-text\">Failed</h5>
+          </div>"
+        end
+
         def passed_tests()
-          passed = 0
-          @data_provider[:features].each do |name, metrics|
-            passed+=metrics[1]
-          end
           "<div class=\"configuration-wrapper\">
-            <i class=\"configuration-icon material-icons\">check_circle</i>
-            <h5 id=\"configuration-text\">#{passed}</h5>
+            <i class=\"configuration-icon pass-total material-icons\">check_circle</i>
+            <h5 id=\"configuration-text\">#{@data_provider[:pass]}</h5>
           </div>"
         end
 
         def failed_tests()
-          failed = 0
-          @data_provider[:features].each do |name, metrics|
-            failed+=metrics[2]
-          end
           "<div class=\"configuration-wrapper\">
-            <i class=\"configuration-icon material-icons\">cancel</i>
-            <h5 id=\"configuration-text\">#{failed}</h5>
+            <i class=\"configuration-icon fail-total material-icons\">cancel</i>
+            <h5 id=\"configuration-text\">#{@data_provider[:fail] == 0 ? "None" : @data_provider[:fail]}</h5>
           </div>"
         end
 
         def percentage_pass()
-          total = 0
-          passed = 0
-          @data_provider[:features].each do |name, metrics|
-            total+=metrics[0]
-            passed+=metrics[1]
-          end
-          pass_percentage = ((passed/total.to_f) * 100).round(2)
+          pass_percentage = ((@data_provider[:pass]/@data_provider[:total].to_f) * 100).round(2)
           "<div class=\"configuration-wrapper\">
             <i class=\"configuration-icon material-icons\">equalizer</i>
             <h5 id=\"configuration-text\">#{pass_percentage}%</h5>
