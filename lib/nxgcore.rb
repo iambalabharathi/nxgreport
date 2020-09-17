@@ -320,7 +320,7 @@ class NxgCore
         def passed_tests()
           "<div class=\"configuration-wrapper\">
             <i class=\"configuration-icon pass-total material-icons\">check_circle</i>
-            <h5 id=\"configuration-text\">#{@data_provider[:pass]}</h5>
+            <h5 id=\"configuration-text\">#{@data_provider[:pass] == 0 ? "None" : @data_provider[:pass]}</h5>
           </div>"
         end
 
@@ -366,13 +366,13 @@ class NxgCore
         def device()
           return if !@data_provider.key?(:device)
             
-          return config_item(@data_provider[:device], "devices_other")
+          return config_item(@data_provider[:device], "devices")
         end
     
         def execution_date()
           return if !@data_provider.key?(:execution_date)
             
-          return config_item(@data_provider[:execution_date], "date_range")
+          return config_item(@data_provider[:execution_date], "event")
         end
 
         def config_item(name, icon)
