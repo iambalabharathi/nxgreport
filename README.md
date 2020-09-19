@@ -80,7 +80,7 @@ $NxgReport.set_device(name: "iPhone X")
 $NxgReport.set_os(name: "iOS 12.1")
 $NxgReport.set_release(name: "M09 2020")
 $NxgReport.set_app_version(no: "app0.9.1")
-$NxgReport.set_envrionment(name: "QA")
+$NxgReport.set_environment(name: "QA")
 ```
 
 In **hooks.rb** add the below block of code.
