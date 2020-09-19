@@ -1,9 +1,9 @@
 Gem::Specification.new do |spec|
     spec.name        = 'nxgreport'
-    spec.version     = '0.7.1'
-    spec.date        = '2020-09-06'
+    spec.version     = '0.8.0'
+    spec.date        = '2020-09-19'
     spec.summary     = "Next Gen Report"
-    spec.description = "A simple light weighted gem to generate a beautiful e-mailable test report. \n\nIt displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes."
+    spec.description = "Generate a beautiful static test report."
     spec.authors     = ["Balabharathi Jayaraman"]
     spec.email       = 'balabharathi.jayaraman@gmail.com'
     spec.files       = ["lib/nxgreport.rb", 'lib/nxgcore.rb', "lib/nxgcss.rb"]

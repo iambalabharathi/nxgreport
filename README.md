@@ -56,12 +56,11 @@ require 'nxgreport'
 
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
 
-$NxgReport.set_execution(date: "10-10-2020")
 $NxgReport.set_device(name: "iPhone X")
 $NxgReport.set_os(name: "iOS 12.1")
 $NxgReport.set_release(name: "M09 2020")
 $NxgReport.set_app_version(no: "app0.9.1")
-$NxgReport.set_envrionment(name: "QA")
+$NxgReport.set_environment(name: "QA")
 
 $NxgReport.log_test(feature_name: "Feature Name", test_status: "Pass/Fail")
 
@@ -77,7 +76,6 @@ require 'nxgreport'
 
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
 
-$NxgReport.set_execution(date: "10-10-2020")
 $NxgReport.set_device(name: "iPhone X")
 $NxgReport.set_os(name: "iOS 12.1")
 $NxgReport.set_release(name: "M09 2020")
