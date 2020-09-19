@@ -316,28 +316,25 @@ class NxgCore
         def execution_time()
           return if !@data_provider.key?(:environment)
           
-          return "<div class=\"configuration-wrapper\">
-                  <i class=\"configuration-icon material-icons\">access_time</i>
-                  <h5 id=\"configuration-text\">#{@data_provider[:execution_time]}</h5>
-                </div>"
+          return config_item("Total execution time", @data_provider[:execution_time],'access_time')
         end
 
         def filter()
-          "<div class=\"configuration-wrapper\" onclick=\"handleFilter()\" id=\"filter\">
+          "<div class=\"configuration-wrapper\" onclick=\"handleFilter()\" id=\"filter\" title=\"Filter tests\">
             <i class=\"configuration-icon material-icons\">filter_list</i>
             <h5 id=\"configuration-text\">Failed</h5>
           </div>"
         end
 
         def passed_tests()
-          "<div class=\"configuration-wrapper\">
+          "<div class=\"configuration-wrapper\" title=\"Passed tests\">
             <i class=\"configuration-icon pass-total material-icons\">check_circle</i>
             <h5 id=\"configuration-text\">#{@data_provider[:pass] == 0 ? "None" : @data_provider[:pass]}</h5>
           </div>"
         end
 
         def failed_tests()
-          "<div class=\"configuration-wrapper\">
+          "<div class=\"configuration-wrapper\" title=\"Failed tests\">
             <i class=\"configuration-icon fail-total material-icons\">cancel</i>
             <h5 id=\"configuration-text\">#{@data_provider[:fail] == 0 ? "None" : @data_provider[:fail]}</h5>
           </div>"
@@ -345,50 +342,48 @@ class NxgCore
 
         def percentage_pass()
           pass_percentage = ((@data_provider[:pass]/@data_provider[:total].to_f) * 100).round(2)
-          "<div class=\"configuration-wrapper\">
-            <i class=\"configuration-icon material-icons\">equalizer</i>
-            <h5 id=\"configuration-text\">#{pass_percentage}%</h5>
-          </div>"
+
+          return config_item("Pass percentage", pass_percentage,'equalizer')
         end
     
         def environment()
           return if !@data_provider.key?(:environment)
 
-          return config_item(@data_provider[:environment], "layers")
+          return config_item("Test environment", @data_provider[:environment], "layers")
         end
     
         def app_version()
           return if !@data_provider.key?(:app_version)
 
-          return config_item(@data_provider[:app_version], "info")
+          return config_item("App version tested", @data_provider[:app_version], "info")
         end
     
         def release_name()
           return if !@data_provider.key?(:release_name)
 
-          return config_item(@data_provider[:release_name], "bookmark")
+          return config_item("Release", @data_provider[:release_name], "bookmark")
         end
     
         def os()
           return if !@data_provider.key?(:os)
 
-          return config_item(@data_provider[:os], "settings")
+          return config_item("Os tested", @data_provider[:os], "settings")
         end
     
         def device()
           return if !@data_provider.key?(:device)
             
-          return config_item(@data_provider[:device], "devices")
+          return config_item("Device tested", @data_provider[:device], "devices")
         end
     
         def execution_date()
           @data_provider[:execution_date] = Time.now().strftime("%b %d, %Y") if !@data_provider.key?(:execution_date)
             
-          return config_item(@data_provider[:execution_date], "event")
+          return config_item("Execution date", @data_provider[:execution_date], "event")
         end
 
-        def config_item(name, icon)
-          "<div class=\"configuration-wrapper\">
+        def config_item(toot_tip, name, icon)
+          "<div class=\"configuration-wrapper\" title=\"#{toot_tip}\">
             <i class=\"configuration-icon material-icons\">#{icon}</i>
             <h5 id=\"configuration-text\">#{name}</h5>
           </div>"
