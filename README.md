@@ -38,7 +38,7 @@ It displays a single view where tests (total, pass, fail) are grouped by functio
 
 <div align="center">
     <img src="./demo/demo.gif" alt="Markdownify">
-    <img src="./demo/toolbar.png" alt="Markdownify"> 
+    <img src="./demo/toolbar1.png" alt="Markdownify"> 
 </div>
 
 ## **Installation**
