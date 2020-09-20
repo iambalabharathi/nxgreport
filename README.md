@@ -13,9 +13,6 @@
     <a href="#">
         <img alt="Ruby Version" src="https://img.shields.io/badge/ruby version-2.3.0-red" height="18">
     </a>
-    <!-- <a href="#">
-        <img src="https://ruby-gem-downloads-badge.herokuapp.com/nxgreport?extension=png" alt="Gem Downloads" height="18">
-    </a> -->
     &nbsp;&nbsp;
     <a href="https://badge.fury.io/rb/nxgreport">
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
@@ -37,9 +34,15 @@ It displays a single view where tests (total, pass, fail) are grouped by functio
 ## **Demo**
 
 <div align="center">
-    <img src="./demo/demo.gif" alt="Markdownify">
+    <img src="./demo/demo.gif" alt="Markdownify" width="800">
 </div>
 
+<div align="center">
+    <img src="./demo/dark-all.png" alt="Markdownify" width="400">
+    <img src="./demo/dark-fail.png" alt="Markdownify" width="400">
+    <img src="./demo/light-all.png" alt="Markdownify" width="400">
+    <img src="./demo/light-fail.png" alt="Markdownify" width="400">
+</div>
 ## **Installation**
 
     gem install nxgreport
