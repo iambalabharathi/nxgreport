@@ -37,12 +37,6 @@ It displays a single view where tests (total, pass, fail) are grouped by functio
     <img src="./demo/demo.gif" alt="Markdownify" width="800">
 </div>
 
-<div align="center">
-    <img src="./demo/dark-all.png" alt="Markdownify" width="400">
-    <img src="./demo/dark-fail.png" alt="Markdownify" width="400">
-    <img src="./demo/light-all.png" alt="Markdownify" width="400">
-    <img src="./demo/light-fail.png" alt="Markdownify" width="400">
-</div>
 ## **Installation**
 
     gem install nxgreport
