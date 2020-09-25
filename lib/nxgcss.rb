@@ -111,6 +111,9 @@ module NxgCss
         #sidebar-title,
         #sidebar-status {
           color: var(--secondary-color);
+          transition: opacity 0.5s ease-in-out;
+          transition-delay: 0.3s;
+          opacity: 0;
         }
   
         #test-title {

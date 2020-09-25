@@ -335,6 +335,8 @@ class NxgCore
             $(\"#sidebar\").css(\"width\", \"40%\");
             $(\"#sidebar-title\").css(\"visibility\", \"visible\");
             $(\"#sidebar-status\").css(\"visibility\", \"visible\");
+            $(\"#sidebar-title\").css(\"opacity\", \"1\");
+            $(\"#sidebar-status\").css(\"opacity\", \"1\");
             /* Update Test Information */
       
             $(\"#sidebar-title\").text(\"Failed Tests\");
@@ -364,8 +366,11 @@ class NxgCore
           function closeDetails() {
             $(\"#sidebar-title\").css(\"visibility\", \"hidden\");
             $(\"#sidebar-status\").css(\"visibility\", \"hidden\");
-            $(\"#sidebar-overlay\").css(\"visibility\", \"hidden\");
+            $(\"#sidebar-title\").css(\"opacity\", \"0\");
+            $(\"#sidebar-status\").css(\"opacity\", \"0\");
+            
             $(\"#sidebar-overlay\").css(\"margin-left\", \"0\");
+            $(\"#sidebar-overlay\").css(\"visibility\", \"hidden\");
             $(\"#sidebar\").css(\"width\", \"0\");
           }
       
@@ -384,6 +389,8 @@ class NxgCore
             $(\"#sidebar\").css(\"width\", \"40%\");
             $(\"#sidebar-title\").css(\"visibility\", \"visible\");
             $(\"#sidebar-status\").css(\"visibility\", \"visible\");
+            $(\"#sidebar-title\").css(\"opacity\", \"1\");
+            $(\"#sidebar-status\").css(\"opacity\", \"1\");
             /* Update Test Information */
       
             $(\"#sidebar-title\").text(feature.name);

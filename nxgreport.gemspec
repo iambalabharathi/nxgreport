@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
     spec.name        = 'nxgreport'
-    spec.version     = '0.10.0'
+    spec.version     = '0.11.1'
     spec.date        = '2020-09-25'
     spec.summary     = "Next Gen Report"
     spec.description = "Generate a beautiful static test report."
