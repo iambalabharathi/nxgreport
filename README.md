@@ -35,9 +35,7 @@
 
 <div align="center">
     <img src="./demo/light-summary.png" alt="Markdownify" width="800">
-    <img src="./demo/light-detail.png" alt="Markdownify" width="800">
     <img src="./demo/dark-summary.png" alt="Markdownify" width="800">
-    <img src="./demo/dark-detail.png" alt="Markdownify" width="800">
 </div>
 
 ## **Installation**
@@ -84,7 +82,8 @@ In **hooks.rb** add the below block of code.
 After do |scenario|
     feature_name = scenario.feature.name
     scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
-    $NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: "Error message or additional comments about the test")
+    comments = scenario.exception.nil? ? "Success" : scenario.exception.message
+    $NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: comments)
 end
 
 at_exit do
