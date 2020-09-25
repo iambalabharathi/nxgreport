@@ -1,4 +1,4 @@
-## **[v0.8.0](https://rubygems.org/gems/nxgreport/versions/0.8.0)**
+## **[v0.9.0](https://rubygems.org/gems/nxgreport/versions/0.9.0)**
 
 - Add animated sliding details view to display the test cases per feature
 - Ui color changes
