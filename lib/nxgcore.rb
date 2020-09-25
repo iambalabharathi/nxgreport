@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'pry'
 require 'json'
-require '/Users/balabharathijayaraman/Documents/Code/NxgReport/nxgreport/lib/nxgcss.rb'
+require 'nxgcss.rb'
 
 class NxgCore
     class NxgReport
