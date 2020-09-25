@@ -15,7 +15,7 @@ class NxgCore
           @data_provider[:total] = 0
         end
 
-        def setup(location: "./NxgReport.html", title: "Features Summary")
+        def setup(location: "./NxgReport.html", title: "$NxgReport")
             @data_provider[:report_path] = location.empty? ? "./NxgReport.html" : location
             folder_check()
             @data_provider[:title] = title
