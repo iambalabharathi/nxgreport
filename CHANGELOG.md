@@ -1,5 +1,12 @@
 ## **[v0.8.0](https://rubygems.org/gems/nxgreport/versions/0.8.0)**
 
+- Add animated sliding details view to display the test cases per feature
+- Ui color changes
+- The fail at th top in toolbar is clickable which displays all the failed test cases
+- Automatic dark & light mode detection on supported OS.
+
+## **[v0.8.0](https://rubygems.org/gems/nxgreport/versions/0.8.0)**
+
 - UI tweaks like drop shadows, borders, transition animations
 - Option to filter only failed features/functionalities
 - Bug fixes & Improvements
