@@ -35,9 +35,9 @@
 
 <div align="center">
     <img src="./demo/light-summary.png" alt="Markdownify" width="800">
-    <img src="./demo/light-detail.png" alt="Markdownify" width="800">
     <img src="./demo/dark-summary.png" alt="Markdownify" width="800">
-    <img src="./demo/dark-detail.png" alt="Markdownify" width="800">
+    <img src="./demo/light-detail.png" alt="Markdownify" width="400">
+    <img src="./demo/dark-detail.png" alt="Markdownify" width="400">
 </div>
 
 ## **Installation**
