@@ -82,6 +82,7 @@ In **hooks.rb** add the below block of code.
 After do |scenario|
     feature_name = scenario.feature.name
     scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
+    comments = scenario.exception.nil? ? "Success" : scenario.exception.message
     $NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: "Error message or additional comments about the test")
 end
 
