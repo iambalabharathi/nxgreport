@@ -1,6 +1,7 @@
 require 'fileutils'
-
-require 'nxgcss.rb'
+require 'pry'
+require 'json'
+require '/Users/balabharathijayaraman/Documents/Code/NxgReport/nxgreport/lib/nxgcss.rb'
 
 class NxgCore
     class NxgReport
@@ -18,18 +19,10 @@ class NxgCore
             @data_provider[:report_path] = location.empty? ? "./NxgReport.html" : location
             folder_check()
             @data_provider[:title] = title
-            @data_provider[:title_color] = "background: linear-gradient(to bottom right, #ff644e, #cb3018);"
+            @data_provider[:title_color] = ""
             @data_provider[:open_on_completion] = false
-            @data_provider[:features] = Hash.new()
+            @data_provider[:features] = Array.new()
             @start_time = Time.now.to_f
-        end
-
-        def set_title_color(hex_color: "")
-          if hex_color.strip().empty?() || hex_color.strip()[0] != "#"
-            log("set_title_color method is called with empty color. please check the code.")
-            return
-          end
-          @data_provider[:title_color] = "background-color: #{hex_color.strip().downcase()};"
         end
     
         def open_upon_execution(value: true)
@@ -75,7 +68,7 @@ class NxgCore
           @data_provider[:execution_date] = date
         end
     
-        def log_test(feature_name: "", test_status: "")
+        def log_test(feature_name: "", test_name:"", test_status: "", comments: "")
           if feature_name.nil?() || feature_name.strip.empty?()
             log("Feature name cannot be empty.")
             return
@@ -85,18 +78,31 @@ class NxgCore
             log("Test status cannot be empty.")
             return
           end
-          
-          test_pass = test_status.downcase.include?('pass')
-          name = feature_name.strip()
-  
-          if !@data_provider[:features].key?(name)
-            @data_provider[:features][name]=[0,0,0]
+
+          if test_name.nil?() || test_name.strip.empty?()
+            log("Test name cannot be empty.")
+            return
           end
 
-          @data_provider[:features][name][0]+=1
-          @data_provider[:total]+=1
-          @data_provider[:features][name][(test_pass) ? 1 : 2]+=1
-          @data_provider[(test_pass) ? :pass : :fail]+=1
+          f_name = feature_name.strip
+          t_name = test_name.strip
+          t_pass = test_status.strip.downcase.include?('pass') ? true : false
+          t_comments = comments.strip
+
+          if !feature_exists?(f_name)
+            new_feature = {
+              "name" => f_name,
+              "total" => 0,
+              "pass" => 0,
+              "fail" => 0,
+              "tests" => Array.new()
+            }
+            @data_provider[:features].push(new_feature)
+          end
+
+          update_feature(f_name, t_name, t_pass, t_comments)
+          @data_provider[:total] += 1
+          @data_provider[t_pass ? :pass : :fail] += 1
         end
     
         def build(execution_time: 0)
@@ -108,6 +114,29 @@ class NxgCore
         end
     
         # Private methods
+
+        def update_feature(f_name, t_name, t_pass, t_comments)
+          @data_provider[:features].each do |feature|
+            if feature["name"].eql?(f_name)
+              feature["total"]+=1
+              feature[t_pass ? "pass" : "fail"]+=1
+              feature["tests"].push({
+                "name" => t_name,
+                "testPass" => t_pass,
+                "comments" => t_comments
+              })
+              return
+            end
+          end
+        end
+
+        def feature_exists?(feature_name)
+          @data_provider[:features].each do |feature|
+            return true if feature["name"].eql?(feature_name)
+          end
+          return false
+        end
+
         def log(message)
           puts("🤖- #{message}")
         end
@@ -163,8 +192,20 @@ class NxgCore
         end
 
         def body()
-          "<body class=\"dark\" id=\"app\" onload=\"onStart()\">
-            <div class=\"body-wrapper\">
+          "<body id=\"app\" onload=\"onRefresh()\">
+            <div id=\"sidebar\" onclick=\"closeDetails()\">
+              <div id=\"sidebar-div\">
+                <div id=\"sidebar-title-wrap\">
+                  <h1 id=\"sidebar-title\">Title</h1>
+                  &nbsp;&nbsp;
+                  <i class=\"material-icons\" id=\"sidebar-status\">check_circle</i>
+                </div>
+              </div>
+            </div>
+          <div id=\"sidebar-overlay\" onclick=\"closeDetails()\">
+            <div id=\"sidebar-overlay-grid\"></div>
+          </div>
+            <div id=\"body-wrap\">
               #{header()}
               #{config()}
               #{features()}
@@ -174,30 +215,26 @@ class NxgCore
         end
 
         def header()
-          "<div class=\"header\">
-            <h1>#{@data_provider[:title]}</h1>
-            <div class=\"button-wrapper\">
-              <button id=\"theme-switch\" onclick=\"handleThemeSwitch()\">
-                <i class=\"material-icons\" id=\"theme-switch-icon\">brightness_2</i>
+          "<div id=\"header\">
+            <h1 id=\"app-title\">#{@data_provider[:title]}</h1>
+            <div id=\"theme-wrap\">
+              <button id=\"theme-switch\" onclick=\"switchTheme()\">
+                <i class=\"material-icons\" id=\"theme-icon\">brightness_2</i>
               </button>
             </div>
           </div>"
         end
 
         def features()
-          "<div class=\"mc\"></div>"
+          "<div class=\"features-grid\"></div>"
       end
 
       def features_js_array()
-        js_array = ''
-        @data_provider[:features].each do |name, metrics|
-          js_array += "{ name: \"#{name}\", total: #{metrics[0]}, pass: #{metrics[1]}, fail: #{metrics[2]} },"
-        end
-        return js_array
+        return @data_provider[:features].to_s.gsub("=>", ":")
       end
 
         def footer()
-          "<div class=\"footer\">
+          "<div id=\"footer\">
             <p>
               Developed by
               <span>
@@ -214,91 +251,173 @@ class NxgCore
 
         def javascript()
           "<script>
-            var theme = \"dark\";
-            var displayAllTests = true;
-            
-            var features = [
-                #{features_js_array()}
-            ]
-        
-            function onStart() {
-              displayAll();
-            }
-        
-            function handleThemeSwitch() {
-              if (theme === \"dark\") {
-                theme = \"light\";
-                document.getElementById(\"app\").classList.remove(\"dark\");
-                document.getElementById(\"theme-switch-icon\").innerHTML = \"wb_sunny\";
-                document.getElementById(\"theme-switch-icon\");
-                return;
-              }
-              if (theme === \"light\") {
-                theme = \"dark\";
-                document.getElementById(\"app\").classList.add(\"dark\");
-                document.getElementById(\"theme-switch-icon\").innerHTML = \"brightness_2\";
-              }
-            }
-        
-            function handleFilter() {
-              displayAllTests = !displayAllTests;
-              if (displayAllTests) {
-                displayAll();
-              } else {
-                displayFailuresOnly();
-              }
-            }
-        
-            function displayAll() {
-              $(\"#filter h5\").text(\"All\");
-              $(\".banner-in-the-middle\").removeClass(\"banner-in-the-middle\").addClass(\"mc\");
-              $(\".mc\").empty();
-              features.forEach((item) => {
-                $(\".mc\").append(
-                  `<div class=\"module dark ${
-                    item.fail > 0 ? \"danger\" : \"\"
-                  }\"><div class=\"funcname\"><h4>${
-                    item.name
-                  }</h4></div><div class=\"total\"><h6>Total</h6><h4>${
-                    item.total
-                  }</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${
-                    item.pass
-                  }</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${
-                    item.fail
-                  }</h4></div></div>`
+          var darkTheme = false;
+          var displayFailuresOnly = false;
+      
+          const allFeatures = #{features_js_array};
+      
+          var dataSource = [];
+      
+          const STATUS = {
+            pass: \"check_circle\",
+            fail: \"cancel\",
+          };
+      
+          function onRefresh() {
+            switchTheme();
+            dataSource = allFeatures;
+            setFilter();
+          }
+      
+          function updateView() {
+            $(\".banner\").removeClass(\"banner\").addClass(\"features-grid\");
+            $(\".features-grid\").empty();
+      
+            if (dataSource.length === 0) {
+              console.log(\"inside\");
+              $(\".features-grid\")
+                .removeClass(\"features-grid\")
+                .addClass(\"banner\")
+                .append(
+                  `<i class=\"banner-text green-font material-icons\">done_all</i><h1>No Failures</>`
                 );
-              });
+              return;
             }
-
-            function displayFailuresOnly() {
-              $(\"#filter h5\").text(\"Failures\");
-              $(\".banner-in-the-middle\").removeClass(\"banner-in-the-middle\").addClass(\"mc\");
-              $(\".mc\").empty();
-              failureCount = 0;
-              features.forEach((item) => {
-                if (item.fail > 0) {
-                  failureCount++;
-                  $(\".mc\").append(
-                    `<div class=\"module dark danger\"><div class=\"funcname\"><h4>${item.name}</h4></div><div class=\"total\"><h6>Total</h6><h4>${item.total}</h4></div><div class=\"pass\"><h6>Passed</h6><h4>${item.pass}</h4></div><div class=\"fail\"><h6>Failed</h6><h4>${item.fail}</h4></div></div>`
-                  );
+      
+            dataSource.forEach((feature, index) => {
+              $(\".features-grid\").append(
+                `<div class=\"module dark ${
+                  feature.fail > 0 ? \"red-bg\" : \"\"
+                }\" onclick=\"showDetails(${index})\"><div class=\"funcname\"><h4>${
+                  feature.name
+                }</h4></div><div class=\"total\"><h6>Total</h6><h4>${
+                  feature.total
+                }</h4></div><div class=\"pass green-font\"><h6>Passed</h6><h4>${
+                  feature.pass
+                }</h4></div><div class=\"fail red-font\"><h6>Failed</h6><h4>${
+                  feature.fail
+                }</h4></div></div>`
+              );
+            });
+          }
+      
+          function setFilter() {
+            if (displayFailuresOnly) {
+              $(\"#filter h5\").text(\"Failed\");
+              dataSource = allFeatures.filter((feature) => {
+                return feature.fail > 0;
+              });
+            } else {
+              $(\"#filter h5\").text(\"All\");
+              dataSource = allFeatures;
+            }
+            updateView();
+            displayFailuresOnly = !displayFailuresOnly;
+          }
+      
+          function filterAllFailed() {
+            allFailedTests = [];
+      
+            failedFeatures = allFeatures.filter((feature) => {
+              return feature.fail > 0;
+            });
+      
+            for (index = 0; index < failedFeatures.length; index++) {
+              failedFeatures[index].tests.filter((test) => {
+                if (!test.testPass) {
+                  allFailedTests.push(test);
                 }
               });
-              if (failureCount === 0) {
-              $(\".mc\")
-                .removeClass(\"mc\")
-                .addClass(\"banner-in-the-middle\")
-                .append(
-                  `<i class=\"banner-text material-icons\">done_all</i><h1>No Failures</>`
-                );
+            }
+      
+            $(\"#sidebar-overlay\").css(\"visibility\", \"visible\");
+            $(\"#sidebar-overlay\").css(\"margin-left\", \"40%\");
+            $(\"#sidebar\").css(\"width\", \"40%\");
+            $(\"#sidebar-title\").css(\"visibility\", \"visible\");
+            $(\"#sidebar-status\").css(\"visibility\", \"visible\");
+            /* Update Test Information */
+      
+            $(\"#sidebar-title\").text(\"Failed Tests\");
+            $(\"#sidebar-status\").text(STATUS.fail);
+            $(\"#sidebar-overlay-grid\").empty();
+            allFailedTests.forEach((test) => {
+              $(\"#sidebar-overlay-grid\").append(
+                `<div id=\"sidebar-overlay-test-info\" onclick=\"()=>{}\"><i class=\"${
+                  test.testPass ? \"green-font\" : \"red-font\"
+                } material-icons\" style=\"font-size: 1em\">${
+                  STATUS.fail
+                }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4>${
+                  test.comments !== \"\"
+                    ? `<p id=\"error-message\">${test.comments}</p>`
+                    : \"\"
+                }</div>`
+              );
+            });
+          }
+      
+          function switchTheme() {
+            $(document.documentElement).attr(\"theme\", !darkTheme ? \"light\" : \"dark\");
+            $(\"#theme-icon\").text(!darkTheme ? \"wb_sunny\" : \"brightness_2\");
+            darkTheme = !darkTheme;
+          }
+      
+          function closeDetails() {
+            $(\"#sidebar-title\").css(\"visibility\", \"hidden\");
+            $(\"#sidebar-status\").css(\"visibility\", \"hidden\");
+            $(\"#sidebar-overlay\").css(\"visibility\", \"hidden\");
+            $(\"#sidebar-overlay\").css(\"margin-left\", \"0\");
+            $(\"#sidebar\").css(\"width\", \"0\");
+          }
+      
+          window
+            .matchMedia(\"(prefers-color-scheme: dark)\")
+            .addEventListener(\"change\", (e) => {
+              darkTheme = e.matches;
+              switchTheme();
+            });
+      
+          function showDetails(featureID) {
+            feature = dataSource[featureID];
+      
+            $(\"#sidebar-overlay\").css(\"visibility\", \"visible\");
+            $(\"#sidebar-overlay\").css(\"margin-left\", \"40%\");
+            $(\"#sidebar\").css(\"width\", \"40%\");
+            $(\"#sidebar-title\").css(\"visibility\", \"visible\");
+            $(\"#sidebar-status\").css(\"visibility\", \"visible\");
+            /* Update Test Information */
+      
+            $(\"#sidebar-title\").text(feature.name);
+            $(\"#sidebar-overlay-grid\").empty();
+            feature.tests.forEach((test) => {
+              $(\"#sidebar-overlay-grid\").append(
+                `<div id=\"sidebar-overlay-test-info\" onclick=\"()=>{}\"><i class=\"${
+                  test.testPass ? \"green-font\" : \"red-font\"
+                } material-icons\" style=\"font-size: 1em\">${
+                  test.testPass ? STATUS.pass : STATUS.fail
+                }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4>${
+                  test.comments !== \"\"
+                    ? `<p id=\"error-message\">${test.comments}</p>`
+                    : \"\"
+                }</div>`
+              );
+            });
+      
+            for (index = 0; index < feature.tests.length; index++) {
+              if (!feature.tests[index].testPass) {
+                $(\"#sidebar-status\").text(STATUS.fail);
+                return;
               }
             }
+            $(\"#sidebar-status\").text(STATUS.pass);
+          }
+      
           </script>"
         end
     
         def config()
           return if @data_provider.length == 0
 
-          return "<div class=\"configuration-container\">
+          return "<div class=\"params-container\">
                   #{release_name()}
                   #{execution_date()}
                   #{device()}
@@ -320,23 +439,23 @@ class NxgCore
         end
 
         def filter()
-          "<div class=\"configuration-wrapper\" onclick=\"handleFilter()\" id=\"filter\" title=\"Filter tests\">
-            <i class=\"configuration-icon material-icons\">filter_list</i>
-            <h5 id=\"configuration-text\">Failed</h5>
+          "<div class=\"param-wrap\" onclick=\"setFilter()\" id=\"filter\" title=\"Filter tests\">
+            <i class=\"pi material-icons\">filter_list</i>
+            <h5 id=\"pt\">Failed</h5>
           </div>"
         end
 
         def passed_tests()
-          "<div class=\"configuration-wrapper\" title=\"Passed tests\">
-            <i class=\"configuration-icon pass-total material-icons\">check_circle</i>
-            <h5 id=\"configuration-text\">#{@data_provider[:pass] == 0 ? "None" : @data_provider[:pass]}</h5>
+          "<div class=\"param-wrap\" title=\"Passed tests\">
+            <i class=\"pi green-font material-icons\">check_circle</i>
+            <h5 id=\"pt\">#{@data_provider[:pass] == 0 ? "None" : @data_provider[:pass]}</h5>
           </div>"
         end
 
         def failed_tests()
-          "<div class=\"configuration-wrapper\" title=\"Failed tests\">
-            <i class=\"configuration-icon fail-total material-icons\">cancel</i>
-            <h5 id=\"configuration-text\">#{@data_provider[:fail] == 0 ? "None" : @data_provider[:fail]}</h5>
+          "<div class=\"param-wrap\" title=\"Failed tests\" #{@data_provider[:fail] > 0 ? "onclick=\"filterAllFailed()\" style=\"cursor: pointer\"" : ""}>
+            <i class=\"pi red-font material-icons\">cancel</i>
+            <h5 id=\"pt\">#{@data_provider[:fail] == 0 ? "None" : @data_provider[:fail]}</h5>
           </div>"
         end
 
@@ -383,9 +502,9 @@ class NxgCore
         end
 
         def config_item(toot_tip, name, icon)
-          "<div class=\"configuration-wrapper\" title=\"#{toot_tip}\">
-            <i class=\"configuration-icon material-icons\">#{icon}</i>
-            <h5 id=\"configuration-text\">#{name}</h5>
+          "<div class=\"param-wrap\" title=\"#{toot_tip}\">
+            <i class=\"pi material-icons\">#{icon}</i>
+            <h5 id=\"pt\">#{name}</h5>
           </div>"
         end
 

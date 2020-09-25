@@ -34,8 +34,10 @@
 ## **Demo**
 
 <div align="center">
-    <img src="./demo/light-all.png" alt="Markdownify" width="800">
-    <img src="./demo/dark-all.png" alt="Markdownify" width="800">
+    <img src="./demo/light-summary.png" alt="Markdownify" width="800">
+    <img src="./demo/light-detail.png" alt="Markdownify" width="800">
+    <img src="./demo/dark-summary.png" alt="Markdownify" width="800">
+    <img src="./demo/dark-detail.png" alt="Markdownify" width="800">
 </div>
 
 ## **Installation**
@@ -55,7 +57,7 @@ $NxgReport.set_release(name: "M09 2020")
 $NxgReport.set_app_version(no: "app0.9.1")
 $NxgReport.set_environment(name: "QA")
 
-$NxgReport.log_test(feature_name: "Feature Name", test_status: "Pass/Fail")
+$NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: "Error message or additional comments about the test")
 
 $NxgReport.build()
 ```
@@ -82,7 +84,7 @@ In **hooks.rb** add the below block of code.
 After do |scenario|
     feature_name = scenario.feature.name
     scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
-    $NxgReport.log_test(feature_name: "Feature Name", test_status: scenario_pass)
+    $NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: "Error message or additional comments about the test")
 end
 
 at_exit do

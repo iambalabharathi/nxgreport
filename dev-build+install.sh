@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GEM_VERSION='0.7.1'
+GEM_VERSION='0.8.1'
 
 rm -rf nxgreport-$GEM_VERSION.gem
 sudo gem uninstall nxgreport
