@@ -146,7 +146,7 @@ module NxgHTML
 
         return "<div class=\"param-wrap\" title=\"Pass percentage\">
                   <i class=\"pi #{pass_percentage.to_i == 100 ? "green-font" : ""} material-icons\">equalizer</i>
-                  <h5 class=\"#{pass_percentage.to_i == 100 ? "green-font" : ""}\" id=\"pt\">#{pass_percentage}</h5>
+                  <h5 id=\"pt\">#{pass_percentage.to_i == 100 ? pass_percentage.to_i : pass_percentage}%</h5>
                 </div>"
     end
 
