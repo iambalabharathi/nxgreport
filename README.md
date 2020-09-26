@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://github.com/balabharathijayaraman/nxgreport">
-        <img src="./demo/Nxg.gif" alt="Markdownify" width="200">
+        <img src="./docs/Nxg.gif" alt="Markdownify" width="200">
     </a>
     <br> Next Gen Report 💎 <br>
 </h1>
@@ -34,8 +34,8 @@
 ## **Demo**
 
 <div align="center">
-    <img src="./demo/light-summary.png" alt="Markdownify" width="800">
-    <img src="./demo/dark-summary.png" alt="Markdownify" width="800">
+    <img src="./docs/light-summary.png" alt="Markdownify" width="800">
+    <img src="./docs/dark-summary.png" alt="Markdownify" width="800">
 </div>
 
 ## **Installation**
