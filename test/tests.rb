@@ -22,26 +22,13 @@ class TestNxgReportGeneration < Test::Unit::TestCase
     def test_default_report_title()
         @nxg_report.setup()
 
-        assert_equal("Features Summary", @stub_data_provider[:title])
+        assert_equal("$NxgReport", @stub_data_provider[:title])
     end
 
     def test_title_change()
         @nxg_report.setup(title: "New Title")
 
         assert_equal("New Title", @stub_data_provider[:title])
-    end
-
-    def test_default_title_color()
-        @nxg_report.setup()
-
-        assert_equal("background: linear-gradient(to bottom right, #ff644e, #cb3018);", @stub_data_provider[:title_color])
-    end
-
-    def test_title_color_change()
-        @nxg_report.setup()
-
-        @nxg_report.set_title_color(hex_color: "#123123")
-        assert_equal("background-color: #123123;", @stub_data_provider[:title_color])
     end
 
     def test_default_open_on_completion_setting()
@@ -223,7 +210,7 @@ class TestNxgReportGeneration < Test::Unit::TestCase
 
     def test_report_is_generated_if_atleast_1_test_is_logged()
         @nxg_report.setup()
-        @nxg_report.log_test(feature_name:"Login", test_status:"Pass")
+        @nxg_report.log_test(feature_name:"Login", test_name: "Test name", test_status:"Pass", comments: "Some")
         @nxg_report.build()
 
         assert(File.file?(@stub_data_provider[:report_path]))

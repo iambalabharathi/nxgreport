@@ -14,21 +14,21 @@ module NxgCss
           --primary-color: #fff;
           --secondary-color: #fff;
           --primary-font-color: #424242;
-          --green: rgb(31, 172, 31);
+          --green: rgb(19, 143, 19);
           --red: rgb(214, 7, 7);
           --blue: rgb(0, 89, 255);
-          --red-bg: rgba(255, 0, 0, 0.233);
+          --red-bg: #ff073925;
         }
-  
+
         [theme=\"dark\"] {
           --background-color: #252525;
           --primary-color: #2e2e2e;
           --secondary-color: rgba(255, 255, 255, 0.842);
           --primary-font-color: #f9fafccb;
-          --green: rgb(6, 207, 6);
-          --red: rgb(228, 1, 1);
-          --blue: rgb(91, 226, 250);
-          --red-bg: rgba(201, 53, 53, 0.479);
+          --green: #15ce40;
+          --red: #ff073a;
+          --blue: #2cbcff;
+          --red-bg: #ff07392c;
         }
   
         * {

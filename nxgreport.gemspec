@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
     spec.description = "Generate a beautiful static test report."
     spec.authors     = ["Balabharathi Jayaraman"]
     spec.email       = 'balabharathi.jayaraman@gmail.com'
-    spec.files       = ["lib/nxgreport.rb", 'lib/nxgcore.rb', "lib/nxgcss.rb"]
+    spec.files       = ["lib/nxgreport.rb", 'lib/nxgcore.rb', "lib/nxgcss.rb", "lib/nxgjs.rb", "lib/nxghtml.rb"]
     spec.homepage    = 'https://rubygemspec.org/gems/nxgreport'
     spec.license     = 'MIT'
     spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
