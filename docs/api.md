@@ -2,4 +2,4 @@
 
 # **\$NxgReport**
 
-## Learn about the support **\$NxgReport** provides to build your test report. (\$NxgReport is a _global variable_).
+## Learn about the support **\$NxgReport** provides to build your test report.
