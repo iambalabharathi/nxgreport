@@ -144,7 +144,10 @@ module NxgHTML
     def percentage_pass()
         pass_percentage = ((@data_provider[:pass]/@data_provider[:total].to_f) * 100).round(2)
 
-        return config_item("Pass percentage", pass_percentage,'equalizer')
+        return "<div class=\"param-wrap\" title=\"Pass percentage\">
+                  <i class=\"pi #{pass_percentage.to_i == 100 ? "green-font" : ""} material-icons\">equalizer</i>
+                  <h5 class=\"#{pass_percentage.to_i == 100 ? "green-font" : ""}\" id=\"pt\">#{pass_percentage}</h5>
+                </div>"
     end
 
     def environment()
