@@ -20,6 +20,7 @@ module NxgHTML
           <meta charset=\"UTF-8\" />
           <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
           <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>
+          <script> #{js_detect_system_dark_mode()}</script>
           <title>Home | #{@data_provider[:title]}</title>
           #{google_fonts_link()}
           #{icons_link()}
@@ -69,7 +70,7 @@ module NxgHTML
           <h1 id=\"app-title\">#{@data_provider[:title]}</h1>
           <div id=\"theme-wrap\">
             <button id=\"theme-switch\" onclick=\"switchTheme()\">
-              <i class=\"material-icons\" id=\"theme-icon\">brightness_2</i>
+              <i class=\"material-icons\" id=\"theme-icon\">wb_sunny</i>
             </button>
           </div>
         </div>"

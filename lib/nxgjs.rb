@@ -1,12 +1,18 @@
 
 module NxgJavascript
 
+    def js_detect_system_dark_mode()
+        "if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            $(document.documentElement).attr(\"theme\", \"dark\");
+            $(\"#theme-icon\").text(\"brightness_2\");
+        }"
+    end
+
     def js(data_provider)
 
         js_array = data_provider[:features].to_s.gsub("=>", ":")
 
         return "<script>
-                    var darkTheme = false;
                     var displayFailuresOnly = false;
                 
                     const allFeatures = #{js_array};
@@ -19,7 +25,6 @@ module NxgJavascript
                     };
                 
                     function onRefresh() {
-                        switchTheme();
                         dataSource = allFeatures;
                         setFilter();
                     }
@@ -113,9 +118,9 @@ module NxgJavascript
                     }
                 
                     function switchTheme() {
-                        $(document.documentElement).attr(\"theme\", !darkTheme ? \"light\" : \"dark\");
-                        $(\"#theme-icon\").text(!darkTheme ? \"wb_sunny\" : \"brightness_2\");
-                        darkTheme = !darkTheme;
+                        currentTheme = $(document.documentElement).attr(\"theme\");
+                        $(document.documentElement).attr(\"theme\", currentTheme === \"dark\" ? \"light\" : \"dark\");
+                        $(\"#theme-icon\").text(currentTheme === \"dark\" ? \"wb_sunny\" : \"brightness_2\");
                     }
                 
                     function closeDetails() {
@@ -132,8 +137,9 @@ module NxgJavascript
                     window
                         .matchMedia(\"(prefers-color-scheme: dark)\")
                         .addEventListener(\"change\", (e) => {
-                        darkTheme = e.matches;
-                        switchTheme();
+                            darkTheme = e.matches;
+                            $(document.documentElement).attr(\"theme\", darkTheme ? \"dark\" : \"light\");
+                            $(\"#theme-icon\").text(darkTheme ? \"brightness_2\" : \"wb_sunny\");
                         });
                 
                     function showDetails(featureID) {
@@ -152,23 +158,23 @@ module NxgJavascript
                         $(\"#sidebar-overlay-grid\").empty();
                         feature.tests.forEach((test) => {
                         $(\"#sidebar-overlay-grid\").append(
-                            `<div id=\"sidebar-overlay-test-info\" onclick=\"()=>{}\"><i class=\"${
-                            test.testPass ? \"green-font\" : \"red-font\"
-                            } material-icons\" style=\"font-size: 1em\">${
-                            test.testPass ? STATUS.pass : STATUS.fail
-                            }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4>${
-                            test.comments !== \"\"
-                                ? `<p id=\"error-message\">${test.comments}</p>`
-                                : \"\"
-                            }</div>`
-                        );
+                                `<div id=\"sidebar-overlay-test-info\" onclick=\"()=>{}\"><i class=\"${
+                                test.testPass ? \"green-font\" : \"red-font\"
+                                } material-icons\" style=\"font-size: 1em\">${
+                                test.testPass ? STATUS.pass : STATUS.fail
+                                }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4>${
+                                test.comments !== \"\"
+                                    ? `<p id=\"error-message\">${test.comments}</p>`
+                                    : \"\"
+                                }</div>`
+                            );
                         });
                 
                         for (index = 0; index < feature.tests.length; index++) {
-                        if (!feature.tests[index].testPass) {
-                            $(\"#sidebar-status\").text(STATUS.fail);
-                            return;
-                        }
+                            if (!feature.tests[index].testPass) {
+                                $(\"#sidebar-status\").text(STATUS.fail);
+                                return;
+                            }
                         }
                         $(\"#sidebar-status\").text(STATUS.pass);
                     }
