@@ -101,11 +101,20 @@ module NxgCss
           height: fit-content;
         }
   
-        #sidebar-title-wrap,
+        #sidebar-title-wrap {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          place-items: center;
+        }
+
         #sidebar-overlay-test-info {
           display: flex;
           place-items: center;
           flex-wrap: wrap;
+        }
+
+        #sidebar-title {
+          margin-right: 0.2em;
         }
   
         #sidebar-title,

@@ -48,7 +48,6 @@ module NxgHTML
             <div id=\"sidebar-div\">
               <div id=\"sidebar-title-wrap\">
                 <h1 id=\"sidebar-title\">Title</h1>
-                &nbsp;&nbsp;
                 <i class=\"material-icons\" id=\"sidebar-status\">check_circle</i>
               </div>
             </div>
