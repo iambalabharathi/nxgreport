@@ -67,7 +67,7 @@ class NxgCore
           @data_provider[:execution_date] = date
         end
 
-        def set_execution_time(time)
+        def set_execution_time()
           time_diff_in_mins = 0
           time_diff_in_secs = 0
 
@@ -124,11 +124,11 @@ class NxgCore
           @data_provider[t_pass ? :pass : :fail] += 1
         end
     
-        def build(execution_time: 0)
+        def build()
           @data_provider[:report_path] = generate_report_path() if @data_provider[:report_path].empty?()
           @data_provider[:title] = "$NxgReport" if @data_provider[:title].empty?()
           folder_check()
-          set_execution_time(execution_time)
+          set_execution_time()
           write()
           if @data_provider[:open_on_completion]
             system("open #{@data_provider[:report_path]}") if File.file?(@data_provider[:report_path])
