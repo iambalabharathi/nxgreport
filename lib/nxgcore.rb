@@ -197,7 +197,7 @@ class NxgCore
         def get_execution_time(execution_time)
           if execution_time != 0 
             @test_start_time = Time.now.to_f
-            return execution_time
+            return execution_time.round()
           end
           @test_end_time = Time.now.to_f
           execution_time = (@test_end_time - @test_start_time).round()

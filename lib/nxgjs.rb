@@ -4,7 +4,6 @@ module NxgJavascript
     def js_detect_system_dark_mode()
         "if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             $(document.documentElement).attr(\"theme\", \"dark\");
-            $(\"#theme-icon\").text(\"brightness_2\");
         }"
     end
 
@@ -27,6 +26,8 @@ module NxgJavascript
                     function onRefresh() {
                         dataSource = allFeatures;
                         setFilter();
+                        currentTheme = $(document.documentElement).attr(\"theme\");
+                        $(\"#theme-icon\").text(currentTheme === \"dark\" ? \"brightness_2\" : \"wb_sunny\");
                     }
                 
                     function updateView() {
