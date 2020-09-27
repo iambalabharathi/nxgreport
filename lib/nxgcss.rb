@@ -114,7 +114,7 @@ module NxgCss
         }
 
         #sidebar-title {
-          margin-right: 0.2em;
+          margin: 0 0.2em 0 0;
         }
   
         #sidebar-title,
