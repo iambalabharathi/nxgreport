@@ -11,15 +11,17 @@ class NxgCore
           @data_provider[:pass] = 0
           @data_provider[:fail] = 0
           @data_provider[:total] = 0
+          @data_provider[:open_on_completion] = false
+          @data_provider[:features] = Array.new()
+          @data_provider[:title] = ""
+          @data_provider[:report_path] = ""
+          @start_time = Time.now.to_f
+          @test_start_time = Time.now.to_f
         end
 
         def setup(location: "./NxgReport.html", title: "$NxgReport")
             @data_provider[:report_path] = location.empty? ? "./NxgReport.html" : location
-            folder_check()
             @data_provider[:title] = title
-            @data_provider[:open_on_completion] = false
-            @data_provider[:features] = Array.new()
-            @start_time = Time.now.to_f
         end
     
         def open_upon_execution(value: true)
@@ -67,12 +69,15 @@ class NxgCore
 
         def set_execution_time(time)
           time_diff_in_mins = 0
-          if time == 0
-            @end_time = Time.now.to_f
-            time_diff_in_mins = ((@end_time - @start_time)  / 60).to_i
-          else
-            time_diff_in_mins = (time / 60).to_i
+          time_diff_in_secs = 0
+
+          @data_provider[:features].each do |feature|
+            feature["tests"].each do |test|
+              time_diff_in_secs += test["time"]
+            end
           end
+
+          time_diff_in_mins = ((time_diff_in_secs)  / 60).to_i
 
           if time_diff_in_mins >= 60
             time_diff_in_hrs = (time_diff_in_mins / 60.to_f).round(2)
@@ -82,7 +87,7 @@ class NxgCore
           end
         end
     
-        def log_test(feature_name: "", test_name:"", test_status: "", comments: "")
+        def log_test(feature_name: "", test_name:"", test_status: "", comments: "", execution_time: 0)
           if feature_name.nil?() || feature_name.strip.empty?()
             log("Feature name cannot be empty.")
             return
@@ -114,12 +119,15 @@ class NxgCore
             @data_provider[:features].push(new_feature)
           end
 
-          update_feature(f_name, t_name, t_pass, t_comments)
+          update_feature(f_name, t_name, t_pass, t_comments, get_execution_time(execution_time))
           @data_provider[:total] += 1
           @data_provider[t_pass ? :pass : :fail] += 1
         end
     
         def build(execution_time: 0)
+          @data_provider[:report_path] = generate_report_path() if @data_provider[:report_path].empty?()
+          @data_provider[:title] = "$NxgReport" if @data_provider[:title].empty?()
+          folder_check()
           set_execution_time(execution_time)
           write()
           if @data_provider[:open_on_completion]
@@ -129,7 +137,7 @@ class NxgCore
     
         # Private methods
 
-        def update_feature(f_name, t_name, t_pass, t_comments)
+        def update_feature(f_name, t_name, t_pass, t_comments, t_execution_time)
           @data_provider[:features].each do |feature|
             if feature["name"].eql?(f_name)
               feature["total"]+=1
@@ -137,7 +145,8 @@ class NxgCore
               feature["tests"].push({
                 "name" => t_name,
                 "testPass" => t_pass,
-                "comments" => t_comments
+                "comments" => t_comments, 
+                "time" => t_execution_time
               })
               return
             end
@@ -173,6 +182,27 @@ class NxgCore
           template = File.new(@data_provider[:report_path], 'w')
           template.puts(html(@data_provider))
           template.close()
+        end
+
+        def generate_report_path()
+          report_filename = @data_provider.key?(:release_name) ? @data_provider[:release_name] : "NxgReport"
+          report_filename += "-#{@data_provider[:device]}" if @data_provider.key?(:device)
+          report_filename += "-#{@data_provider[:os]}" if @data_provider.key?(:os)
+          report_filename += "-#{@data_provider[:app_version]}" if @data_provider.key?(:app_version)
+          report_filename += "-#{@data_provider[:environment]}" if @data_provider.key?(:environment)
+          report_filename = report_filename.gsub(/[^0-9a-z-]/i, '')
+          return "./#{report_filename}.html"
+        end
+
+        def get_execution_time(execution_time)
+          if execution_time != 0 
+            @test_start_time = Time.now.to_f
+            return execution_time
+          end
+          @test_end_time = Time.now.to_f
+          execution_time = (@test_end_time - @test_start_time).round()
+          @test_start_time = Time.now.to_f
+          return execution_time
         end
 
         private :log, :clean, :write, :update_feature, :folder_check

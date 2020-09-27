@@ -108,7 +108,7 @@ module NxgJavascript
                             test.testPass ? \"green-font\" : \"red-font\"
                             } material-icons\" style=\"font-size: 1em\">${
                             STATUS.fail
-                            }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4>${
+                            }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4><div><h4 id=\"test-execution-time\">${test.time} secs</h4></div>${
                             test.comments !== \"\"
                                 ? `<p id=\"error-message\">${test.comments}</p>`
                                 : \"\"
@@ -162,7 +162,7 @@ module NxgJavascript
                                 test.testPass ? \"green-font\" : \"red-font\"
                                 } material-icons\" style=\"font-size: 1em\">${
                                 test.testPass ? STATUS.pass : STATUS.fail
-                                }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4>${
+                                }</i>&nbsp;&nbsp;<h4 id=\"test-title\">${test.name}</h4><div><h4 id=\"test-execution-time\">${test.time} secs</h4></div>${
                                 test.comments !== \"\"
                                     ? `<p id=\"error-message\">${test.comments}</p>`
                                     : \"\"

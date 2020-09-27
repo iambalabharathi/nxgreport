@@ -128,6 +128,16 @@ module NxgCss
         #test-title {
           margin: 0;
         }
+
+        #test-execution-time {
+          font-size: 0.7em;
+          font-weight: bold;
+          background: var(--primary-gradient);
+          color: white;
+          padding: 0.2em 0.5em;
+          border-radius: 0.5em;
+          margin-left: 0.5em;
+        }
   
         h2,
         h3,
