@@ -87,7 +87,7 @@ module NxgHTML
             <span>
               <a
                 href=\"https://www.linkedin.com/in/balabharathijayaraman\"
-                rel=\"nofollow\"
+                rel=\"noopener\"
                 target=\"_blank\"
                 >Balabharathi Jayaraman</a
               >
