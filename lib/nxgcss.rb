@@ -23,7 +23,7 @@ module NxgCss
         [theme=\"dark\"] {
           --background-color: #252525;
           --primary-color: #2e2e2e;
-          --secondary-color: rgba(255, 255, 255, 0.842);
+          --secondary-color: #fff;
           --primary-font-color: #f9fafccb;
           --green: #15ce40;
           --red: #ff073a;
@@ -99,6 +99,8 @@ module NxgCss
 
         #sidebar-catergories > div > h6 {
           color: black;
+          font-weight: normal;
+          font-size: 0.8em;
         }
   
         #sidebar-overlay-test-info {

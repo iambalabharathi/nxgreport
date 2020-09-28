@@ -15,14 +15,7 @@ module NxgJavascript
                     const allFeatures = #{js_array};
                     const STATUS = { pass: \"check_circle\", fail: \"cancel\", };
                     const CATEGORIES_COLORS = [
-                        \"#fddb3a\",
-                        \"#b0d2f6\",
-                        \"##ec71e4\",
-                        \"#d793ff\",
-                        \"#ffefa0\",
-                        \"#28df99\",
-                        \"#d6e0f0\",
-                        \"#dddddd\",
+                        \"#76D7C4\", \"#F9E79F\", \"#AEB6BF\",
                     ];
                     var displayFailuresOnly = false;
                     var dataSource = [];
