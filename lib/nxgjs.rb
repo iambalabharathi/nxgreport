@@ -91,6 +91,7 @@ module NxgJavascript
                         });
                         }
                 
+                        $(\"#body-wrap\").css(\"overflow\", \"hidden\");
                         $(\"#sidebar-overlay\").css(\"visibility\", \"visible\");
                         $(\"#sidebar-overlay\").css(\"margin-left\", \"40%\");
                         $(\"#sidebar\").css(\"width\", \"40%\");
@@ -129,10 +130,11 @@ module NxgJavascript
                         $(\"#sidebar-status\").css(\"visibility\", \"hidden\");
                         $(\"#sidebar-title\").css(\"opacity\", \"0\");
                         $(\"#sidebar-status\").css(\"opacity\", \"0\");
-                        
                         $(\"#sidebar-overlay\").css(\"margin-left\", \"0\");
                         $(\"#sidebar-overlay\").css(\"visibility\", \"hidden\");
                         $(\"#sidebar\").css(\"width\", \"0\");
+                        $(\"#body-wrap\").css(\"overflow\", \"auto\");
+                        $(\"#sidebar-overlay\").css(\"overflow\", \"hidden\");
                     }
                 
                     window
@@ -146,6 +148,7 @@ module NxgJavascript
                     function showDetails(featureID) {
                         feature = dataSource[featureID];
                 
+                        $(\"#body-wrap\").css(\"overflow\", \"hidden\");
                         $(\"#sidebar-overlay\").css(\"visibility\", \"visible\");
                         $(\"#sidebar-overlay\").css(\"margin-left\", \"40%\");
                         $(\"#sidebar\").css(\"width\", \"40%\");
