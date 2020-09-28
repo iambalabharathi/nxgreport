@@ -71,6 +71,34 @@ module NxgCss
   
         #sidebar-div {
           margin: auto;
+          display: grid;
+          grid-template-rows: 1fr auto;
+          place-items: center;
+        }
+
+        #sidebar-catergories {
+          width: 80%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          transition: opacity 0.5s ease-in-out;
+          transition-delay: 0.5s;
+          opacity: 0;
+          margin-top: 25px;
+        }
+
+        #sidebar-catergories > div {
+          background-color: chartreuse;
+          border-radius: 1em;
+          margin: 0.5em 0.2em;
+          padding: 0.2em 0.5em;
+          -webkit-box-shadow: -1px 0px 5px -3px rgba(0, 0, 0, 0.75);
+          -moz-box-shadow: -1px 0px 5px -3px rgba(0, 0, 0, 0.75);
+          box-shadow: -1px 0px 5px -3px rgba(0, 0, 0, 0.75);
+        }
+
+        #sidebar-catergories > div > h6 {
+          color: black;
         }
   
         #sidebar-overlay-test-info {

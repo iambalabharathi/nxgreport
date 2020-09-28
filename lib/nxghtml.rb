@@ -50,6 +50,8 @@ module NxgHTML
                 <h1 id=\"sidebar-title\">Title</h1>
                 <i class=\"material-icons\" id=\"sidebar-status\">check_circle</i>
               </div>
+              <div id=\"sidebar-catergories\">
+              </div>
             </div>
           </div>
         <div id=\"sidebar-overlay\" onclick=\"closeDetails()\">

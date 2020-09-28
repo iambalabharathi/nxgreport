@@ -87,7 +87,7 @@ class NxgCore
           end
         end
     
-        def log_test(feature_name: "", test_name:"", test_status: "", comments: "", execution_time: 0)
+        def log_test(feature_name: "", test_name:"", test_status: "", tag: "", comments: "", execution_time: 0)
           if feature_name.nil?() || feature_name.strip.empty?()
             log("Feature name cannot be empty.")
             return
@@ -119,7 +119,7 @@ class NxgCore
             @data_provider[:features].push(new_feature)
           end
 
-          update_feature(f_name, t_name, t_pass, t_comments, get_execution_time(execution_time))
+          update_feature(f_name, t_name, t_pass, t_comments, get_execution_time(execution_time), tag)
           @data_provider[:total] += 1
           @data_provider[t_pass ? :pass : :fail] += 1
         end
@@ -137,7 +137,7 @@ class NxgCore
     
         # Private methods
 
-        def update_feature(f_name, t_name, t_pass, t_comments, t_execution_time)
+        def update_feature(f_name, t_name, t_pass, t_comments, t_execution_time, t_tag)
           @data_provider[:features].each do |feature|
             if feature["name"].eql?(f_name)
               feature["total"]+=1
@@ -146,7 +146,8 @@ class NxgCore
                 "name" => t_name,
                 "testPass" => t_pass,
                 "comments" => t_comments, 
-                "time" => t_execution_time
+                "time" => t_execution_time,
+                "tag" => t_tag
               })
               return
             end

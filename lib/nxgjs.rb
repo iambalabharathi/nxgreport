@@ -12,16 +12,21 @@ module NxgJavascript
         js_array = data_provider[:features].to_s.gsub("=>", ":")
 
         return "<script>
-                    var displayFailuresOnly = false;
-                
                     const allFeatures = #{js_array};
-                
+                    const STATUS = { pass: \"check_circle\", fail: \"cancel\", };
+                    const CATEGORIES_COLORS = [
+                        \"#fddb3a\",
+                        \"#b0d2f6\",
+                        \"##ec71e4\",
+                        \"#d793ff\",
+                        \"#ffefa0\",
+                        \"#28df99\",
+                        \"#d6e0f0\",
+                        \"#dddddd\",
+                    ];
+                    var displayFailuresOnly = false;
                     var dataSource = [];
-                
-                    const STATUS = {
-                        pass: \"check_circle\",
-                        fail: \"cancel\",
-                    };
+                    var catergories = [];
                 
                     function onRefresh() {
                         dataSource = allFeatures;
@@ -78,6 +83,7 @@ module NxgJavascript
                 
                     function filterAllFailed() {
                         allFailedTests = [];
+                        catergories = [];
                 
                         failedFeatures = allFeatures.filter((feature) => {
                         return feature.fail > 0;
@@ -99,6 +105,8 @@ module NxgJavascript
                         $(\"#sidebar-status\").css(\"visibility\", \"visible\");
                         $(\"#sidebar-title\").css(\"opacity\", \"1\");
                         $(\"#sidebar-status\").css(\"opacity\", \"1\");
+                        $(\"#sidebar-catergories\").css(\"visibility\", \"visible\");
+                        $(\"#sidebar-catergories\").css(\"opacity\", \"1\");
                         /* Update Test Information */
                 
                         $(\"#sidebar-title\").text(\"Failed Tests\");
@@ -116,7 +124,15 @@ module NxgJavascript
                                 : \"\"
                             }</div>`
                         );
+                            categorize(test);
                         });
+                        displayCategories();
+                    }
+
+                    function displayCategories() {
+                        $(\"#sidebar-catergories\").empty();
+                        if(catergories.length === 1) { return; }
+                        catergories.forEach((cat) => {$(\"#sidebar-catergories\").append(`<div style=\"background-color: ${CATEGORIES_COLORS[Math.floor(Math.random() * CATEGORIES_COLORS.length)]};\"><h6>#${cat.name}</h6></div>`);});
                     }
                 
                     function switchTheme() {
@@ -126,6 +142,8 @@ module NxgJavascript
                     }
                 
                     function closeDetails() {
+                        $(\"#sidebar-catergories\").css(\"visibility\", \"hidden\");
+                        $(\"#sidebar-catergories\").css(\"opacity\", \"0\");
                         $(\"#sidebar-title\").css(\"visibility\", \"hidden\");
                         $(\"#sidebar-status\").css(\"visibility\", \"hidden\");
                         $(\"#sidebar-title\").css(\"opacity\", \"0\");
@@ -147,6 +165,7 @@ module NxgJavascript
                 
                     function showDetails(featureID) {
                         feature = dataSource[featureID];
+                        catergories = [];
                 
                         $(\"#body-wrap\").css(\"overflow\", \"hidden\");
                         $(\"#sidebar-overlay\").css(\"visibility\", \"visible\");
@@ -156,6 +175,8 @@ module NxgJavascript
                         $(\"#sidebar-status\").css(\"visibility\", \"visible\");
                         $(\"#sidebar-title\").css(\"opacity\", \"1\");
                         $(\"#sidebar-status\").css(\"opacity\", \"1\");
+                        $(\"#sidebar-catergories\").css(\"visibility\", \"visible\");
+                        $(\"#sidebar-catergories\").css(\"opacity\", \"1\");
                         /* Update Test Information */
                 
                         $(\"#sidebar-title\").text(feature.name);
@@ -172,8 +193,10 @@ module NxgJavascript
                                     : \"\"
                                 }</div>`
                             );
+                            categorize(test);
                         });
-                
+                        displayCategories();
+
                         for (index = 0; index < feature.tests.length; index++) {
                             if (!feature.tests[index].testPass) {
                                 $(\"#sidebar-status\").text(STATUS.fail);
@@ -181,6 +204,35 @@ module NxgJavascript
                             }
                         }
                         $(\"#sidebar-status\").text(STATUS.pass);
+                    }
+
+                    function categorize(test) {
+                        if (test.tag === \"\") {
+                            return;
+                        }
+                        if (!catergoryAdded(test.tag)) {
+                            catergories.push({ name: test.tag.toLowerCase(), tests: [test] });
+                        } else {
+                            catergories[catergoryIndex(test.tag)].tests.push(test);
+                        }
+                    }
+
+                    function catergoryAdded(category) {
+                        for (var i = 0; i < catergories.length; i++) {
+                            if (catergories[i].name === category.toLowerCase()) {
+                            return true;
+                            }
+                        }
+                        return false;
+                    }
+
+                    function catergoryIndex(category) {
+                        for (var i = 0; i < catergories.length; i++) {
+                            if (catergories[i].name === category.toLowerCase()) {
+                            return i;
+                            }
+                        }
+                        return 0;
                     }
                 </script>"
     end
