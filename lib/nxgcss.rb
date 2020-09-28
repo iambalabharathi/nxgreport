@@ -121,7 +121,7 @@ module NxgCss
         #sidebar-status {
           color: var(--secondary-color);
           transition: opacity 0.5s ease-in-out;
-          transition-delay: 0.3s;
+          transition-delay: 0.5s;
           opacity: 0;
         }
   
