@@ -35,6 +35,7 @@
 
 <div align="center">
     <img src="./docs/light-summary.png" alt="Markdownify" width="800">
+    <br/>
     <img src="./docs/dark-summary.png" alt="Markdownify" width="800">
 </div>
 
