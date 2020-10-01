@@ -55,7 +55,7 @@ $NxgReport.set_release(name: "M09 2020")
 $NxgReport.set_app_version(no: "app0.9.1")
 $NxgReport.set_environment(name: "QA")
 
-$NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: "Error message or additional comments about the test")
+$NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: "Error message or additional comments about the test", tag: "critical")
 
 $NxgReport.build()
 ```
@@ -83,7 +83,7 @@ After do |scenario|
     feature_name = scenario.feature.name
     scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
     comments = scenario.exception.nil? ? "Success" : scenario.exception.message
-    $NxgReport.log_test(feature_name: "Feature Name",test_name: "This is a test", test_status: "Pass/Fail", comments: comments)
+    $NxgReport.log_test(feature_name: feature_name, test_name: scenario.name, test_status: scenario_pass, comments: comments, tag: "critical")
 end
 
 at_exit do

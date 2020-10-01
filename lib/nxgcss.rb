@@ -88,17 +88,17 @@ module NxgCss
         }
 
         #sidebar-catergories > div {
-          background-color: chartreuse;
+          background-color: var(--background-color);
           border-radius: 1em;
           margin: 0.5em 0.2em;
           padding: 0.2em 0.5em;
-          -webkit-box-shadow: -1px 0px 5px -3px rgba(0, 0, 0, 0.75);
-          -moz-box-shadow: -1px 0px 5px -3px rgba(0, 0, 0, 0.75);
-          box-shadow: -1px 0px 5px -3px rgba(0, 0, 0, 0.75);
+          -webkit-box-shadow: -3px 0px 5px -3px rgba(216, 216, 216, 0.75);
+          -moz-box-shadow: -3px 0px 5px -3px rgba(216, 216, 216, 0.75);
+          box-shadow: -3px 0px 5px -3px rgba(216, 216, 216, 0.75);
         }
 
         #sidebar-catergories > div > h6 {
-          color: black;
+          color: var(--primary-font-color);
           font-weight: normal;
           font-size: 0.8em;
         }

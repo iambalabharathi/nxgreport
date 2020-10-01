@@ -14,9 +14,6 @@ module NxgJavascript
         return "<script>
                     const allFeatures = #{js_array};
                     const STATUS = { pass: \"check_circle\", fail: \"cancel\", };
-                    const CATEGORIES_COLORS = [
-                        \"#76D7C4\", \"#F9E79F\", \"#AEB6BF\",
-                    ];
                     var displayFailuresOnly = false;
                     var dataSource = [];
                     var catergories = [];
@@ -91,6 +88,7 @@ module NxgJavascript
                         }
                 
                         $(\"#body-wrap\").css(\"overflow\", \"hidden\");
+                        $(\"#sidebar-overlay\").css(\"overflow\", \"auto\");
                         $(\"#sidebar-overlay\").css(\"visibility\", \"visible\");
                         $(\"#sidebar-overlay\").css(\"margin-left\", \"40%\");
                         $(\"#sidebar\").css(\"width\", \"40%\");
@@ -125,7 +123,7 @@ module NxgJavascript
                     function displayCategories() {
                         $(\"#sidebar-catergories\").empty();
                         if(catergories.length === 1) { return; }
-                        catergories.forEach((cat) => {$(\"#sidebar-catergories\").append(`<div style=\"background-color: ${CATEGORIES_COLORS[Math.floor(Math.random() * CATEGORIES_COLORS.length)]};\"><h6>#${cat.name}</h6></div>`);});
+                        catergories.forEach((cat) => {$(\"#sidebar-catergories\").append(`<div><h6>#${cat.name}</h6></div>`);});
                     }
                 
                     function switchTheme() {
@@ -134,18 +132,20 @@ module NxgJavascript
                         $(\"#theme-icon\").text(currentTheme === \"dark\" ? \"wb_sunny\" : \"brightness_2\");
                     }
                 
-                    function closeDetails() {
-                        $(\"#sidebar-catergories\").css(\"visibility\", \"hidden\");
-                        $(\"#sidebar-catergories\").css(\"opacity\", \"0\");
-                        $(\"#sidebar-title\").css(\"visibility\", \"hidden\");
-                        $(\"#sidebar-status\").css(\"visibility\", \"hidden\");
-                        $(\"#sidebar-title\").css(\"opacity\", \"0\");
-                        $(\"#sidebar-status\").css(\"opacity\", \"0\");
-                        $(\"#sidebar-overlay\").css(\"margin-left\", \"0\");
-                        $(\"#sidebar-overlay\").css(\"visibility\", \"hidden\");
-                        $(\"#sidebar\").css(\"width\", \"0\");
-                        $(\"#body-wrap\").css(\"overflow\", \"auto\");
-                        $(\"#sidebar-overlay\").css(\"overflow\", \"hidden\");
+                    function closeDetails(e) {
+                        if (e.target.id === \"sidebar\" || e.target.id === \"sidebar-overlay\") {
+                            $(\"#sidebar-catergories\").css(\"visibility\", \"hidden\");
+                            $(\"#sidebar-catergories\").css(\"opacity\", \"0\");
+                            $(\"#sidebar-title\").css(\"visibility\", \"hidden\");
+                            $(\"#sidebar-status\").css(\"visibility\", \"hidden\");
+                            $(\"#sidebar-title\").css(\"opacity\", \"0\");
+                            $(\"#sidebar-status\").css(\"opacity\", \"0\");
+                            $(\"#sidebar-overlay\").css(\"margin-left\", \"0\");
+                            $(\"#sidebar-overlay\").css(\"visibility\", \"hidden\");
+                            $(\"#sidebar\").css(\"width\", \"0\");
+                            $(\"#body-wrap\").css(\"overflow\", \"auto\");
+                            $(\"#sidebar-overlay\").css(\"overflow\", \"hidden\");
+                        }
                     }
                 
                     window
@@ -161,6 +161,7 @@ module NxgJavascript
                         catergories = [];
                 
                         $(\"#body-wrap\").css(\"overflow\", \"hidden\");
+                        $(\"#sidebar-overlay\").css(\"overflow\", \"auto\");
                         $(\"#sidebar-overlay\").css(\"visibility\", \"visible\");
                         $(\"#sidebar-overlay\").css(\"margin-left\", \"40%\");
                         $(\"#sidebar\").css(\"width\", \"40%\");

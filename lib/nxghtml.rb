@@ -44,7 +44,7 @@ module NxgHTML
 
     def body()
         "<body id=\"app\" onload=\"onRefresh()\">
-          <div id=\"sidebar\" onclick=\"closeDetails()\">
+          <div id=\"sidebar\" onclick=\"closeDetails(event)\">
             <div id=\"sidebar-div\">
               <div id=\"sidebar-title-wrap\">
                 <h1 id=\"sidebar-title\">Title</h1>
@@ -54,7 +54,7 @@ module NxgHTML
               </div>
             </div>
           </div>
-        <div id=\"sidebar-overlay\" onclick=\"closeDetails()\">
+        <div id=\"sidebar-overlay\" onclick=\"closeDetails(event)\">
           <div id=\"sidebar-overlay-grid\"></div>
         </div>
           <div id=\"body-wrap\">

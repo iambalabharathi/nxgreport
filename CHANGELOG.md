@@ -1,3 +1,8 @@
+## **[v0.11.0](https://rubygems.org/gems/nxgreport/versions/0.11.0)**
+
+- Tags your test cases
+- Bugs fix & UI enhancements
+
 ## **[v0.10.0](https://rubygems.org/gems/nxgreport/versions/0.10.0)**
 
 - Add animated sliding details view to display the test cases per feature
