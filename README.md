@@ -111,12 +111,16 @@ $NxgReport.setup(location, title)
     _This is title of report displayed. If not passed, the report will be generated with a title "Features Summary"_
 
 ```
-$NxgReport.log_test("Feature Name", "Pass/Fail")
+$NxgReport.log_test(feature_name: "Login", test_name: "Login with email address and password", test_status: "Pass", comments: "System failure", tag: "Critical")
 ```
 
 - **feature_name**
 
-    _Use this parameter to specify the feature name under the test should be logged ex:(Login with Biometrics)_
+    _Use this parameter to specify the feature name under the test should be logged, ex:(Login)_
+    
+- **test_name**
+
+    _Use this parameter to specify the test name, ex:(Login with email address and password)_
     
 - **test_status**
 
