@@ -102,17 +102,33 @@ end
 $NxgReport.setup(location, title)
 ```
 
-- **location (optional):** _This is an absolute path where the report should be generated (ex: "C:\Report\index.hmtl). If not passed, the report will be generated in the **root folder** as **NxgReport.html**_
-- **title (optional):** _This is title of report displayed. If not passed, the report will be generated with a title "Features Summary"_
+- **location (optional):** 
+
+    _This is an absolute path where the report should be generated (ex: "C:\Report\index.hmtl). If not passed, the report will be generated in the **root folder** as **NxgReport.html**_
+    
+- **title (optional):** 
+
+    _This is title of report displayed. If not passed, the report will be generated with a title "Features Summary"_
 
 ```
 $NxgReport.log_test("Feature Name", "Pass/Fail")
 ```
 
-- **feature_name** _Use this parameter to specify the feature name under the test should be logged ex:(Login with Biometrics)_
-- **test_status** _Use this parameter to specify status of the test, allowed values are Pass or Fail_
-- **comments (optional)** _Use this parameter to add custom message/description/logs to the test scenarios, ex: failure stack trace_
-- **tag (optional)** _Use this parameter to specify a tag for the test scenario, ex: critical, cosmetic_
+- **feature_name**
+
+    _Use this parameter to specify the feature name under the test should be logged ex:(Login with Biometrics)_
+    
+- **test_status**
+
+    _Use this parameter to specify status of the test, allowed values are Pass or Fail_
+    
+- **comments (optional)** 
+
+    _Use this parameter to add custom message/description/logs to the test scenarios, ex: failure stack trace_
+    
+- **tag (optional)** 
+
+    _Use this parameter to specify a tag for the test scenario, ex: critical, cosmetic_
 
 ## **Like it?**
 
