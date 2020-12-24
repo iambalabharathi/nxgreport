@@ -111,6 +111,8 @@ $NxgReport.log_test("Feature Name", "Pass/Fail")
 
 - **feature_name** _This is the feature name under the test should be logged ex:(Login with Biometrics)_
 - **test_status** _This is the status of the test, allowed values are Pass or Fail_
+- **comments** _A parameter to add custom message/description/logs to the test scenarios, ex: failure stack trace_
+- **tag** _Use this parameter to specify a tag for the test scenario, ex: critical, cosmetic_
 
 ## **Like it?**
 
