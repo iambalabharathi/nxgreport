@@ -1,0 +1,640 @@
+<html lang="en">
+            <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script> if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            $(document.documentElement).attr("theme", "dark");
+        }</script>
+          <title>Home | My Report</title>
+          <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+          rel="stylesheet"
+        />
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+          <style>
+        :root {
+          --font: "Open Sans", sans-serif;
+          --primary-gradient: linear-gradient(to bottom right, #ff644e, #cb3018);
+          --background-color: #f4f4f4;
+          --primary-color: #fff;
+          --secondary-color: #fff;
+          --primary-font-color: #424242;
+          --green: rgb(19, 143, 19);
+          --red: rgb(214, 7, 7);
+          --blue: rgb(0, 89, 255);
+          --red-bg: #ff073925;
+        }
+
+        [theme="dark"] {
+          --background-color: #252525;
+          --primary-color: #2e2e2e;
+          --secondary-color: #fff;
+          --primary-font-color: #f9fafccb;
+          --green: #15ce40;
+          --red: #ff073a;
+          --blue: #2cbcff;
+          --red-bg: #ff07392c;
+        }
+  
+        * {
+          font-family: var(--font);
+          color: var(--primary-font-color);
+          transition: color 0.5s ease;
+          transition: background-color 0.5s ease;
+        }
+
+        a {
+          text-decoration: none;
+        }
+  
+        #app {
+          background-color: var(--background-color);
+          margin: auto;
+        }
+  
+        #header {
+          display: grid;
+          grid-template-columns: 8fr 1fr;
+          text-align: center;
+          background: var(--primary-gradient);
+        }
+  
+        #app-title,
+        #theme-icon {
+          color: var(--background-color);
+        }
+  
+        #sidebar {
+          width: 0;
+          height: 100%;
+          position: fixed;
+          z-index: 2;
+          top: 0;
+          left: 0;
+          overflow-x: hidden;
+          transition: 1s ease;
+          display: flex;
+          place-items: center;
+          background: var(--primary-gradient);
+        }
+  
+        #sidebar-div {
+          margin: auto;
+          display: grid;
+          grid-template-rows: 1fr auto;
+          place-items: center;
+        }
+
+        #sidebar-catergories {
+          width: 80%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          transition: opacity 0.5s ease-in-out;
+          transition-delay: 0.5s;
+          opacity: 0;
+          margin-top: 25px;
+        }
+
+        #sidebar-catergories > div {
+          background-color: var(--background-color);
+          border-radius: 1em;
+          margin: 0.5em 0.2em;
+          padding: 0.2em 0.5em;
+          -webkit-box-shadow: -3px 0px 5px -3px rgba(216, 216, 216, 0.75);
+          -moz-box-shadow: -3px 0px 5px -3px rgba(216, 216, 216, 0.75);
+          box-shadow: -3px 0px 5px -3px rgba(216, 216, 216, 0.75);
+        }
+
+        #sidebar-catergories > div > h6 {
+          color: var(--primary-font-color);
+          font-weight: normal;
+          font-size: 0.8em;
+        }
+  
+        #sidebar-overlay-test-info {
+          font-size: 16px;
+          margin: 0.5em 0;
+        }
+  
+        #sidebar-overlay {
+          width: 60%;
+          height: 100%;
+          z-index: 1;
+          position: fixed;
+          top: 0;
+          left: 0;
+          visibility: hidden;
+          display: flex;
+          transition: margin-left 1s ease;
+          overflow-y: auto;
+          background-color: var(--background-color);
+        }
+  
+        #sidebar-overlay-grid {
+          display: grid;
+          grid-template-rows: auto;
+          padding: 1em;
+          margin: 0 1em;
+          width: 100%;
+          height: fit-content;
+        }
+  
+        #sidebar-title-wrap {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          place-items: center;
+        }
+
+        #sidebar-overlay-test-info {
+          display: flex;
+          place-items: center;
+          flex-wrap: wrap;
+        }
+
+        #sidebar-title {
+          margin: 0 0.2em 0 0;
+        }
+  
+        #sidebar-title,
+        #sidebar-status {
+          color: var(--secondary-color);
+          transition: opacity 0.5s ease-in-out;
+          transition-delay: 0.5s;
+          opacity: 0;
+        }
+  
+        #test-title {
+          margin: 0;
+        }
+
+        #test-execution-time {
+          font-size: 0.7em;
+          font-weight: bold;
+          background: var(--primary-gradient);
+          color: white;
+          padding: 0.2em 0.5em;
+          border-radius: 0.5em;
+          margin-left: 0.5em;
+        }
+  
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          text-align: center;
+          margin: auto;
+        }
+  
+        #error-message {
+          flex-basis: 100%;
+          margin: 1em 1.5em 0 1.5em;
+          display: table-cell;
+          vertical-align: middle;
+          background-color: var(--primary-color);
+          padding: 1em;
+          border-radius: 1em;
+          font-size: 0.8em;
+        }
+  
+        #body-wrap {
+          display: grid;
+          grid-template-rows: auto auto 1fr;
+          height: 100vh;
+          width: 100vw;
+        }
+  
+        #theme-switch {
+          width: 5em;
+          height: 5em;
+          background-color: Transparent;
+          background-repeat: no-repeat;
+          border: none;
+          cursor: pointer;
+          overflow: hidden;
+          outline: none;
+          margin: 0;
+          margin-right: 1em;
+          position: relative;
+          top: 50%;
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+  
+        .params-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          text-align: center;
+          padding: 1em 2em;
+        }
+  
+        .param-wrap {
+          display: flex;
+          place-items: center;
+        }
+  
+        .pi {
+          font-size: 1.5em;
+          padding-right: 0.5em;
+        }
+  
+        #pt {
+          font-size: 0.9em;
+        }
+  
+        #filter {
+          cursor: pointer;
+          border-radius: 1em;
+          width: 5em;
+          padding: 0.2em 1em;
+          background-color: var(--primary-color);
+        }
+  
+        .features-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-auto-rows: 70px;
+          grid-gap: 0.5em;
+          padding: 0.5em 2em;
+        }
+  
+        .module {
+          display: grid;
+          place-items: center;
+          grid-template-columns: 3fr 1fr 1fr 1fr;
+          border-radius: 0.7rem;
+          padding: 10px 10px;
+          background-color: var(--primary-color);
+          cursor: pointer;
+        }
+  
+        .total,
+        .pass,
+        .fail {
+          display: grid;
+          width: 100%;
+          height: 100%;
+          place-items: center;
+        }
+  
+        .total > * {
+          color: var(--blue);
+        }
+  
+        .banner {
+          margin: auto;
+          text-align: center;
+        }
+  
+        .banner-text {
+          font-size: 5em;
+        }
+  
+        #footer {
+          font-size: 0.7rem;
+          text-align: center;
+          margin-bottom: 0.5em;
+          padding: 3em 3em 1em 3em;
+        }
+  
+        @media (min-width: 600px) and (max-width: 1400px) {
+          .pi {
+            font-size: 1em;
+            padding-right: 0.5em;
+          }
+  
+          #pt {
+            font-size: 0.8em;
+          }
+  
+          .funcname {
+            font-size: 0.9em;
+          }
+        }
+  
+        .green-font,
+        .pass > * {
+          color: var(--green);
+        }
+  
+        .red-font,
+        .fail > * {
+          color: var(--red);
+        }
+  
+        .red-bg {
+          background-color: var(--red-bg);
+        }
+      </style>
+        </head>
+            <body id="app" onload="onRefresh()">
+          <div id="sidebar" onclick="closeDetails(event)">
+            <div id="sidebar-div">
+              <div id="sidebar-title-wrap">
+                <h1 id="sidebar-title">Title</h1>
+                <i class="material-icons" id="sidebar-status">check_circle</i>
+              </div>
+              <div id="sidebar-catergories">
+              </div>
+            </div>
+          </div>
+        <div id="sidebar-overlay" onclick="closeDetails(event)">
+          <div id="sidebar-overlay-grid"></div>
+        </div>
+          <div id="body-wrap">
+            <div id="header">
+          <h1 id="app-title">My Report</h1>
+          <div id="theme-wrap">
+            <button id="theme-switch" onclick="switchTheme()">
+              <i class="material-icons" id="theme-icon">wb_sunny</i>
+            </button>
+          </div>
+        </div>
+            <div class="params-container">
+                    <div class="param-wrap" title="Release">
+            <i class="pi material-icons">bookmark</i>
+            <h5 id="pt">M09 2020</h5>
+        </div>
+                    <div class="param-wrap" title="Execution date">
+            <i class="pi material-icons">event</i>
+            <h5 id="pt">May 13, 2021</h5>
+        </div>
+                    <div class="param-wrap" title="Device tested">
+            <i class="pi material-icons">devices</i>
+            <h5 id="pt">iPhone X</h5>
+        </div>
+                    <div class="param-wrap" title="Os tested">
+            <i class="pi material-icons">settings</i>
+            <h5 id="pt">iOS 12.1</h5>
+        </div>
+                    <div class="param-wrap" title="App version tested">
+            <i class="pi material-icons">info</i>
+            <h5 id="pt">App Version 0.9.1</h5>
+        </div>
+                    <div class="param-wrap" title="Test environment">
+            <i class="pi material-icons">layers</i>
+            <h5 id="pt">QA</h5>
+        </div>
+                    <div class="param-wrap" title="Passed tests">
+            <i class="pi green-font material-icons">check_circle</i>
+            <h5 id="pt">2</h5>
+        </div>
+                    <div class="param-wrap" title="Failed tests" >
+            <i class="pi red-font material-icons">cancel</i>
+            <h5 id="pt">None</h5>
+        </div>
+                    <div class="param-wrap" title="Pass percentage">
+                  <i class="pi green-font material-icons">equalizer</i>
+                  <h5 id="pt">100%</h5>
+                </div>
+                    <div class="param-wrap" title="Total execution time">
+            <i class="pi material-icons">access_time</i>
+            <h5 id="pt">0 mins</h5>
+        </div>
+                    <div class="param-wrap" onclick="setFilter()" id="filter" title="Filter tests">
+            <i class="pi material-icons">filter_list</i>
+            <h5 id="pt">Failed</h5>
+        </div>
+                </div>
+            <div class="features-grid"></div>
+            <div id="footer">
+          <p>
+            Made with ❤️ by 
+            <span>
+              <a
+                href="https://www.linkedin.com/in/balabharathijayaraman"
+                rel="noopener"
+                target="_blank"
+                ><strong>Balabharathi Jayaraman </strong></a
+              >
+            </span>
+            for better reporting.
+          </p>
+        </div>
+          </div>
+        </body>
+            <script>
+                    const allFeatures = [{"name":"Demo", "total":1, "pass":1, "fail":0, "tests":[{"name":"Demo Test", "testPass":true, "comments":"This is a demo test.", "time":0, "tag":"critical"}]}, {"name":"Demo 2", "total":1, "pass":1, "fail":0, "tests":[{"name":"Demo Test", "testPass":true, "comments":"This is a demo test.", "time":0, "tag":"critical"}]}];
+                    const STATUS = { pass: "check_circle", fail: "cancel", };
+                    var displayFailuresOnly = false;
+                    var dataSource = [];
+                    var catergories = [];
+                
+                    function onRefresh() {
+                        dataSource = allFeatures;
+                        setFilter();
+                        currentTheme = $(document.documentElement).attr("theme");
+                        $("#theme-icon").text(currentTheme === "dark" ? "brightness_2" : "wb_sunny");
+                    }
+                
+                    function updateView() {
+                        $(".banner").removeClass("banner").addClass("features-grid");
+                        $(".features-grid").empty();
+                
+                        if (dataSource.length === 0) {
+                        console.log("inside");
+                        $(".features-grid")
+                            .removeClass("features-grid")
+                            .addClass("banner")
+                            .append(
+                            `<i class="banner-text green-font material-icons">done_all</i><h1>No Failures</>`
+                            );
+                        return;
+                        }
+                
+                        dataSource.forEach((feature, index) => {
+                        $(".features-grid").append(
+                            `<div class="module dark ${
+                            feature.fail > 0 ? "red-bg" : ""
+                            }" onclick="showDetails(${index})"><div class="funcname"><h4>${
+                            feature.name
+                            }</h4></div><div class="total"><h6>Total</h6><h4>${
+                            feature.total
+                            }</h4></div><div class="pass green-font"><h6>Passed</h6><h4>${
+                            feature.pass
+                            }</h4></div><div class="fail red-font"><h6>Failed</h6><h4>${
+                            feature.fail
+                            }</h4></div></div>`
+                        );
+                        });
+                    }
+                
+                    function setFilter() {
+                        if (displayFailuresOnly) {
+                        $("#filter h5").text("Failed");
+                        dataSource = allFeatures.filter((feature) => {
+                            return feature.fail > 0;
+                        });
+                        } else {
+                        $("#filter h5").text("All");
+                        dataSource = allFeatures;
+                        }
+                        updateView();
+                        displayFailuresOnly = !displayFailuresOnly;
+                    }
+                
+                    function filterAllFailed() {
+                        allFailedTests = [];
+                        catergories = [];
+                
+                        failedFeatures = allFeatures.filter((feature) => {
+                        return feature.fail > 0;
+                        });
+                
+                        for (index = 0; index < failedFeatures.length; index++) {
+                        failedFeatures[index].tests.filter((test) => {
+                            if (!test.testPass) {
+                            allFailedTests.push(test);
+                            }
+                        });
+                        }
+                
+                        $("#body-wrap").css("overflow", "hidden");
+                        $("#sidebar-overlay").css("overflow", "auto");
+                        $("#sidebar-overlay").css("visibility", "visible");
+                        $("#sidebar-overlay").css("margin-left", "40%");
+                        $("#sidebar").css("width", "40%");
+                        $("#sidebar-title").css("visibility", "visible");
+                        $("#sidebar-status").css("visibility", "visible");
+                        $("#sidebar-title").css("opacity", "1");
+                        $("#sidebar-status").css("opacity", "1");
+                        $("#sidebar-catergories").css("visibility", "visible");
+                        $("#sidebar-catergories").css("opacity", "1");
+                        /* Update Test Information */
+                
+                        $("#sidebar-title").text("Failed Tests");
+                        $("#sidebar-status").text(STATUS.fail);
+                        $("#sidebar-overlay-grid").empty();
+                        allFailedTests.forEach((test) => {
+                        $("#sidebar-overlay-grid").append(
+                            `<div id="sidebar-overlay-test-info" onclick="()=>{}"><i class="${
+                            test.testPass ? "green-font" : "red-font"
+                            } material-icons" style="font-size: 1em">${
+                            STATUS.fail
+                            }</i>&nbsp;&nbsp;<h4 id="test-title">${test.name}</h4><div><h4 id="test-execution-time">${test.time} secs</h4></div>${
+                            test.comments !== ""
+                                ? `<p id="error-message">${test.comments}</p>`
+                                : ""
+                            }</div>`
+                        );
+                            categorize(test);
+                        });
+                        displayCategories();
+                    }
+
+                    function displayCategories() {
+                        $("#sidebar-catergories").empty();
+                        if(catergories.length === 1) { return; }
+                        catergories.forEach((cat) => {$("#sidebar-catergories").append(`<div><h6>#${cat.name}</h6></div>`);});
+                    }
+                
+                    function switchTheme() {
+                        currentTheme = $(document.documentElement).attr("theme");
+                        $(document.documentElement).attr("theme", currentTheme === "dark" ? "light" : "dark");
+                        $("#theme-icon").text(currentTheme === "dark" ? "wb_sunny" : "brightness_2");
+                    }
+                
+                    function closeDetails(e) {
+                        if (e.target.id === "sidebar" || e.target.id === "sidebar-overlay") {
+                            $("#sidebar-catergories").css("visibility", "hidden");
+                            $("#sidebar-catergories").css("opacity", "0");
+                            $("#sidebar-title").css("visibility", "hidden");
+                            $("#sidebar-status").css("visibility", "hidden");
+                            $("#sidebar-title").css("opacity", "0");
+                            $("#sidebar-status").css("opacity", "0");
+                            $("#sidebar-overlay").css("margin-left", "0");
+                            $("#sidebar-overlay").css("visibility", "hidden");
+                            $("#sidebar").css("width", "0");
+                            $("#body-wrap").css("overflow", "auto");
+                            $("#sidebar-overlay").css("overflow", "hidden");
+                        }
+                    }
+                
+                    window
+                        .matchMedia("(prefers-color-scheme: dark)")
+                        .addEventListener("change", (e) => {
+                            darkTheme = e.matches;
+                            $(document.documentElement).attr("theme", darkTheme ? "dark" : "light");
+                            $("#theme-icon").text(darkTheme ? "brightness_2" : "wb_sunny");
+                        });
+                
+                    function showDetails(featureID) {
+                        feature = dataSource[featureID];
+                        catergories = [];
+                
+                        $("#body-wrap").css("overflow", "hidden");
+                        $("#sidebar-overlay").css("overflow", "auto");
+                        $("#sidebar-overlay").css("visibility", "visible");
+                        $("#sidebar-overlay").css("margin-left", "40%");
+                        $("#sidebar").css("width", "40%");
+                        $("#sidebar-title").css("visibility", "visible");
+                        $("#sidebar-status").css("visibility", "visible");
+                        $("#sidebar-title").css("opacity", "1");
+                        $("#sidebar-status").css("opacity", "1");
+                        $("#sidebar-catergories").css("visibility", "visible");
+                        $("#sidebar-catergories").css("opacity", "1");
+                        /* Update Test Information */
+                
+                        $("#sidebar-title").text(feature.name);
+                        $("#sidebar-overlay-grid").empty();
+                        feature.tests.forEach((test) => {
+                        $("#sidebar-overlay-grid").append(
+                                `<div id="sidebar-overlay-test-info" onclick="()=>{}"><i class="${
+                                test.testPass ? "green-font" : "red-font"
+                                } material-icons" style="font-size: 1em">${
+                                test.testPass ? STATUS.pass : STATUS.fail
+                                }</i>&nbsp;&nbsp;<h4 id="test-title">${test.name}</h4><div><h4 id="test-execution-time">${test.time} secs</h4></div>${
+                                test.comments !== ""
+                                    ? `<p id="error-message">${test.comments}</p>`
+                                    : ""
+                                }</div>`
+                            );
+                            categorize(test);
+                        });
+                        displayCategories();
+
+                        for (index = 0; index < feature.tests.length; index++) {
+                            if (!feature.tests[index].testPass) {
+                                $("#sidebar-status").text(STATUS.fail);
+                                return;
+                            }
+                        }
+                        $("#sidebar-status").text(STATUS.pass);
+                    }
+
+                    function categorize(test) {
+                        if (test.tag === "") {
+                            return;
+                        }
+                        if (!catergoryAdded(test.tag)) {
+                            catergories.push({ name: test.tag.toLowerCase(), tests: [test] });
+                        } else {
+                            catergories[catergoryIndex(test.tag)].tests.push(test);
+                        }
+                    }
+
+                    function catergoryAdded(category) {
+                        for (var i = 0; i < catergories.length; i++) {
+                            if (catergories[i].name === category.toLowerCase()) {
+                            return true;
+                            }
+                        }
+                        return false;
+                    }
+
+                    function catergoryIndex(category) {
+                        for (var i = 0; i < catergories.length; i++) {
+                            if (catergories[i].name === category.toLowerCase()) {
+                            return i;
+                            }
+                        }
+                        return 0;
+                    }
+                </script>
+        </html>
