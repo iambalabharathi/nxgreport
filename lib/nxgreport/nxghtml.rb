@@ -84,7 +84,7 @@ module NxgHTML
     def footer()
         "<div id=\"footer\">
           <p>
-            Developed by
+            Made with ❤️ by
             <span>
               <a
                 href=\"https://www.linkedin.com/in/balabharathijayaraman\"
