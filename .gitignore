@@ -1,8 +1,0 @@
-*.gem
-*.html
-test/play.rb
-.DS_Store
-/test/cucumber-test
-/NewLocation
-
-generate_report.sh
