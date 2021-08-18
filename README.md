@@ -17,6 +17,10 @@
     <a href="https://badge.fury.io/rb/nxgreport">
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
     </a>
+     &nbsp;&nbsp;
+    <a href="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml">
+        <img src="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml/badge.svg?branch=main" alt="Pipeline Status" height="18">
+    </a>
 </p>
 
 <h4 align="center">
