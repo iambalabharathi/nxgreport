@@ -26,6 +26,7 @@ jobs:
         bundle exec rake test
   build:
     name: Publish gem to GPR & RubyGems
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: read
