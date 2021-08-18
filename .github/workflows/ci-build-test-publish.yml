@@ -22,9 +22,6 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
     - name: Set up Ruby Environment
       run: |
-        echo '======================================='
-        echo '          Running Unit Tests           '
-        echo '======================================='
         bundle install
         bundle exec rake test
   build:
@@ -42,9 +39,6 @@ jobs:
         bundler-cache: true
     - name: Publish to GPR
       run: |
-        echo '======================================='
-        echo 'Publishing to GitHub Package Repository'
-        echo '======================================='
         # mkdir -p $HOME/.gem
         # touch $HOME/.gem/credentials
         # chmod 0600 $HOME/.gem/credentials
@@ -58,9 +52,6 @@ jobs:
 
     - name: Publish to RubyGems
       run: |
-        echo '======================================='
-        echo '  Publishing to Ruby Gems Repository   '
-        echo '======================================='
         # mkdir -p $HOME/.gem
         # touch $HOME/.gem/credentials
         # chmod 0600 $HOME/.gem/credentials

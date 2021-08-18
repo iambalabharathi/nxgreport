@@ -3,4 +3,4 @@ require "nxgreport/version"
 require 'nxgreport/nxgcore.rb'
 
 $NxgReport = NxgCore.new().instance()
-puts("Initialized NxgReport [✓]")
+puts("Initialized NxgReport instance [✓]")
