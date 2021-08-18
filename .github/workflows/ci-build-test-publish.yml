@@ -8,29 +8,38 @@ on:
       - '**.rb'
 
 jobs:
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['2.6', '2.7', '3.0']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby Environment
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    - name: Set up Ruby Environment
+      run: |
+        echo '======================================='
+        echo '          Running Unit Tests           '
+        echo '======================================='
+        bundle exec rake test
   build:
     name: Build + Publish
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
-
-    - name: Run tests
-      run: |
-        echo '======================================='
-        echo '          Running Unit Tests           '
-        echo '======================================='
-        gem install bundle
-        bundle install
-        bundle exec rake test
-
+        bundler-cache: true
     - name: Publish to GPR
       run: |
         echo '======================================='
@@ -40,8 +49,6 @@ jobs:
         # touch $HOME/.gem/credentials
         # chmod 0600 $HOME/.gem/credentials
         # printf -- "---\n:github: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        # gem install bundle
-        # bundle install
         # gem build *.gemspec
         # gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
       env:
@@ -57,8 +64,6 @@ jobs:
         # touch $HOME/.gem/credentials
         # chmod 0600 $HOME/.gem/credentials
         # printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        # gem install bundle
-        # bundle install
         # gem build *.gemspec
         # gem push *.gem
       env:
