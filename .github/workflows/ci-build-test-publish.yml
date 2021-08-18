@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-    - name: Set up Ruby Environment
+    - name: Running Tests
       run: |
         bundle install
         bundle exec rake test
