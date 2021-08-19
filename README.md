@@ -66,9 +66,9 @@ $NxgReport.set_environment(name: "QA")
 
 $NxgReport.log_test(
         feature_name: "Feature Name",
-        test_name: "This is a test", 
-        test_status: "Pass/Fail", 
-        comments: "Error message or additional comments about the test", 
+        test_name: "This is a test",
+        test_status: "Pass/Fail",
+        comments: "Error message or additional comments about the test",
         tag: "critical"
         )
 
@@ -99,10 +99,10 @@ After do |scenario|
     scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
     comments = (scenario.exception.nil?) ? "Success" : scenario.exception.message
     $NxgReport.log_test(
-            feature_name: feature_name, 
-            test_name: scenario.name, 
+            feature_name: feature_name,
+            test_name: scenario.name,
             test_status: scenario_pass,
-            comments: comments, 
+            comments: comments,
             tag: "critical"
             )
 end
@@ -118,47 +118,33 @@ end
 $NxgReport.setup(location, title)
 ```
 
-- **location (optional):** 
+- **location (optional):**
 
-    _This is an absolute path where the report should be generated (ex: "C:\Report\index.hmtl). If not passed, the report will be generated in the **root folder** as **NxgReport.html**_
-    
-- **title (optional):** 
+  _This is an absolute path where the report should be generated (ex: "C:\Report\index.hmtl). If not passed, the report will be generated in the **root folder** as **NxgReport.html**_
 
-    _This is title of report displayed. If not passed, the report will be generated with a title "Features Summary"_
+- **title (optional):**
+
+  _This is title of report displayed. If not passed, the report will be generated with a title "Features Summary"_
 
 ```
 $NxgReport.log_test(
-        feature_name: "Login", 
-        test_name: "Login with email address and password", 
-        test_status: "Pass", 
-        comments: "System failure", 
+        feature_name: "Login",
+        test_name: "Login with email address and password",
+        test_status: "Pass",
+        comments: "System failure",
         tag: "Critical"
         )
 ```
 
-- **feature_name**
-
-    _Use this parameter to specify the feature name under the test should be logged, ex:(Login)_
-    
-- **test_name**
-
-    _Use this parameter to specify the test name, ex:(Login with email address and password)_
-    
-- **test_status**
-
-    _Use this parameter to specify status of the test, allowed values are Pass or Fail_
-    
-- **comments (optional)** 
-
-    _Use this parameter to add custom message/description/logs to the test scenarios, ex: failure stack trace_
-    
-- **tag (optional)** 
-
-    _Use this parameter to specify a tag for the test scenario, ex: critical, cosmetic_
+- **feature_name** - _Use this parameter to specify the feature name under the test should be logged, ex:(Login)_
+- **test_name** - _Use this parameter to specify the test name, ex:(Login with email address and password)_
+- **test_status** - _Use this parameter to specify status of the test, allowed values are Pass or Fail_
+- **comments (optional)** - _Use this parameter to add custom message/description/logs to the test scenarios, ex: failure stack trace_
+- **tag (optional)** - _Use this parameter to specify a tag for the test scenario, ex: critical, cosmetic_
 
 ## **Like it?**
 
-Click the star icon ✭ at the top-right corner of this page to show your appreciation.
+<a href="https://www.buymeacoffee.com/iambalabharathi" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## **Contributing**
 
