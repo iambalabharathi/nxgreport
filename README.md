@@ -27,7 +27,7 @@
     Stunning test report in 5 mins 🚀 
     </br>
     </br>
-    A simple light weighted gem to generate a beautiful e-mailable test report. (2300+ Downloads)</h4>
+    A simple light weighted gem to generate a beautiful e-mailable test report. (3500+ Downloads)</h4>
 <p align="center">
     It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.
 </p>
@@ -77,7 +77,7 @@ $NxgReport.build()
 
 ## **Cucumber Ruby Usage**
 
-In **env.rb** add the below line
+In `env.rb` add the below line
 
 ```ruby
 require 'nxgreport'
@@ -91,20 +91,21 @@ $NxgReport.set_app_version(no: "app0.9.1")
 $NxgReport.set_environment(name: "QA")
 ```
 
-In **hooks.rb** add the below block of code.
+In `hooks.rb` add the below block of code.
 
 ```ruby
 After do |scenario|
+
     feature_name = scenario.feature.name
-    scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
+    scenario_status = !scenario.failed?() ? "Pass" : "Fail"
     comments = (scenario.exception.nil?) ? "Success" : scenario.exception.message
+
     $NxgReport.log_test(
             feature_name: feature_name,
             test_name: scenario.name,
-            test_status: scenario_pass,
+            test_status: scenario_status,
             comments: comments,
-            tag: "critical"
-            )
+            tag: "critical")
 end
 
 at_exit do
@@ -127,8 +128,7 @@ $NxgReport.log_test(
         test_name: "Login with email address and password",
         test_status: "Pass",
         comments: "System failure",
-        tag: "Critical"
-        )
+        tag: "Critical")
 ```
 
 - `feature_name` - _String_
@@ -143,7 +143,7 @@ $NxgReport.log_test(
 
 ## **Contributing**
 
-We're open to any contribution. It has to be tested properly though.
+I'm open to any contribution. It has to be tested properly though.
 
 ## **License**
 
