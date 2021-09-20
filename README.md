@@ -53,7 +53,7 @@
 
 ## **Usage**
 
-```
+```ruby
 require 'nxgreport'
 
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
@@ -79,7 +79,7 @@ $NxgReport.build()
 
 In **env.rb** add the below line
 
-```
+```ruby
 require 'nxgreport'
 
 $NxgReport.setup(location: "Absolute file path", title: "My Report")
@@ -93,7 +93,7 @@ $NxgReport.set_environment(name: "QA")
 
 In **hooks.rb** add the below block of code.
 
-```
+```ruby
 After do |scenario|
     feature_name = scenario.feature.name
     scenario_pass = !scenario.failed?() ? "Pass" : "Fail"
@@ -114,19 +114,14 @@ end
 
 ## **Parameters Explaination**
 
-```
+```ruby
 $NxgReport.setup(location, title)
 ```
 
-- **location (optional):**
+- `location (optional):` - _File path - C:\Report\index.hmtl_
+- `title (optional):` - _String_
 
-  _This is an absolute path where the report should be generated (ex: "C:\Report\index.hmtl). If not passed, the report will be generated in the **root folder** as **NxgReport.html**_
-
-- **title (optional):**
-
-  _This is title of report displayed. If not passed, the report will be generated with a title "Features Summary"_
-
-```
+```ruby
 $NxgReport.log_test(
         feature_name: "Login",
         test_name: "Login with email address and password",
@@ -136,11 +131,11 @@ $NxgReport.log_test(
         )
 ```
 
-- **feature_name** - _Use this parameter to specify the feature name under the test should be logged, ex:(Login)_
-- **test_name** - _Use this parameter to specify the test name, ex:(Login with email address and password)_
-- **test_status** - _Use this parameter to specify status of the test, allowed values are Pass or Fail_
-- **comments (optional)** - _Use this parameter to add custom message/description/logs to the test scenarios, ex: failure stack trace_
-- **tag (optional)** - _Use this parameter to specify a tag for the test scenario, ex: critical, cosmetic_
+- `feature_name` - _String_
+- `test_name` - _String_
+- `test_status` - _Pass or Fail_
+- `comments (optional)` - _Sring_
+- `tag (optional)` - _Sring_
 
 ## **Like it?**
 
