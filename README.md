@@ -69,8 +69,7 @@ $NxgReport.log_test(
         test_name: "This is a test",
         test_status: "Pass/Fail",
         comments: "Error message or additional comments about the test",
-        tag: "critical"
-        )
+        tag: "critical")
 
 $NxgReport.build()
 ```
