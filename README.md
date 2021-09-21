@@ -72,7 +72,7 @@ $NxgReport.log_test(
 $NxgReport.build()
 ```
 
-## **Cucumber Ruby Usage**
+## **Cucumber-Ruby Usage**
 
 In `env.rb` add the below line
 
@@ -116,8 +116,8 @@ end
 $NxgReport.setup(location, title)
 ```
 
-- `location (optional):` - _File path - C:\Report\index.hmtl_
-- `title (optional):` - _String_
+- `location` - _File path - C:\Report\index.hmtl_
+- `title` - _String_
 
 ```ruby
 $NxgReport.log_test(
@@ -131,8 +131,8 @@ $NxgReport.log_test(
 - `feature_name` - _String_
 - `test_name` - _String_
 - `test_status` - _Pass or Fail_
-- `comments (optional)` - _Sring_
-- `tag (optional)` - _Sring_
+- `comments` - _Sring_
+- `tag` - _Sring_
 
 ## **Like it?**
 
