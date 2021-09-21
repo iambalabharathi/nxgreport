@@ -6,12 +6,12 @@
 </h1>
 
 <p align="center">
-    <a href="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml">
-        <img src="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml/badge.svg?branch=main" alt="Pipeline Status" height="18">
-    </a>
-    &nbsp;&nbsp;
     <a href="#">
         <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport?color=blue" height="18">
+    </a>
+    &nbsp;&nbsp;
+    <a href="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml">
+        <img src="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml/badge.svg?branch=main" alt="Pipeline Status" height="18">
     </a>
     &nbsp;&nbsp;
     <a href="#">
@@ -22,14 +22,11 @@
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
     </a>
 </p>
-
+<p align="center">Stunning test report in 5 mins ⏳<p>
 <h4 align="center">
-    Stunning test report in 5 mins 🚀 
-    </br>
-    </br>
     A simple light weighted gem to generate a beautiful e-mailable test report. (3500+ Downloads)</h4>
 <p align="center">
-    It displays a single view where tests (total, pass, fail) are grouped by functionality. The result is a single static HTML file with an option to switch between dark & light modes.
+    Generates a static site (Supports Dark 🌓 mode).
 </p>
 
 <p align="center">
@@ -43,6 +40,7 @@
 
 <div align="center">
     <img src="./docs/light-summary.png" alt="Markdownify" width="800">
+    <br/>
     <br/>
     <img src="./docs/dark-summary.png" alt="Markdownify" width="800">
 </div>
