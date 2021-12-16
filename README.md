@@ -114,10 +114,6 @@ end
 
 <a href="https://www.buymeacoffee.com/iambalabharathi" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-## **Contributing**
-
-I'm open to any contribution. It has to be tested properly though.
-
 ## **License**
 
 Copyright © 2020 [MIT License](LICENSE)
