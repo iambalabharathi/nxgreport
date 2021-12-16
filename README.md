@@ -110,30 +110,6 @@ at_exit do
 end
 ```
 
-## **Parameters Explaination**
-
-```ruby
-$NxgReport.setup(location, title)
-```
-
-- `location` - _File path - C:\Report\index.hmtl_
-- `title` - _String_
-
-```ruby
-$NxgReport.log_test(
-        feature_name: "Login",
-        test_name: "Login with email address and password",
-        test_status: "Pass",
-        comments: "System failure",
-        tag: "Critical")
-```
-
-- `feature_name` - _String_
-- `test_name` - _String_
-- `test_status` - _Pass or Fail_
-- `comments` - _Sring_
-- `tag` - _Sring_
-
 ## **Like it?**
 
 <a href="https://www.buymeacoffee.com/iambalabharathi" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
