@@ -22,7 +22,6 @@
         <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
     </a>
 </p>
-<p align="center">Stunning test report in 5 mins ⏳<p>
 <h4 align="center">
     A simple light weighted gem to generate a beautiful e-mailable test report. (7500+ Downloads)</h4>
 <p align="center">
