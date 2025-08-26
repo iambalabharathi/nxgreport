@@ -23,7 +23,7 @@
     </a>
 </p>
 <h4 align="center">
-    A simple light weighted gem to generate a beautiful e-mailable test report. (7500+ Downloads)</h4>
+    A simple light weighted gem to generate a beautiful e-mailable test report. (30000+ Downloads)</h4>
 <p align="center">
     Generates a static site (Supports Dark 🌓 mode).
 </p>
