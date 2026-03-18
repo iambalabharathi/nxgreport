@@ -1,118 +1,198 @@
-<h1 align="center">
-    <a href="https://github.com/balabharathijayaraman/nxgreport">
-        <img src="./docs/Nxg.gif" alt="Markdownify" width="200">
-    </a>
-    <br> Next Gen Report 💎 <br>
-</h1>
-
-<p align="center">
-    <a href="#">
-        <img alt="GitHub" src="https://img.shields.io/github/license/balabharathijayaraman/nxgreport?color=blue" height="18">
-    </a>
-    &nbsp;&nbsp;
-    <a href="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml">
-        <img src="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml/badge.svg?branch=main" alt="Pipeline Status" height="18">
-    </a>
-    &nbsp;&nbsp;
-    <a href="#">
-        <img alt="Ruby Version" src="https://img.shields.io/badge/ruby version-2.3.0-red" height="18">
-    </a>
-    &nbsp;&nbsp;
-    <a href="https://badge.fury.io/rb/nxgreport">
-        <img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" height="18">
-    </a>
-</p>
-<h4 align="center">
-    A simple light weighted gem to generate a beautiful e-mailable test report. (30000+ Downloads)</h4>
-<p align="center">
-    Generates a static site (Supports Dark 🌓 mode).
-</p>
-
-<p align="center">
-  <a href="#demo">Demo</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#license">License</a>
-</p>
-
-## **Demo**
-
 <div align="center">
-    <img src="./docs/light-summary.png" alt="Markdownify" width="800">
-    <br/>
-    <br/>
-    <img src="./docs/dark-summary.png" alt="Markdownify" width="800">
+  <img src="./docs/Nxg.gif" alt="NxgReport" width="120">
+  <h1>NxgReport</h1>
+  <p><strong>Beautiful, zero-dependency test reports for Ruby</strong></p>
+  <p>Generate stunning, self-contained HTML test reports that you can share, email, or host anywhere.<br/>No server required — just a single <code>.html</code> file.</p>
+
+  <a href="https://badge.fury.io/rb/nxgreport"><img src="https://badge.fury.io/rb/nxgreport.svg" alt="Gem Version" /></a>&nbsp;
+  <a href="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml"><img src="https://github.com/iambalabharathi/nxgreport/actions/workflows/ci-build-test-publish.yml/badge.svg?branch=main" alt="CI" /></a>&nbsp;
+  <a href="https://github.com/iambalabharathi/nxgreport/blob/main/LICENSE"><img src="https://img.shields.io/github/license/iambalabharathi/nxgreport?color=blue" alt="License" /></a>&nbsp;
+  <img src="https://img.shields.io/badge/ruby-%3E%3D%202.3.0-red" alt="Ruby Version" />
+
+  <br/><br/>
+
+  <a href="#-screenshots">Screenshots</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="#-quick-start">Quick Start</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="#-features">Features</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="#-api-reference">API</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="#-cucumber-integration">Cucumber</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="#-contributing">Contributing</a>
 </div>
 
-## **Installation**
+<br/>
 
-    gem install nxgreport
+## Screenshots
 
-## **Usage**
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./docs/dark-summary.png">
+    <source media="(prefers-color-scheme: light)" srcset="./docs/light-summary.png">
+    <img src="./docs/light-summary.png" alt="NxgReport Dashboard" width="800">
+  </picture>
+  <br/><br/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./docs/dark-detail.png">
+    <source media="(prefers-color-scheme: light)" srcset="./docs/light-detail.png">
+    <img src="./docs/light-detail.png" alt="NxgReport Test Details" width="800">
+  </picture>
+</div>
+
+<br/>
+
+## Features
+
+| | |
+|---|---|
+| **Self-contained HTML** | Single `.html` file with all CSS & JS inlined — no external dependencies at runtime |
+| **Light & Dark mode** | Auto-detects system preference, with a manual toggle |
+| **Interactive dashboard** | Health banner, stat cards, pass-rate progress bars, and feature cards |
+| **Charts** | Donut chart for pass/fail breakdown, line chart for tests by tag |
+| **Tag filtering** | Tag your tests (`smoke`, `critical`, `regression`, etc.) and filter interactively |
+| **Test detail modal** | Click any feature card to see individual test results, execution times, and error messages |
+| **Metadata bar** | Display release name, device, OS, app version, environment, and execution time |
+| **E-mailable** | Works in any browser — share via email, Slack, or host as a static page |
+| **Zero dependencies** | Pure Ruby gem with no runtime dependencies |
+
+<br/>
+
+## Quick Start
+
+### Install
+
+```bash
+gem install nxgreport
+```
+
+Or add to your `Gemfile`:
+
+```ruby
+gem 'nxgreport'
+```
+
+### Generate a report
 
 ```ruby
 require 'nxgreport'
 
-$NxgReport.setup(location: "Absolute file path", title: "My Report")
+# Configure
+$NxgReport.setup(location: "./TestReport.html", title: "My Test Suite")
+$NxgReport.set_device(name: "iPhone 16 Pro")
+$NxgReport.set_os(name: "iOS 18.2")
+$NxgReport.set_release(name: "Sprint 47")
+$NxgReport.set_app_version(no: "3.2.0")
+$NxgReport.set_environment(name: "Staging")
 
-$NxgReport.set_device(name: "iPhone X")
-$NxgReport.set_os(name: "iOS 12.1")
-$NxgReport.set_release(name: "M09 2020")
-$NxgReport.set_app_version(no: "app0.9.1")
-$NxgReport.set_environment(name: "QA")
+# Log tests
+$NxgReport.log_test(
+  feature_name: "Login",
+  test_name: "User can login with valid credentials",
+  test_status: "Pass",
+  comments: "Success",
+  tag: "smoke",
+  execution_time: 3.2
+)
 
 $NxgReport.log_test(
-        feature_name: "Feature Name",
-        test_name: "This is a test",
-        test_status: "Pass/Fail",
-        comments: "Error message or additional comments about the test",
-        tag: "critical")
+  feature_name: "Login",
+  test_name: "Biometric authentication",
+  test_status: "Fail",
+  comments: "TouchID prompt not displayed on simulator",
+  tag: "critical",
+  execution_time: 5.4
+)
 
+# Build the report
 $NxgReport.build()
 ```
 
-## **Cucumber-Ruby Usage**
+That's it — open the generated `.html` file in any browser.
 
-In `env.rb` add the below line
+<br/>
+
+## API Reference
+
+### Setup
+
+| Method | Description |
+|--------|-------------|
+| `$NxgReport.setup(location:, title:)` | Set the output file path and report title |
+| `$NxgReport.set_device(name:)` | Device under test (e.g. `"iPhone 16 Pro"`) |
+| `$NxgReport.set_os(name:)` | OS version (e.g. `"iOS 18.2"`) |
+| `$NxgReport.set_release(name:)` | Release or sprint name |
+| `$NxgReport.set_app_version(no:)` | Application version number |
+| `$NxgReport.set_environment(name:)` | Test environment (e.g. `"Staging"`, `"QA"`) |
+| `$NxgReport.set_execution(date:)` | Custom execution date (defaults to today) |
+| `$NxgReport.open_upon_execution(value:)` | Auto-open report in browser after build |
+
+### Logging tests
+
+```ruby
+$NxgReport.log_test(
+  feature_name: "Feature Name",    # Required — groups tests under a feature card
+  test_name: "Test description",   # Required — name of the individual test
+  test_status: "Pass",             # Required — "Pass" or "Fail"
+  comments: "Error details",       # Optional — shown in the detail modal
+  tag: "smoke",                    # Optional — used for tag filtering & charts
+  execution_time: 3.2              # Optional — in seconds (auto-calculated if omitted)
+)
+```
+
+### Building
+
+```ruby
+$NxgReport.build()  # Generates the HTML report file
+```
+
+<br/>
+
+## Cucumber Integration
+
+**`env.rb`** — setup the report:
 
 ```ruby
 require 'nxgreport'
 
-$NxgReport.setup(location: "Absolute file path", title: "My Report")
-
-$NxgReport.set_device(name: "iPhone X")
-$NxgReport.set_os(name: "iOS 12.1")
-$NxgReport.set_release(name: "M09 2020")
-$NxgReport.set_app_version(no: "app0.9.1")
+$NxgReport.setup(location: "./reports/CucumberReport.html", title: "Cucumber Results")
+$NxgReport.set_device(name: "iPhone 16 Pro")
+$NxgReport.set_os(name: "iOS 18.2")
 $NxgReport.set_environment(name: "QA")
 ```
 
-In `hooks.rb` add the below block of code.
+**`hooks.rb`** — log each scenario automatically:
 
 ```ruby
 After do |scenario|
-
-    feature_name = scenario.feature.name
-    scenario_status = !scenario.failed?() ? "Pass" : "Fail"
-    comments = (scenario.exception.nil?) ? "Success" : scenario.exception.message
-
-    $NxgReport.log_test(
-            feature_name: feature_name,
-            test_name: scenario.name,
-            test_status: scenario_status,
-            comments: comments,
-            tag: "critical")
+  $NxgReport.log_test(
+    feature_name: scenario.feature.name,
+    test_name: scenario.name,
+    test_status: scenario.failed? ? "Fail" : "Pass",
+    comments: scenario.exception&.message || "Success",
+    tag: "cucumber"
+  )
 end
 
 at_exit do
-    $NxgReport.build()
+  $NxgReport.build()
 end
 ```
 
-## **Like it?**
+<br/>
 
-<a href="https://www.buymeacoffee.com/iambalabharathi" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+## Contributing
 
-## **License**
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-Copyright © 2020 [MIT License](LICENSE)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b my-feature`)
+3. Commit your changes (`git commit -m 'Add my feature'`)
+4. Push to the branch (`git push origin my-feature`)
+5. Open a Pull Request
+
+<br/>
+
+## Support the project
+
+If you find NxgReport useful, consider supporting its development:
+
+<a href="https://www.buymeacoffee.com/iambalabharathi" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" /></a>
+
+<br/>
+
+## License
+
+MIT &copy; [Balabharathi Jayaraman](https://www.linkedin.com/in/iambalabharathi)
