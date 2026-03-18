@@ -6,6 +6,9 @@ on:
       - feature/**
     paths:
       - "**.rb"
+      - ".github/workflows/**"
+      - "Gemfile"
+      - "*.gemspec"
 
 jobs:
   test:
