@@ -19,17 +19,15 @@
 ## Screenshots
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./docs/dark-summary.png">
-    <source media="(prefers-color-scheme: light)" srcset="./docs/light-summary.png">
-    <img src="./docs/light-summary.png" alt="NxgReport Dashboard" width="800">
-  </picture>
+  <h4>Light Mode</h4>
+  <img src="./docs/light-summary.png" alt="NxgReport Light Mode" width="800">
   <br/><br/>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./docs/dark-detail.png">
-    <source media="(prefers-color-scheme: light)" srcset="./docs/light-detail.png">
-    <img src="./docs/light-detail.png" alt="NxgReport Test Details" width="800">
-  </picture>
+  <img src="./docs/light-detail.png" alt="NxgReport Light Detail" width="800">
+  <br/><br/>
+  <h4>Dark Mode</h4>
+  <img src="./docs/dark-summary.png" alt="NxgReport Dark Mode" width="800">
+  <br/><br/>
+  <img src="./docs/dark-detail.png" alt="NxgReport Dark Detail" width="800">
 </div>
 
 <br/>
