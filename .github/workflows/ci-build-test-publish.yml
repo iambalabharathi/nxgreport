@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ["2.6", "2.7", "3.0"]
+        ruby-version: ["3.1", "3.2", "3.3"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Ruby Environment
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
       - name: Running Tests
         run: |
-          bundle install
           bundle exec rake test
   build:
     name: Publish gem to GPR & RubyGems
@@ -32,11 +32,12 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.x
+          ruby-version: "3.3"
+          bundler-cache: true
       - name: Publish to GPR
         run: |
           mkdir -p $HOME/.gem
